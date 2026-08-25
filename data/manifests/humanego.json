@@ -35,54 +35,54 @@
   "annotations": [
     {
       "label": "hand_tracking_results.csv",
-      "status": "remote exact",
+      "status": "remote / local exact",
       "format": "CSV · 1002 rows · 155 cols",
-      "local_path": null,
+      "local_path": "assets/local/humanego/annotations/hand_tracking_results.csv",
       "official_url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/hand_tracking/hand_tracking_results.csv",
       "viewer": null,
       "note": "双手 confidence、各 21×3 landmarks、wrist SE(3) 与 palm/wrist normals；页面按当前 recording frame 读取。"
     },
     {
       "label": "aria_phases_results.json",
-      "status": "remote exact",
+      "status": "remote / local exact",
       "format": "JSON · 1002 frames",
-      "local_path": null,
+      "local_path": "assets/local/humanego/annotations/aria_phases_results.json",
       "official_url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/aria_phases_results.json",
       "viewer": null,
       "note": "0=STOP/MANIPULATION、1=FORWARD/NAV、2=ROTATE/NAV、3=TRANSITION、4=FINISHED。"
     },
     {
       "label": "cotracker_results.json",
-      "status": "remote exact",
+      "status": "remote / local exact",
       "format": "JSON · obj1/obj2 · 944 frames",
-      "local_path": null,
+      "local_path": "assets/local/humanego/annotations/cotracker_results.json",
       "official_url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/cotracker_results.json",
       "viewer": null,
       "note": "Keypoints 视图：obj1=bread、obj2=plate，各 20 个 2D track + visibility。"
     },
     {
       "label": "aria_cam_rgb_config.json",
-      "status": "remote exact",
+      "status": "remote / local exact",
       "format": "JSON · RGB calibration",
-      "local_path": null,
+      "local_path": "assets/local/humanego/annotations/aria_cam_rgb_config.json",
       "official_url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/aria_cam_rgb_config.json",
       "viewer": null,
       "note": "同 recording 的 RGB camera configuration。"
     },
     {
       "label": "kptsselector_results.json",
-      "status": "remote exact",
+      "status": "remote / local exact",
       "format": "JSON · 2×20 reference points",
-      "local_path": null,
+      "local_path": "assets/local/humanego/annotations/kptsselector_results.json",
       "official_url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/kptsselector_results.json",
       "viewer": null,
       "note": "bread / plate 各 20 个 reference 2D points。"
     },
     {
       "label": "camtriangulator_results.json",
-      "status": "remote exact",
+      "status": "remote / local exact",
       "format": "JSON · static 3D points / transforms",
-      "local_path": null,
+      "local_path": "assets/local/humanego/annotations/camtriangulator_results.json",
       "official_url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/camtriangulator_results.json",
       "viewer": null,
       "note": "cam0_c2w、每物体 20×3 world/cam0 points 与单个 object_to_cam0_matrix；不是逐帧 object pose。"
