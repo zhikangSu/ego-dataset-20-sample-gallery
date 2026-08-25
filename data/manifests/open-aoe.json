@@ -4,7 +4,7 @@
   "slug": "open-aoe",
   "dataset": "Open-AoE",
   "representative_id": "aoe_20260214_233341_p000",
-  "summary": "固定 revision 下同一 sample 的 Raw、手网格预渲染与 action JSON；视图切换保持同一播放时刻。该 JSON 存在显著时段 QC 异常。",
+  "summary": "固定 revision 下同一 sample 的 Raw、手网格、MANO 参数、相机轨迹与 action JSON；页面从官方源按帧读取。动作 JSON 存在显著 QC 异常。",
   "evidence": "raw",
   "redistribution": "fetch",
   "official_source": "https://huggingface.co/datasets/inclusionAI/OpenAoE-2000h/tree/c363c7866816505c697b9a7ab76341eb2773716b/aoe_20260214_233341_p000",
@@ -35,12 +35,21 @@
   "annotations": [
     {
       "label": "ego_action_annotation.json",
-      "status": "fetch · QC warning",
+      "status": "remote · QC warning",
       "format": "JSON · 25 segments",
       "local_path": "assets/local/open-aoe/annotations/ego_action_annotation.json",
       "official_url": "https://huggingface.co/datasets/inclusionAI/OpenAoE-2000h/resolve/c363c7866816505c697b9a7ab76341eb2773716b/aoe_20260214_233341_p000/ego_annotation/ego_action_annotation.json",
       "viewer": "open-aoe-timeline",
-      "note": "官方文件中前 24 段集中在 0–2.57 s，最后一段覆盖至 180.997 s；页面只如实展示并标为 QC anomaly，不将其当作干净 GT。"
+      "note": "前 24 段集中在 0–2.57 s，末段覆盖 2.57–180.997 s；页面标红，不将其当作干净 GT。"
+    },
+    {
+      "label": "hands.npz + camera_traj.npz",
+      "status": "remote exact",
+      "format": "MANO / SE(3) · 5430 frames",
+      "local_path": null,
+      "official_url": "https://huggingface.co/datasets/inclusionAI/OpenAoE-2000h/tree/c363c7866816505c697b9a7ab76341eb2773716b/aoe_20260214_233341_p000/ego_process/ego_hands_reconstruction",
+      "viewer": null,
+      "note": "浏览器直接解析官方未压缩 NPZ：双手 validity、wrist translation/rotation、45D pose 与 cam_c2w；不在仓库复制数据。"
     }
   ],
   "license_audit": {

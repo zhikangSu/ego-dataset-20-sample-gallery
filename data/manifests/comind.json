@@ -4,7 +4,7 @@
   "slug": "comind",
   "dataset": "CoMind",
   "representative_id": "21c13149-ca54-45dc-94a1-bd74a1c8a27e",
-  "summary": "同一 UUID 的 leader/helper 两路 60 秒协作烹饪视频；仓库内置各 12 秒转码。",
+  "summary": "同一 UUID 的 leader/helper 两路协作烹饪视频；仓库内置 5–17 秒片段，并同步官方 MPS 手、gaze、SLAM 与逐词 transcript。",
   "evidence": "raw",
   "redistribution": "bundled",
   "official_source": "https://comind.ethz.ch/",
@@ -15,7 +15,7 @@
       "local_path": "assets/datasets/comind/leader.mp4",
       "official_url": "https://comind.ethz.ch/files/example_videos/generic/21c13149-ca54-45dc-94a1-bd74a1c8a27e_leader.mp4",
       "provenance": "official raw sample",
-      "source_start_seconds": null,
+      "source_start_seconds": 5,
       "fps": null,
       "synchronized_group": null,
       "overlay": null
@@ -26,7 +26,7 @@
       "local_path": "assets/datasets/comind/helper.mp4",
       "official_url": "https://comind.ethz.ch/files/example_videos/generic/21c13149-ca54-45dc-94a1-bd74a1c8a27e_helper.mp4",
       "provenance": "official synchronized raw sample",
-      "source_start_seconds": null,
+      "source_start_seconds": 5,
       "fps": null,
       "synchronized_group": null,
       "overlay": null
@@ -45,13 +45,22 @@
   ],
   "annotations": [
     {
-      "label": "gaze / hands / objects / scene",
-      "status": "source-only",
-      "format": "dataset fields",
+      "label": "5–17 s MPS + transcript",
+      "status": "derived-excerpt",
+      "format": "JSON · 5 Hz pose/gaze/SLAM",
+      "local_path": "data/annotations/comind/21c13149_5_17.json",
+      "official_url": null,
+      "viewer": "record-timeline",
+      "note": "同 UUID、同 wearer 的官方 healthcheck 文件；按 MP4 description 设备时间精确对齐，逐词 transcript 保留原时间。"
+    },
+    {
+      "label": "objects / social / action benchmark",
+      "status": "not-available",
+      "format": "consolidated JSON",
       "local_path": null,
       "official_url": null,
       "viewer": null,
-      "note": "官网 example MP4 不附逐帧标注小文件。"
+      "note": "该 UUID 属于 test split，官方 benchmark GT 为 null；不把其他帧或其他记录的标签贴到当前片段。"
     }
   ],
   "license_audit": {

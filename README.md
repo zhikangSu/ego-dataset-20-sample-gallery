@@ -45,11 +45,16 @@ python3 scripts/check_repo.py
 
 ## 标注在哪里看
 
-- SHOW3D：下载后，播放器会把官方 hand-pose v2 的 2D 关键点逐帧叠加在两路 headset 视频上（蓝=左手、红=右手）；原始 v2、object pose、calibration 与 caption JSON 也可查看。该样本的 object JSON 不含 mesh vertices，因此页面不会伪造物体轮廓。
-- Open-AoE：Raw 与 Hands overlay 切换时保持同一播放时刻；action JSON 显示为时间轴，并明确标出这条官方样本“前 24 段挤在 2.57 秒内”的 QC 异常，不冒充干净 GT。
-- HumanEgo：原视频与 visual-keypoint 可视化分栏切换。
-- ADT：官方 viewer 图直接展示 RGB、数字孪生、skeleton、objects 与时间窗口。
-- 其余数据集：卡片会明确写出 `gated`、`source-only`、`unreleased` 或 `not-bundled`，并给出官方入口。没有 record-level 标注时不会伪造。
+每个媒体窗下面都有“当前标注”面板。播放器移动时，能绑定到当前 record 和时间基准的字段会自动更新：
+
+- Ropedia：动作/子任务/物体、52 点身体、双手 21 点、接触、SLAM、IMU、深度和 3D 点投影。
+- CoMind：leader/helper 各自的 MPS 双手、gaze、SLAM 与逐词 transcript；该 test UUID 的 action/object/social benchmark GT 为 withheld，页面不会伪造。
+- SHOW3D：视频上的双手 2D overlay，以及下方同步的 hand confidence、3D wrist、object R/t 与 recording caption。
+- Assembly101：exact e1 的 fine action 区间；3D hands 在约 72 GB 的 pose release 中，未下载时明确注明。
+- HD-EPIC：action、verb/noun/hand、高层活动、声音、物体移动和 gaze priming 多轨时间轴。
+- Open-AoE：MANO validity/wrist/45D pose、camera SE(3) 与 atomic action；官方 action JSON 的 QC 异常会醒目标红。
+- HumanEgo：同 recording 的 phase、双手 tracking，以及 Keypoints 视图里的 bread/plate 2D tracks；页面保留两支派生视频的 58 帧偏移和 MPS timestamp QC 说明。
+- ADT、EgoHTR、EgoBody、EgoPAT3D 等：官方 overlay 已烧录在图像或视频中，面板逐项解释画面内容。没有 record ID 的媒体只显示 schema/status，不把其他记录的标注强行贴上去。
 
 ## 文件结构
 
@@ -57,6 +62,8 @@ python3 scripts/check_repo.py
 index.html                  本地优先的 20 项观察窗
 report.html                 完整调研报告（直接嵌入 local-first 观察窗）
 data/catalog.js             页面数据与媒体/标注路径
+gallery.js                  媒体加载、时间对齐、姿态/语义标注面板
+data/annotations/           可核验到当前片段的轻量 record-level 摘要
 data/license_audit.json     20 项机器可读许可审计
 data/manifests/             从 catalog + license audit 生成的 20 份一致性 manifest
 assets/datasets/comind/     可随仓库分发的 CC BY 4.0 短样例

@@ -186,13 +186,13 @@
       "no": 14,
       "name": "HD-EPIC",
       "verdict": "conditional_bundle",
-      "license": "Conflicting official metadata: Bristol repository says CC BY 4.0; official Codabench challenge says CC BY-NC 4.0",
+      "license": "The Bristol video dataset metadata states CC BY 4.0; the public annotations repository has no standalone LICENSE",
       "access": "Public videos and annotations",
-      "bundle_scope": "Treat all media as CC BY-NC 4.0 until clarified; noncommercial use only, with attribution and change notice",
-      "handling": "Record both license sources in the attribution manifest. Obtain author confirmation before commercial use.",
+      "bundle_scope": "The gallery directly streams the Bristol-hosted video; preserve attribution, CC BY 4.0 link and change notice for any copied excerpt",
+      "handling": "Keep the annotation repository's missing standalone LICENSE visible; do not infer that its files inherit a broader grant than the dataset metadata.",
       "sources": [
         "https://data.bris.ac.uk/data/dataset/3cqb5b81wk2dc2379fx1mrxh47",
-        "https://www.codabench.org/competitions/13645/"
+        "https://github.com/hd-epic/hd-epic-annotations"
       ]
     },
     {

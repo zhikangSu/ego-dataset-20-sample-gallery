@@ -4,7 +4,7 @@
   "slug": "adt",
   "dataset": "ADT (Aria Digital Twin)",
   "representative_id": "viewer=Apartment_release_multiskeleton_party_seq104 / timeline episode undisclosed",
-  "summary": "官方 Rerun viewer 同时显示 Aria RGB、数字孪生、skeleton、objects 与时间轴；仅 viewer 图可精确绑定 seq104。",
+  "summary": "官方 Rerun viewer 同时显示 Aria RGB、数字孪生、skeleton、objects 与时间轴；这些标注已烧录在 seq104 viewer 图中。",
   "evidence": "viz",
   "redistribution": "fetch",
   "official_source": "https://facebookresearch.github.io/projectaria_tools/docs/open_datasets/aria_digital_twin_dataset/visualizers",

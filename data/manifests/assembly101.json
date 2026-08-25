@@ -4,7 +4,7 @@
   "slug": "assembly101",
   "dataset": "Assembly101",
   "representative_id": "nusar-2021_action_both_9031-c04d_9031_user_id_2021-02-04_104130",
-  "summary": "官网 sample 的 e1/e3 视角；另有不强绑该 ID 的 12-view 官方 montage。",
+  "summary": "官网 exact e1 序列的 175–185 秒；页面同步官方 fine action，12-view montage 仍明确标为非同一记录。",
   "evidence": "raw",
   "redistribution": "noncommercial-download",
   "official_source": "https://assembly-101.github.io/",
@@ -14,8 +14,8 @@
       "kind": "video",
       "local_path": "assets/local/assembly101/e1.mp4",
       "official_url": "https://drive.usercontent.google.com/download?id=12gg-hMcLGnPXPVzkvhRyud1nqOzQ2_UG&export=download&confirm=t",
-      "provenance": "official sample clip",
-      "source_start_seconds": null,
+      "provenance": "exact official sample window",
+      "source_start_seconds": 175,
       "fps": null,
       "synchronized_group": null,
       "overlay": null
@@ -26,7 +26,7 @@
       "local_path": "assets/local/assembly101/montage.mp4",
       "official_url": "https://assembly-101.github.io/assets/12_view_assembly.mp4",
       "provenance": "official overview; not record-bound",
-      "source_start_seconds": null,
+      "source_start_seconds": 5,
       "fps": null,
       "synchronized_group": null,
       "overlay": null
@@ -34,13 +34,22 @@
   ],
   "annotations": [
     {
-      "label": "actions / errors / 3D hands",
-      "status": "source-only",
-      "format": "CSV / JSON",
+      "label": "e1 fine actions",
+      "status": "derived-excerpt",
+      "format": "JSON · 3 segments",
+      "local_path": "data/annotations/assembly101/e1_175_185.json",
+      "official_url": null,
+      "viewer": "record-timeline",
+      "note": "从官方 validation.csv 的 HMC_21176875(e1) 按 30 fps 裁到 175–185 秒。"
+    },
+    {
+      "label": "errors / 3D hands",
+      "status": "not-bundled",
+      "format": "CSV / 72 GB pose archive",
       "local_path": null,
       "official_url": null,
       "viewer": null,
-      "note": "官网 sample 媒体未同时给出该序列的轻量 annotation bundle。"
+      "note": "3D hands 位于大型受控下载；当前片段未下载。12-view montage 也不是该序列。"
     }
   ],
   "license_audit": {

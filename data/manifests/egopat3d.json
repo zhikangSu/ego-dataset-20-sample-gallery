@@ -4,7 +4,7 @@
   "slug": "egopat3d",
   "dataset": "EgoPAT3D",
   "representative_id": "official sequence asset 1.gif",
-  "summary": "官网编号动画展示 RGB-D ego 中的手、目标物与未来 3D trajectory。",
+  "summary": "官网编号动画展示 RGB-D ego 中的手、目标物与未来 3D trajectory；这些轨迹已烧录在动画中。",
   "evidence": "raw",
   "redistribution": "fetch",
   "official_source": "https://ai4ce.github.io/EgoPAT3D/index.html",
@@ -15,7 +15,7 @@
       "local_path": "assets/local/egopat3d/sequence1.mp4",
       "official_url": "https://ai4ce.github.io/EgoPAT3D/img/gif/1.gif",
       "provenance": "official animated sample",
-      "source_start_seconds": null,
+      "source_start_seconds": 0,
       "fps": null,
       "synchronized_group": null,
       "overlay": null

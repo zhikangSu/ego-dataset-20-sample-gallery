@@ -4,18 +4,18 @@
   "slug": "ropedia",
   "dataset": "Ropedia Xperience-10M",
   "representative_id": "ropedia-ai/xperience-10m-sample / stereo_left.mp4",
-  "summary": "291 秒六目公开 sample；bootstrap 会在你确认非商业条款后，本地生成 12 秒左目预览。",
+  "summary": "291 秒六目公开 sample；页面固定查看 20–32 秒，并同步显示同一 HDF5 中的动作、身体/手部 3D、SLAM、IMU、深度与标定摘要。",
   "evidence": "raw",
   "redistribution": "noncommercial-download",
   "official_source": "https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/tree/main",
   "media": [
     {
-      "label": "本地 12 秒",
+      "label": "20–32 秒",
       "kind": "video",
       "local_path": "assets/local/ropedia/preview.mp4",
       "official_url": "https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/resolve/main/stereo_left.mp4",
-      "provenance": "raw clip",
-      "source_start_seconds": null,
+      "provenance": "exact raw time window",
+      "source_start_seconds": 20,
       "fps": null,
       "synchronized_group": null,
       "overlay": null
@@ -34,13 +34,22 @@
   ],
   "annotations": [
     {
+      "label": "20–32 s 同步摘要",
+      "status": "derived-excerpt",
+      "format": "JSON · 5 Hz",
+      "local_path": "data/annotations/ropedia/stereo_left_20_32.json",
+      "official_url": null,
+      "viewer": "record-timeline",
+      "note": "从同一官方 HDF5 按设备时间抽取；包含动作、52 点身体、双手各 21 点、SLAM、IMU、接触、深度统计与标定。"
+    },
+    {
       "label": "annotation.hdf5",
       "status": "not-bundled",
       "format": "HDF5 · 1.93 GB",
       "local_path": null,
       "official_url": "https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/blob/main/annotation.hdf5",
       "viewer": null,
-      "note": "含 calibration、SLAM、depth、hands、body、IMU 与 captions；体积过大，不进 Git。"
+      "note": "完整 dense depth 与原频率数据仍保留在官方文件；CC BY-NC 4.0。"
     }
   ],
   "license_audit": {

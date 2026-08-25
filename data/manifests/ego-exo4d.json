@@ -4,7 +4,7 @@
   "slug": "ego-exo4d",
   "dataset": "Ego-Exo4D",
   "representative_id": "official asset: bike_repair/aria.mp4",
-  "summary": "网页公开的 30 秒 Aria + 4 GoPro 自行车维修样例；完整 take 与标注仍为许可制。",
+  "summary": "网页公开的 30 秒 Aria + 4 GoPro 自行车维修样例；网页资产未公开 take UID，因此不叠加可能错配的 take 标注。",
   "evidence": "raw",
   "redistribution": "fetch",
   "official_source": "https://ego-exo4d-data.org/",
@@ -15,7 +15,7 @@
       "local_path": "assets/local/ego-exo4d/aria.mp4",
       "official_url": "https://ego-exo4d-data.org/assets/videos/bike_repair/aria.mp4",
       "provenance": "official site sample",
-      "source_start_seconds": null,
+      "source_start_seconds": 4,
       "fps": null,
       "synchronized_group": null,
       "overlay": null
@@ -26,7 +26,7 @@
       "local_path": "assets/local/ego-exo4d/cam01.mp4",
       "official_url": "https://ego-exo4d-data.org/assets/videos/bike_repair/cam01.mp4",
       "provenance": "synchronized official site sample",
-      "source_start_seconds": null,
+      "source_start_seconds": 4,
       "fps": null,
       "synchronized_group": null,
       "overlay": null

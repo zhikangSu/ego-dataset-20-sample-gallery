@@ -4,7 +4,7 @@
   "slug": "show3d",
   "dataset": "SHOW3D",
   "representative_id": "YZH016/balandabowl_scooping_0663",
-  "summary": "同一 scene 的两路 headset 视频；hand-pose v2 可逐帧叠加 2D 手关键点，object pose 仅含 R/t，不能伪画完整轮廓。",
+  "summary": "同一 scene 的两路 headset 视频；页面直接从官方源加载 hand-pose v2、object R/t 与 caption，并按 60 Hz 同步。",
   "evidence": "raw",
   "redistribution": "noncommercial-download",
   "official_source": "https://huggingface.co/datasets/facebook/show3d-dataset",
@@ -14,14 +14,17 @@
       "kind": "video",
       "local_path": "assets/local/show3d/headset0.mp4",
       "official_url": "https://huggingface.co/datasets/facebook/show3d-dataset/resolve/main/scenes/YZH016/balandabowl_scooping_0663/headset0.mp4",
-      "provenance": "official raw clip + local overlay from official hand-pose v2",
+      "provenance": "official raw clip + official hand-pose v2",
       "source_start_seconds": 3,
       "fps": 60,
       "synchronized_group": null,
       "overlay": {
         "kind": "show3d-hands",
         "camera": "headset0",
-        "path": "assets/local/show3d/annotations/hand_overlay_compact.json",
+        "paths": [
+          "assets/local/show3d/annotations/hand_overlay_compact.json",
+          "https://huggingface.co/datasets/facebook/show3d-dataset/resolve/main/hand_pose/v2/scenes/YZH016/balandabowl_scooping_0663/hand_pose.json"
+        ],
         "width": 1024,
         "height": 1280
       }
@@ -31,14 +34,17 @@
       "kind": "video",
       "local_path": "assets/local/show3d/headset1.mp4",
       "official_url": "https://huggingface.co/datasets/facebook/show3d-dataset/resolve/main/scenes/YZH016/balandabowl_scooping_0663/headset1.mp4",
-      "provenance": "official synchronized raw clip + local overlay from official hand-pose v2",
+      "provenance": "official synchronized raw clip + official hand-pose v2",
       "source_start_seconds": 3,
       "fps": 60,
       "synchronized_group": null,
       "overlay": {
         "kind": "show3d-hands",
         "camera": "headset1",
-        "path": "assets/local/show3d/annotations/hand_overlay_compact.json",
+        "paths": [
+          "assets/local/show3d/annotations/hand_overlay_compact.json",
+          "https://huggingface.co/datasets/facebook/show3d-dataset/resolve/main/hand_pose/v2/scenes/YZH016/balandabowl_scooping_0663/hand_pose.json"
+        ],
         "width": 1024,
         "height": 1280
       }

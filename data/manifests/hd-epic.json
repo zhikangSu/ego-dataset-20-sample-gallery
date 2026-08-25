@@ -4,18 +4,18 @@
   "slug": "hd-epic",
   "dataset": "HD-EPIC",
   "representative_id": "P01-20240202-110250 / 134–153 s",
-  "summary": "真实 Nespresso 时间段：加奶泡并搅拌；脚本从公开长视频按时间窗转码。",
+  "summary": "真实 Nespresso 时间段：页面同步 narration/action、verb/noun/hand、高层活动、声音、物体移动与 gaze priming。",
   "evidence": "raw",
-  "redistribution": "noncommercial-download",
+  "redistribution": "fetch",
   "official_source": "https://hd-epic.github.io/site/",
   "media": [
     {
-      "label": "19 秒窗口",
+      "label": "134–153 秒",
       "kind": "video",
       "local_path": "assets/local/hd-epic/p01_134_153.mp4",
       "official_url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-110250.mp4",
       "provenance": "exact raw time window",
-      "source_start_seconds": null,
+      "source_start_seconds": 134,
       "fps": null,
       "synchronized_group": null,
       "overlay": null
@@ -23,26 +23,35 @@
   ],
   "annotations": [
     {
-      "label": "action excerpt",
-      "status": "source-only",
+      "label": "134–153 s 多轨标注",
+      "status": "derived-excerpt",
       "format": "JSON",
+      "local_path": "data/annotations/hd-epic/P01_134_153.json",
+      "official_url": "https://github.com/hd-epic/hd-epic-annotations",
+      "viewer": "record-timeline",
+      "note": "官方记录级标注：12 个 narration/action、2 个 high-level activity、6 个 sound、4 个 object movement 与 8 个 gaze-priming 事件。"
+    },
+    {
+      "label": "camera pose / dense gaze / masks",
+      "status": "source-only",
+      "format": "external intermediate data / PNG",
       "local_path": null,
       "official_url": "https://github.com/hd-epic/hd-epic-annotations",
       "viewer": null,
-      "note": "官方 annotations 可核验该时间窗；当前脚本只裁视频，不伪称已自动提取 JSON。"
+      "note": "官方另行下载；未把外部大文件复制到本仓库。"
     }
   ],
   "license_audit": {
     "no": 14,
     "name": "HD-EPIC",
     "verdict": "conditional_bundle",
-    "license": "Conflicting official metadata: Bristol repository says CC BY 4.0; official Codabench challenge says CC BY-NC 4.0",
+    "license": "The Bristol video dataset metadata states CC BY 4.0; the public annotations repository has no standalone LICENSE",
     "access": "Public videos and annotations",
-    "bundle_scope": "Treat all media as CC BY-NC 4.0 until clarified; noncommercial use only, with attribution and change notice",
-    "handling": "Record both license sources in the attribution manifest. Obtain author confirmation before commercial use.",
+    "bundle_scope": "The gallery directly streams the Bristol-hosted video; preserve attribution, CC BY 4.0 link and change notice for any copied excerpt",
+    "handling": "Keep the annotation repository's missing standalone LICENSE visible; do not infer that its files inherit a broader grant than the dataset metadata.",
     "sources": [
       "https://data.bris.ac.uk/data/dataset/3cqb5b81wk2dc2379fx1mrxh47",
-      "https://www.codabench.org/competitions/13645/"
+      "https://github.com/hd-epic/hd-epic-annotations"
     ]
   },
   "generated_from": [

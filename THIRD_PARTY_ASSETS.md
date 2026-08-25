@@ -11,7 +11,7 @@
 - 来源：[CoMind 官方站](https://comind.ethz.ch/)
 - 许可：[Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
 - 本仓库变更：从官方 leader/helper 示例各截取 12 秒；缩放至 720×720；转为 H.264/yuv420p；移除音频；启用 faststart；另生成配对 contact sheet。
-- 文件：`assets/datasets/comind/leader.mp4`、`helper.mp4`、`contact.webp`
+- 文件：`assets/datasets/comind/leader.mp4`、`helper.mp4`、`contact.webp`、`data/annotations/comind/21c13149_5_17.json`
 
 使用这些文件时请保留上述署名、来源、许可链接和变更说明。
 
@@ -32,7 +32,7 @@
 | 11 | HOI4D | CC BY-NC 4.0 | 非商业用户可自行下载 |
 | 12 | SHOW3D | CC BY-NC 4.0 | 非商业条件下载到本地缓存 |
 | 13 | Assembly101 | CC BY-NC 4.0 | 非商业条件下载到本地缓存 |
-| 14 | HD-EPIC | 官方元数据在 CC BY / CC BY-NC 间冲突 | 按较严格 CC BY-NC，本地缓存 |
+| 14 | HD-EPIC | Bristol dataset metadata 标为 CC BY 4.0；annotations repo 无独立 LICENSE | 官方直连；保留来源与条款说明 |
 | 15 | InterVLA | 未找到媒体许可；数据入口不可用 | 官方入口 |
 | 16 | EgoDex | CC BY-NC-ND | 不制作/提交修改片段 |
 | 17 | Open-AoE | 代码 Apache-2.0；数据许可标为 other | 本地缓存/官方入口 |
