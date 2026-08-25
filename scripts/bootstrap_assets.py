@@ -110,6 +110,12 @@ DATASETS = {
         "items": [
             {"kind": "video", "url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/main/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/vis/aria_vis.mp4", "out": "aria_vis.mp4", "start": 2, "duration": 12},
             {"kind": "video", "url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/main/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/vis/visualkpts_vis.mp4", "out": "keypoints.mp4", "start": 2, "duration": 12},
+            {"kind": "file", "url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/hand_tracking/hand_tracking_results.csv", "out": "annotations/hand_tracking_results.csv"},
+            {"kind": "file", "url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/aria_phases_results.json", "out": "annotations/aria_phases_results.json"},
+            {"kind": "file", "url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/cotracker_results.json", "out": "annotations/cotracker_results.json"},
+            {"kind": "file", "url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/aria_cam_rgb_config.json", "out": "annotations/aria_cam_rgb_config.json"},
+            {"kind": "file", "url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/kptsselector_results.json", "out": "annotations/kptsselector_results.json"},
+            {"kind": "file", "url": "https://huggingface.co/datasets/Leo-TX/HumanEgo/resolve/f0aa87fade6a41316d65322512f56f066dec62e3/serve_bread/aria/mps_serve_bread_000_vrs/preprocess/camtriangulator_results.json", "out": "annotations/camtriangulator_results.json"},
         ],
     },
     "egopat3d": {
