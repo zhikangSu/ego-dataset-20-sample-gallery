@@ -70,7 +70,7 @@ def check_pages() -> None:
     facts.feed(report)
     gallery = [x for x in facts.iframes if x.get("class") == "sample-gallery-frame"]
     assert len(gallery) == 1, "report must contain exactly one gallery iframe"
-    assert gallery[0].get("src") == "index.html?embed=1#gallery"
+    assert gallery[0].get("src") == "index.html?embed=1&viewer=official-media-v2#gallery"
     assert "function mediaCandidates" in index, "official-media fallback is missing"
     assert "官方源直连" in index, "direct official-source state is missing"
     assert "IntersectionObserver" in index, "remote media must remain lazy-loaded"
