@@ -871,14 +871,16 @@
     const tab = viewer.querySelector(".tab.active");
     if (!list.length) {
       missing(stage, dataset, media);
-      genericAnnotation(viewer, dataset, media, null, "none");
+      if (media.annotation) mountAnnotation(viewer, dataset, media, null, "none", mountId);
+      else genericAnnotation(viewer, dataset, media, null, "none");
       return;
     }
     const attempt = index => {
       if (viewer._mountId !== mountId) return;
       if (index >= list.length) {
         missing(stage, dataset, media, Boolean(media.remote));
-        genericAnnotation(viewer, dataset, media, null, "none");
+        if (media.annotation) mountAnnotation(viewer, dataset, media, null, "none", mountId);
+        else genericAnnotation(viewer, dataset, media, null, "none");
         return;
       }
       const {src, kind} = list[index];
@@ -911,6 +913,7 @@
       video.playsInline = true;
       video.preload = "metadata";
       video.referrerPolicy = "no-referrer";
+      if (media.crossOrigin) video.crossOrigin = media.crossOrigin;
       video.src = src;
       video.onloadedmetadata = () => {
         if (viewer._mountId !== mountId) return;
