@@ -71,7 +71,9 @@ def check_pages() -> None:
     gallery = [x for x in facts.iframes if x.get("class") == "sample-gallery-frame"]
     assert len(gallery) == 1, "report must contain exactly one gallery iframe"
     assert gallery[0].get("src") == "index.html?embed=1#gallery"
-    assert "临时在线加载" not in index, "index must not bypass source-term acceptance"
+    assert "function mediaCandidates" in index, "official-media fallback is missing"
+    assert "官方源直连" in index, "direct official-source state is missing"
+    assert "IntersectionObserver" in index, "remote media must remain lazy-loaded"
     subprocess.run(["node", "--check", "data/catalog.js"], cwd=ROOT, check=True)
 
 
@@ -102,7 +104,7 @@ def main() -> None:
     check_catalog_and_manifests(records)
     check_pages()
     check_range_server()
-    print("OK: 20 catalog entries, 20 manifests, local-only initial media, and HTTP Range support")
+    print("OK: 20 catalog entries, 20 manifests, lazy official-media fallback, and HTTP Range support")
 
 
 if __name__ == "__main__":
