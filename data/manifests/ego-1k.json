@@ -1,0 +1,40 @@
+{
+  "schema_version": 2,
+  "index": 7,
+  "slug": "ego-1k",
+  "dataset": "Ego-1K",
+  "representative_id": "scene=1001040591928025 / frame=000000 / cameras 200-1…12",
+  "summary": "官方 shard 中同一时刻的 12 路原始 PNG；许可要求每位使用者自行接受 FAIR 非商业研究协议。",
+  "evidence": "raw",
+  "redistribution": "noncommercial-download",
+  "official_source": "https://huggingface.co/datasets/facebook/ego-1k",
+  "media": [],
+  "annotations": [
+    {
+      "label": "12-view frame + metadata",
+      "status": "source-only",
+      "format": "PNG / JSON in tar shard",
+      "local_path": null,
+      "official_url": "https://huggingface.co/datasets/facebook/ego-1k",
+      "viewer": null,
+      "note": "包含 rig pose 与 per-camera calibration；仓库不替公司用户再分发这些像素。"
+    }
+  ],
+  "license_audit": {
+    "no": 7,
+    "name": "Ego-1K",
+    "verdict": "conditional_bundle",
+    "license": "FAIR Noncommercial Research License",
+    "access": "Public Hugging Face dataset",
+    "bundle_scope": "Noncommercial research only; distribution and derivatives must remain under the same agreement and include a copy of it",
+    "handling": "Include the full FAIR license and citation. Use a downloader instead if the repository belongs to a commercial project or company context that is not clearly noncommercial.",
+    "sources": [
+      "https://huggingface.co/datasets/facebook/ego-1k",
+      "https://huggingface.co/facebook/fair-noncommercial-research-license/blob/main/LICENSE"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "index": 11,
+  "slug": "hoi4d",
+  "dataset": "HOI4D",
+  "representative_id": "ZY20210800004/H4/C3/N68/S380/s05/T2",
+  "summary": "ID 对应 Laptop / Open and close display；官方 teaser 未声明来自该 ID。",
+  "evidence": "frames",
+  "redistribution": "external-only",
+  "official_source": "https://hoi4d.github.io/",
+  "media": [
+    {
+      "label": "数据与 GT",
+      "kind": "image",
+      "local_path": null,
+      "official_url": "https://hoi4d.github.io/teaser.png",
+      "provenance": "official overview; not record-bound",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "hand/object pose + masks + mesh",
+      "status": "gated",
+      "format": "JSON / images / point cloud",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "需接受官方条款后批量下载。"
+    }
+  ],
+  "license_audit": {
+    "no": 11,
+    "name": "HOI4D",
+    "verdict": "conditional_bundle",
+    "license": "CC BY-NC 4.0",
+    "access": "Public download links",
+    "bundle_scope": "Noncommercial dataset media and derivatives with attribution, license link, and change notice",
+    "handling": "Do not use in a commercial or product demo without separate permission.",
+    "sources": [
+      "https://hoi4d.github.io/",
+      "https://creativecommons.org/licenses/by-nc/4.0/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

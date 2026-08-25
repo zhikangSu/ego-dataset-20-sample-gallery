@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "index": 15,
+  "slug": "intervla",
+  "dataset": "InterVLA",
+  "representative_id": "official dataset sample / sequence ID not disclosed",
+  "summary": "只有项目页数据图；截至 2026-08-25，所链接数据仓库不可用。",
+  "evidence": "frames",
+  "redistribution": "external-only",
+  "official_source": "https://liangxuy.github.io/InterVLA/",
+  "media": [
+    {
+      "label": "样例帧",
+      "kind": "image",
+      "local_path": null,
+      "official_url": "https://liangxuy.github.io/InterVLA/static/images/dataset_sample.png",
+      "provenance": "official paper/project figure",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "instruction + human/object motion",
+      "status": "unreleased",
+      "format": "described schema",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "没有可核验的 record-level 文件。"
+    }
+  ],
+  "license_audit": {
+    "no": 15,
+    "name": "InterVLA",
+    "verdict": "external_only",
+    "license": "No dataset or media license located",
+    "access": "Project page is public; linked data/code release was unavailable during the audit",
+    "bundle_scope": "None",
+    "handling": "Link to the project page and paper. Do not copy project figures or infer a license.",
+    "sources": [
+      "https://liangxuy.github.io/InterVLA/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

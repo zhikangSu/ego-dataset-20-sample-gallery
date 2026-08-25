@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "index": 3,
+  "slug": "ace-data-0",
+  "dataset": "ACE-Data-0",
+  "representative_id": "Video Example 01 / table-scale household interaction",
+  "summary": "同一 25 秒事件的 ego 与八路 GoPro；bootstrap 脚本可从官网拉取并转成短片。",
+  "evidence": "raw",
+  "redistribution": "fetch",
+  "official_source": "https://ace-data-engine.github.io/ACE-Data-0/#video-examples",
+  "media": [
+    {
+      "label": "Ego",
+      "kind": "video",
+      "local_path": "assets/local/ace-data-0/ego.mp4",
+      "official_url": "https://ace-data-engine.github.io/ACE-Data-0/assets/videos/example1-rego-front-left.mp4",
+      "provenance": "official raw-looking sample",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    },
+    {
+      "label": "Exo 0",
+      "kind": "video",
+      "local_path": "assets/local/ace-data-0/exo0.mp4",
+      "official_url": "https://ace-data-engine.github.io/ACE-Data-0/assets/videos/example1-gopro-cam0.mp4",
+      "provenance": "synchronized official sample",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "SMPL-X / hands / objects / tactile",
+      "status": "source-only",
+      "format": "dataset fields",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "项目页展示标注 overlay，但未提供该网页样例的独立小型标注文件。"
+    }
+  ],
+  "license_audit": {
+    "no": 3,
+    "name": "ACE-Data-0",
+    "verdict": "external_only",
+    "license": "ACE-Data-0 Research License; noncommercial academic research, personal and non-transferable, explicit no redistribution",
+    "access": "Gated; each collaborator must request access individually",
+    "bundle_scope": "None",
+    "handling": "Do not commit raw data, frames, clips, or derived visualizations. Project-page preview media has no separate redistribution grant.",
+    "sources": [
+      "https://huggingface.co/datasets/ACERobotics/ACE-Data-0",
+      "https://ace-data-engine.github.io/ACE-Data-0/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

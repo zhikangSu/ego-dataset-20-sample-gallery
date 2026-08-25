@@ -1,0 +1,279 @@
+{
+  "audit_date": "2026-08-25",
+  "scope": "Conservative redistribution audit for representative dataset media in a private GitHub research/demo repository.",
+  "disclaimer": "Engineering compliance triage, not legal advice. A private GitHub repository still reproduces files and may make them available to collaborators and a third-party cloud provider.",
+  "verdicts": {
+    "bundle": "Dataset media may be committed under the stated license and conditions.",
+    "conditional_bundle": "Commit only the specifically identified licensed material and only when every stated condition is met.",
+    "verbatim_only": "Only an unmodified original file may be shared; do not trim, crop, transcode, annotate, montage, or convert to GIF.",
+    "external_only": "Do not commit media bytes; retain an official source link, iframe, manifest entry, or user-side downloader."
+  },
+  "global_rules": [
+    "A public project-page teaser is not automatically covered by the dataset license.",
+    "For gated datasets, each user should accept the official terms and download into a gitignored directory.",
+    "For CC BY and CC BY-NC material, preserve creator, source URL, license URL, and change notices.",
+    "Do not assume a noncommercial license is safe for a company repository or a demo connected to product development or commercial advantage.",
+    "When license sources conflict, follow the stricter terms until the rightsholder clarifies them."
+  ],
+  "datasets": [
+    {
+      "no": 1,
+      "name": "Ropedia Xperience-10M",
+      "verdict": "conditional_bundle",
+      "license": "CC BY-NC 4.0 for xperience-10m-sample; full dataset is gated with license tag 'other'",
+      "access": "Public sample; controlled full dataset",
+      "bundle_scope": "Only files or derivatives from ropedia-ai/xperience-10m-sample, for noncommercial use with attribution and change notice",
+      "handling": "Use the public sample for the gallery. Keep the full dataset as an application/download link only.",
+      "sources": [
+        "https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample",
+        "https://huggingface.co/datasets/ropedia-ai/xperience-10m"
+      ]
+    },
+    {
+      "no": 2,
+      "name": "HA-Ego-1K",
+      "verdict": "external_only",
+      "license": "Dataset metadata reports CC BY-NC 4.0, but the gated click-through terms were not publicly retrievable",
+      "access": "Gated; unauthenticated access returns 401",
+      "bundle_scope": "None until the accepted gate terms are archived and confirmed not to restrict redistribution",
+      "handling": "Link to the access request; do not republish files obtained by an approved account.",
+      "sources": [
+        "https://huggingface.co/datasets/humanarchive/HA-Ego-1K"
+      ]
+    },
+    {
+      "no": 3,
+      "name": "ACE-Data-0",
+      "verdict": "external_only",
+      "license": "ACE-Data-0 Research License; noncommercial academic research, personal and non-transferable, explicit no redistribution",
+      "access": "Gated; each collaborator must request access individually",
+      "bundle_scope": "None",
+      "handling": "Do not commit raw data, frames, clips, or derived visualizations. Project-page preview media has no separate redistribution grant.",
+      "sources": [
+        "https://huggingface.co/datasets/ACERobotics/ACE-Data-0",
+        "https://ace-data-engine.github.io/ACE-Data-0/"
+      ]
+    },
+    {
+      "no": 4,
+      "name": "Ego-Exo4D",
+      "verdict": "external_only",
+      "license": "Signed Ego-Exo4D license agreement with restrictions on redistribution and other activities",
+      "access": "Approval and temporary AWS credentials required",
+      "bundle_scope": "None under the conservative audit",
+      "handling": "Keep official site, visualizer, and CLI links. Download approved data outside Git.",
+      "sources": [
+        "https://docs.ego-exo4d-data.org/getting-started/",
+        "https://ego-exo4d-data.org/"
+      ]
+    },
+    {
+      "no": 5,
+      "name": "Aria Digital Twin (ADT)",
+      "verdict": "external_only",
+      "license": "Project Aria ADT License; prohibits distributing the Dataset and derived works and prohibits public display or performance without prior written permission",
+      "access": "Official downloader and sample tooling",
+      "bundle_scope": "None",
+      "handling": "Do not commit frames, clips, GIFs, screenshots, or locally rendered visualizations. Link to the official viewer and downloader.",
+      "sources": [
+        "https://www.projectaria.com/datasets/adt/license/",
+        "https://facebookresearch.github.io/projectaria_tools/docs/open_datasets/aria_digital_twin_dataset/"
+      ]
+    },
+    {
+      "no": 6,
+      "name": "EgoHTR",
+      "verdict": "external_only",
+      "license": "No dataset or media redistribution license located",
+      "access": "Project page labels dataset and code as staged/coming soon",
+      "bundle_scope": "None",
+      "handling": "Use official explorer links only; do not vendor the explorer MP4s.",
+      "sources": [
+        "https://egohtr.github.io/"
+      ]
+    },
+    {
+      "no": 7,
+      "name": "Ego-1K",
+      "verdict": "conditional_bundle",
+      "license": "FAIR Noncommercial Research License",
+      "access": "Public Hugging Face dataset",
+      "bundle_scope": "Noncommercial research only; distribution and derivatives must remain under the same agreement and include a copy of it",
+      "handling": "Include the full FAIR license and citation. Use a downloader instead if the repository belongs to a commercial project or company context that is not clearly noncommercial.",
+      "sources": [
+        "https://huggingface.co/datasets/facebook/ego-1k",
+        "https://huggingface.co/facebook/fair-noncommercial-research-license/blob/main/LICENSE"
+      ]
+    },
+    {
+      "no": 8,
+      "name": "Ego-OSCAR / Stereo-550",
+      "verdict": "external_only",
+      "license": "FPV Labs custom dataset license; official card says commercial usage is allowed but does not expose a verifiable redistribution grant",
+      "access": "Controlled Hugging Face access",
+      "bundle_scope": "None until the exact accepted license authorizes redistribution",
+      "handling": "Do not infer redistribution permission from commercial-use permission. Keep the access request and downloader only.",
+      "sources": [
+        "https://huggingface.co/datasets/fpvlabs/stereo-550"
+      ]
+    },
+    {
+      "no": 9,
+      "name": "CoMind",
+      "verdict": "bundle",
+      "license": "CC BY 4.0",
+      "access": "Official download script and public samples",
+      "bundle_scope": "Dataset files and derivatives, including commercial use, with attribution, license link, and change notice",
+      "handling": "Prefer an actual dataset sample. Do not assume unrelated website decorations or third-party assets are covered.",
+      "sources": [
+        "https://comind.ethz.ch/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ]
+    },
+    {
+      "no": 10,
+      "name": "EgoBody",
+      "verdict": "external_only",
+      "license": "Signed research-use dataset license; no public blanket redistribution grant located",
+      "access": "Registration and signed license required",
+      "bundle_scope": "None",
+      "handling": "Keep the application link. Treat project-page teaser media as external-only unless separately licensed in writing.",
+      "sources": [
+        "https://sanweiliti.github.io/egobody/egobody.html",
+        "https://github.com/sanweiliti/EgoBody"
+      ]
+    },
+    {
+      "no": 11,
+      "name": "HOI4D",
+      "verdict": "conditional_bundle",
+      "license": "CC BY-NC 4.0",
+      "access": "Public download links",
+      "bundle_scope": "Noncommercial dataset media and derivatives with attribution, license link, and change notice",
+      "handling": "Do not use in a commercial or product demo without separate permission.",
+      "sources": [
+        "https://hoi4d.github.io/",
+        "https://creativecommons.org/licenses/by-nc/4.0/"
+      ]
+    },
+    {
+      "no": 12,
+      "name": "SHOW3D",
+      "verdict": "conditional_bundle",
+      "license": "CC BY-NC 4.0 on the current official dataset card",
+      "access": "Public, ungated Hugging Face dataset",
+      "bundle_scope": "Noncommercial released dataset files and derivatives with attribution, license link, and change notice",
+      "handling": "Pin the source commit and audit date because the repository evolved during its release process.",
+      "sources": [
+        "https://huggingface.co/datasets/facebook/show3d-dataset",
+        "https://creativecommons.org/licenses/by-nc/4.0/"
+      ]
+    },
+    {
+      "no": 13,
+      "name": "Assembly101",
+      "verdict": "conditional_bundle",
+      "license": "CC BY-NC 4.0",
+      "access": "Public official samples; full distribution uses an access/download workflow",
+      "bundle_scope": "Prefer the public official sample files for a noncommercial demo, with attribution, license link, and change notice",
+      "handling": "Use the official downloader for the full dataset rather than mirroring it.",
+      "sources": [
+        "https://assembly-101.github.io/",
+        "https://creativecommons.org/licenses/by-nc/4.0/"
+      ]
+    },
+    {
+      "no": 14,
+      "name": "HD-EPIC",
+      "verdict": "conditional_bundle",
+      "license": "Conflicting official metadata: Bristol repository says CC BY 4.0; official Codabench challenge says CC BY-NC 4.0",
+      "access": "Public videos and annotations",
+      "bundle_scope": "Treat all media as CC BY-NC 4.0 until clarified; noncommercial use only, with attribution and change notice",
+      "handling": "Record both license sources in the attribution manifest. Obtain author confirmation before commercial use.",
+      "sources": [
+        "https://data.bris.ac.uk/data/dataset/3cqb5b81wk2dc2379fx1mrxh47",
+        "https://www.codabench.org/competitions/13645/"
+      ]
+    },
+    {
+      "no": 15,
+      "name": "InterVLA",
+      "verdict": "external_only",
+      "license": "No dataset or media license located",
+      "access": "Project page is public; linked data/code release was unavailable during the audit",
+      "bundle_scope": "None",
+      "handling": "Link to the project page and paper. Do not copy project figures or infer a license.",
+      "sources": [
+        "https://liangxuy.github.io/InterVLA/"
+      ]
+    },
+    {
+      "no": 16,
+      "name": "EgoDex",
+      "verdict": "verbatim_only",
+      "license": "CC BY-NC-ND for the dataset; repository code has a separate Apple software license",
+      "access": "Public direct downloads",
+      "bundle_scope": "Only an exact, unmodified original dataset file for noncommercial sharing with attribution",
+      "handling": "Do not trim, crop, transcode, overlay annotations, create a montage, or convert to GIF. For a short preview, use an external link or obtain written permission.",
+      "sources": [
+        "https://github.com/apple/ml-egodex",
+        "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+      ]
+    },
+    {
+      "no": 17,
+      "name": "Open-AoE",
+      "verdict": "external_only",
+      "license": "Apache-2.0 covers original source code; dataset is tagged 'other' and has no verifiable redistribution grant",
+      "access": "Public dataset repository",
+      "bundle_scope": "Code may be reused under Apache-2.0; dataset video, frames, and derived visualizations may not be bundled under this audit",
+      "handling": "Keep data as remote links or a downloader. Preserve Apache notices for reused code.",
+      "sources": [
+        "https://github.com/ant-research/Open-AoE",
+        "https://github.com/ant-research/Open-AoE/blob/main/LEGAL.md",
+        "https://huggingface.co/datasets/inclusionAI/OpenAoE-2000h"
+      ]
+    },
+    {
+      "no": 18,
+      "name": "HumanEgo",
+      "verdict": "conditional_bundle",
+      "license": "CC BY-NC 4.0 as of the 2026-06-08 relicensing commit; Project Aria terms also apply",
+      "access": "Public Hugging Face dataset",
+      "bundle_scope": "Noncommercial dataset media and derivatives with attribution, license link, change notice, and responsible-use compliance",
+      "handling": "Pin the relicensing commit and include the dataset citation and Project Aria notices. Commercial use requires a separate license.",
+      "sources": [
+        "https://huggingface.co/datasets/Leo-TX/HumanEgo",
+        "https://huggingface.co/datasets/Leo-TX/HumanEgo/commit/f0aa87fade6a41316d65322512f56f066dec62e3",
+        "https://creativecommons.org/licenses/by-nc/4.0/"
+      ]
+    },
+    {
+      "no": 19,
+      "name": "Aria Everyday Activities (AEA)",
+      "verdict": "external_only",
+      "license": "Project Aria AEA License; prohibits distributing the Dataset and derived works and prohibits public display or performance without prior written permission",
+      "access": "Official downloader and documentation",
+      "bundle_scope": "None",
+      "handling": "Do not commit frames, clips, GIFs, screenshots, or rendered trajectories. Link to the official viewer and downloader.",
+      "sources": [
+        "https://www.projectaria.com/datasets/aea/license/",
+        "https://facebookresearch.github.io/projectaria_tools/docs/open_datasets/aria_everyday_activities_dataset"
+      ]
+    },
+    {
+      "no": 20,
+      "name": "EgoPAT3D",
+      "verdict": "external_only",
+      "license": "MIT applies to repository code; the externally hosted dataset has no explicit redistribution license and the project site says all rights reserved",
+      "access": "Processed download link; raw MKV by email request",
+      "bundle_scope": "Code only under MIT; not dataset bytes or project-site media",
+      "handling": "Keep official download links or a user-side downloader. Obtain written permission before copying dataset media or the project GIF.",
+      "sources": [
+        "https://github.com/ai4ce/EgoPAT3D",
+        "https://ai4ce.github.io/EgoPAT3D/portfolio.html",
+        "https://ai4ce.github.io/EgoPAT3D/"
+      ]
+    }
+  ]
+}

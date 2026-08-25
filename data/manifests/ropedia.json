@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "index": 1,
+  "slug": "ropedia",
+  "dataset": "Ropedia Xperience-10M",
+  "representative_id": "ropedia-ai/xperience-10m-sample / stereo_left.mp4",
+  "summary": "291 秒六目公开 sample；bootstrap 会在你确认非商业条款后，本地生成 12 秒左目预览。",
+  "evidence": "raw",
+  "redistribution": "noncommercial-download",
+  "official_source": "https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/tree/main",
+  "media": [
+    {
+      "label": "本地 12 秒",
+      "kind": "video",
+      "local_path": "assets/local/ropedia/preview.mp4",
+      "official_url": "https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/resolve/main/stereo_left.mp4",
+      "provenance": "raw clip",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    },
+    {
+      "label": "四帧速览",
+      "kind": "image",
+      "local_path": "assets/local/ropedia/contact.webp",
+      "official_url": null,
+      "provenance": "raw frames",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "annotation.hdf5",
+      "status": "not-bundled",
+      "format": "HDF5 · 1.93 GB",
+      "local_path": null,
+      "official_url": "https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/blob/main/annotation.hdf5",
+      "viewer": null,
+      "note": "含 calibration、SLAM、depth、hands、body、IMU 与 captions；体积过大，不进 Git。"
+    }
+  ],
+  "license_audit": {
+    "no": 1,
+    "name": "Ropedia Xperience-10M",
+    "verdict": "conditional_bundle",
+    "license": "CC BY-NC 4.0 for xperience-10m-sample; full dataset is gated with license tag 'other'",
+    "access": "Public sample; controlled full dataset",
+    "bundle_scope": "Only files or derivatives from ropedia-ai/xperience-10m-sample, for noncommercial use with attribution and change notice",
+    "handling": "Use the public sample for the gallery. Keep the full dataset as an application/download link only.",
+    "sources": [
+      "https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample",
+      "https://huggingface.co/datasets/ropedia-ai/xperience-10m"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

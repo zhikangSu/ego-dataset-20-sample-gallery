@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "index": 8,
+  "slug": "ego-oscar",
+  "dataset": "Ego-OSCAR-550h",
+  "representative_id": "stera006_8zlo11pxcsqd (directory example)",
+  "summary": "session gated；公开页面只有论文实拍网格与校准图，且不能强绑到该 session。",
+  "evidence": "frames",
+  "redistribution": "external-only",
+  "official_source": "https://huggingface.co/datasets/fpvlabs/stereo-550",
+  "media": [
+    {
+      "label": "任务网格",
+      "kind": "image",
+      "local_path": null,
+      "official_url": "https://arxiv.org/html/2608.08285v1/images/diversity.png",
+      "provenance": "paper figure; not record-bound",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    },
+    {
+      "label": "双目校准",
+      "kind": "image",
+      "local_path": null,
+      "official_url": "https://arxiv.org/html/2608.08285v1/images/Rectified_image.jpg",
+      "provenance": "paper figure",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "stereo / IMU / 3D hands / captions",
+      "status": "gated",
+      "format": "MP4 / JSON / CSV",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "不在 GitHub 重新分发。"
+    }
+  ],
+  "license_audit": {
+    "no": 8,
+    "name": "Ego-OSCAR / Stereo-550",
+    "verdict": "external_only",
+    "license": "FPV Labs custom dataset license; official card says commercial usage is allowed but does not expose a verifiable redistribution grant",
+    "access": "Controlled Hugging Face access",
+    "bundle_scope": "None until the exact accepted license authorizes redistribution",
+    "handling": "Do not infer redistribution permission from commercial-use permission. Keep the access request and downloader only.",
+    "sources": [
+      "https://huggingface.co/datasets/fpvlabs/stereo-550"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

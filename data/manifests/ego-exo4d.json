@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "index": 4,
+  "slug": "ego-exo4d",
+  "dataset": "Ego-Exo4D",
+  "representative_id": "official asset: bike_repair/aria.mp4",
+  "summary": "网页公开的 30 秒 Aria + 4 GoPro 自行车维修样例；完整 take 与标注仍为许可制。",
+  "evidence": "raw",
+  "redistribution": "fetch",
+  "official_source": "https://ego-exo4d-data.org/",
+  "media": [
+    {
+      "label": "Aria ego",
+      "kind": "video",
+      "local_path": "assets/local/ego-exo4d/aria.mp4",
+      "official_url": "https://ego-exo4d-data.org/assets/videos/bike_repair/aria.mp4",
+      "provenance": "official site sample",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    },
+    {
+      "label": "GoPro 01",
+      "kind": "video",
+      "local_path": "assets/local/ego-exo4d/cam01.mp4",
+      "official_url": "https://ego-exo4d-data.org/assets/videos/bike_repair/cam01.mp4",
+      "provenance": "synchronized official site sample",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "take annotations",
+      "status": "gated",
+      "format": "JSON / CSV / trajectory",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "网页样例未映射公开 take UID；不伪造 record-level 标注。"
+    }
+  ],
+  "license_audit": {
+    "no": 4,
+    "name": "Ego-Exo4D",
+    "verdict": "external_only",
+    "license": "Signed Ego-Exo4D license agreement with restrictions on redistribution and other activities",
+    "access": "Approval and temporary AWS credentials required",
+    "bundle_scope": "None under the conservative audit",
+    "handling": "Keep official site, visualizer, and CLI links. Download approved data outside Git.",
+    "sources": [
+      "https://docs.ego-exo4d-data.org/getting-started/",
+      "https://ego-exo4d-data.org/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

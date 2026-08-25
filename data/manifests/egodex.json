@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "index": 16,
+  "slug": "egodex",
+  "dataset": "EgoDex",
+  "representative_id": "official montage / task1/0.* is README schema only",
+  "summary": "官方真实数据 montage；最小 test archive 约 16 GB，不把 task1/0 强绑到图片。",
+  "evidence": "frames",
+  "redistribution": "external-only",
+  "official_source": "https://github.com/apple/ml-egodex",
+  "media": [
+    {
+      "label": "任务网格",
+      "kind": "image",
+      "local_path": null,
+      "official_url": "https://arxiv.org/html/2505.11709v1/grid_v4.png",
+      "provenance": "official paper figure",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "paired HDF5",
+      "status": "not-bundled",
+      "format": "HDF5 · 68-joint SE(3)",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "CC BY-NC-ND，仓库不制作或再分发修改版数据片段。"
+    }
+  ],
+  "license_audit": {
+    "no": 16,
+    "name": "EgoDex",
+    "verdict": "verbatim_only",
+    "license": "CC BY-NC-ND for the dataset; repository code has a separate Apple software license",
+    "access": "Public direct downloads",
+    "bundle_scope": "Only an exact, unmodified original dataset file for noncommercial sharing with attribution",
+    "handling": "Do not trim, crop, transcode, overlay annotations, create a montage, or convert to GIF. For a short preview, use an external link or obtain written permission.",
+    "sources": [
+      "https://github.com/apple/ml-egodex",
+      "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

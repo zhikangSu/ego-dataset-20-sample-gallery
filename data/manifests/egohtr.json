@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "index": 6,
+  "slug": "egohtr",
+  "dataset": "EgoHTR",
+  "representative_id": "official modality explorer / episode ID not disclosed",
+  "summary": "官网真实多模态 explorer，展示 ego/exo、SLAM、mesh、point cloud 与 SMPL。",
+  "evidence": "viz",
+  "redistribution": "fetch",
+  "official_source": "https://egohtr.github.io/",
+  "media": [
+    {
+      "label": "多模态",
+      "kind": "video",
+      "local_path": "assets/local/egohtr/modalities.mp4",
+      "official_url": "https://egohtr.github.io/assets/explorer_modalities/all.mp4",
+      "provenance": "official visualization",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    },
+    {
+      "label": "contact sheet",
+      "kind": "image",
+      "local_path": "assets/local/egohtr/contact.webp",
+      "official_url": null,
+      "provenance": "frames from official visualization",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "body / terrain / SLAM",
+      "status": "unreleased",
+      "format": "planned dataset",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "项目页能看 overlay，但当前没有可放入仓库的逐帧标注文件。"
+    }
+  ],
+  "license_audit": {
+    "no": 6,
+    "name": "EgoHTR",
+    "verdict": "external_only",
+    "license": "No dataset or media redistribution license located",
+    "access": "Project page labels dataset and code as staged/coming soon",
+    "bundle_scope": "None",
+    "handling": "Use official explorer links only; do not vendor the explorer MP4s.",
+    "sources": [
+      "https://egohtr.github.io/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

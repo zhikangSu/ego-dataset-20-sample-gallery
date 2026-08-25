@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "index": 13,
+  "slug": "assembly101",
+  "dataset": "Assembly101",
+  "representative_id": "nusar-2021_action_both_9031-c04d_9031_user_id_2021-02-04_104130",
+  "summary": "官网 sample 的 e1/e3 视角；另有不强绑该 ID 的 12-view 官方 montage。",
+  "evidence": "raw",
+  "redistribution": "noncommercial-download",
+  "official_source": "https://assembly-101.github.io/",
+  "media": [
+    {
+      "label": "Ego e1",
+      "kind": "video",
+      "local_path": "assets/local/assembly101/e1.mp4",
+      "official_url": "https://drive.usercontent.google.com/download?id=12gg-hMcLGnPXPVzkvhRyud1nqOzQ2_UG&export=download&confirm=t",
+      "provenance": "official sample clip",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    },
+    {
+      "label": "12-view",
+      "kind": "video",
+      "local_path": "assets/local/assembly101/montage.mp4",
+      "official_url": "https://assembly-101.github.io/assets/12_view_assembly.mp4",
+      "provenance": "official overview; not record-bound",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "actions / errors / 3D hands",
+      "status": "source-only",
+      "format": "CSV / JSON",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "官网 sample 媒体未同时给出该序列的轻量 annotation bundle。"
+    }
+  ],
+  "license_audit": {
+    "no": 13,
+    "name": "Assembly101",
+    "verdict": "conditional_bundle",
+    "license": "CC BY-NC 4.0",
+    "access": "Public official samples; full distribution uses an access/download workflow",
+    "bundle_scope": "Prefer the public official sample files for a noncommercial demo, with attribution, license link, and change notice",
+    "handling": "Use the official downloader for the full dataset rather than mirroring it.",
+    "sources": [
+      "https://assembly-101.github.io/",
+      "https://creativecommons.org/licenses/by-nc/4.0/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

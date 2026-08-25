@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "index": 5,
+  "slug": "adt",
+  "dataset": "ADT (Aria Digital Twin)",
+  "representative_id": "viewer=Apartment_release_multiskeleton_party_seq104 / timeline episode undisclosed",
+  "summary": "官方 Rerun viewer 同时显示 Aria RGB、数字孪生、skeleton、objects 与时间轴；仅 viewer 图可精确绑定 seq104。",
+  "evidence": "viz",
+  "redistribution": "fetch",
+  "official_source": "https://facebookresearch.github.io/projectaria_tools/docs/open_datasets/aria_digital_twin_dataset/visualizers",
+  "media": [
+    {
+      "label": "RGB + 3D",
+      "kind": "image",
+      "local_path": "assets/local/adt/viewer.png",
+      "official_url": "https://facebookresearch.github.io/projectaria_tools/assets/images/rerun-adt-8f99fc7ab867aeb74af652b7dc49a61c.png",
+      "provenance": "official record-level visualization",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    },
+    {
+      "label": "时间窗口",
+      "kind": "image",
+      "local_path": "assets/local/adt/timeline.png",
+      "official_url": "https://facebookresearch.github.io/projectaria_tools/assets/images/rerun-adt-time-window-e461b5593e86b60f79aacbdb82a7cd2d.png",
+      "provenance": "official visualization",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "digital-twin streams",
+      "status": "gated",
+      "format": "VRS / CSV / JSON",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "完整 depth、segmentation、boxes、skeleton 与 trajectory 需官方 downloader。"
+    }
+  ],
+  "license_audit": {
+    "no": 5,
+    "name": "Aria Digital Twin (ADT)",
+    "verdict": "external_only",
+    "license": "Project Aria ADT License; prohibits distributing the Dataset and derived works and prohibits public display or performance without prior written permission",
+    "access": "Official downloader and sample tooling",
+    "bundle_scope": "None",
+    "handling": "Do not commit frames, clips, GIFs, screenshots, or locally rendered visualizations. Link to the official viewer and downloader.",
+    "sources": [
+      "https://www.projectaria.com/datasets/adt/license/",
+      "https://facebookresearch.github.io/projectaria_tools/docs/open_datasets/aria_digital_twin_dataset/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

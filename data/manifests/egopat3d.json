@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "index": 20,
+  "slug": "egopat3d",
+  "dataset": "EgoPAT3D",
+  "representative_id": "official sequence asset 1.gif",
+  "summary": "官网编号动画展示 RGB-D ego 中的手、目标物与未来 3D trajectory。",
+  "evidence": "raw",
+  "redistribution": "fetch",
+  "official_source": "https://ai4ce.github.io/EgoPAT3D/index.html",
+  "media": [
+    {
+      "label": "Sequence 1",
+      "kind": "video",
+      "local_path": "assets/local/egopat3d/sequence1.mp4",
+      "official_url": "https://ai4ce.github.io/EgoPAT3D/img/gif/1.gif",
+      "provenance": "official animated sample",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "trajectory / scene PLY / hand keypoints",
+      "status": "source-only",
+      "format": "TXT / PLY",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "官网动画不附该片段的独立 annotation 文件。"
+    }
+  ],
+  "license_audit": {
+    "no": 20,
+    "name": "EgoPAT3D",
+    "verdict": "external_only",
+    "license": "MIT applies to repository code; the externally hosted dataset has no explicit redistribution license and the project site says all rights reserved",
+    "access": "Processed download link; raw MKV by email request",
+    "bundle_scope": "Code only under MIT; not dataset bytes or project-site media",
+    "handling": "Keep official download links or a user-side downloader. Obtain written permission before copying dataset media or the project GIF.",
+    "sources": [
+      "https://github.com/ai4ce/EgoPAT3D",
+      "https://ai4ce.github.io/EgoPAT3D/portfolio.html",
+      "https://ai4ce.github.io/EgoPAT3D/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schema_version": 2,
+  "index": 12,
+  "slug": "show3d",
+  "dataset": "SHOW3D",
+  "representative_id": "YZH016/balandabowl_scooping_0663",
+  "summary": "同一 scene 的两路 headset 视频；hand-pose v2 可逐帧叠加 2D 手关键点，object pose 仅含 R/t，不能伪画完整轮廓。",
+  "evidence": "raw",
+  "redistribution": "noncommercial-download",
+  "official_source": "https://huggingface.co/datasets/facebook/show3d-dataset",
+  "media": [
+    {
+      "label": "Headset 0 + hands",
+      "kind": "video",
+      "local_path": "assets/local/show3d/headset0.mp4",
+      "official_url": "https://huggingface.co/datasets/facebook/show3d-dataset/resolve/main/scenes/YZH016/balandabowl_scooping_0663/headset0.mp4",
+      "provenance": "official raw clip + local overlay from official hand-pose v2",
+      "source_start_seconds": 3,
+      "fps": 60,
+      "synchronized_group": null,
+      "overlay": {
+        "kind": "show3d-hands",
+        "camera": "headset0",
+        "path": "assets/local/show3d/annotations/hand_overlay_compact.json",
+        "width": 1024,
+        "height": 1280
+      }
+    },
+    {
+      "label": "Headset 1 + hands",
+      "kind": "video",
+      "local_path": "assets/local/show3d/headset1.mp4",
+      "official_url": "https://huggingface.co/datasets/facebook/show3d-dataset/resolve/main/scenes/YZH016/balandabowl_scooping_0663/headset1.mp4",
+      "provenance": "official synchronized raw clip + local overlay from official hand-pose v2",
+      "source_start_seconds": 3,
+      "fps": 60,
+      "synchronized_group": null,
+      "overlay": {
+        "kind": "show3d-hands",
+        "camera": "headset1",
+        "path": "assets/local/show3d/annotations/hand_overlay_compact.json",
+        "width": 1024,
+        "height": 1280
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "label": "hand_overlay_compact.json",
+      "status": "derived-local",
+      "format": "JSON · 2D landmarks",
+      "local_path": "assets/local/show3d/annotations/hand_overlay_compact.json",
+      "official_url": null,
+      "viewer": null,
+      "note": "由官方 hand-pose v2 在本机裁出 confidence>0.5 的左右手 2D 点；视频上蓝=左手、红=右手。"
+    },
+    {
+      "label": "hand_pose_v2.json",
+      "status": "fetch",
+      "format": "JSON · 1786 frames",
+      "local_path": "assets/local/show3d/annotations/hand_pose_v2.json",
+      "official_url": "https://huggingface.co/datasets/facebook/show3d-dataset/resolve/main/hand_pose/v2/scenes/YZH016/balandabowl_scooping_0663/hand_pose.json",
+      "viewer": null,
+      "note": "使用 v2；v1 存在官方已知的 scale/projection 问题。"
+    },
+    {
+      "label": "object_pose.json",
+      "status": "fetch",
+      "format": "JSON · R/t",
+      "local_path": "assets/local/show3d/annotations/object_pose.json",
+      "official_url": "https://huggingface.co/datasets/facebook/show3d-dataset/resolve/main/object_pose/v1/scenes/YZH016/balandabowl_scooping_0663/object_pose.json",
+      "viewer": null,
+      "note": "本样本不含 vertices_world_space；因此不绘制虚假的物体网格/轮廓。"
+    },
+    {
+      "label": "headset calibrations",
+      "status": "fetch",
+      "format": "JSON",
+      "local_path": "assets/local/show3d/annotations/headset0_calibration.json",
+      "official_url": "https://huggingface.co/datasets/facebook/show3d-dataset/resolve/main/scenes/YZH016/balandabowl_scooping_0663/camera_calibration/headset0.json",
+      "viewer": null,
+      "note": "用于需要时投影物体中心/坐标轴。"
+    },
+    {
+      "label": "caption.json",
+      "status": "fetch",
+      "format": "JSON",
+      "local_path": "assets/local/show3d/annotations/caption.json",
+      "official_url": "https://huggingface.co/datasets/facebook/show3d-dataset/resolve/main/captions/v1/scenes/YZH016/balandabowl_scooping_0663/caption.json",
+      "viewer": null,
+      "note": null
+    }
+  ],
+  "license_audit": {
+    "no": 12,
+    "name": "SHOW3D",
+    "verdict": "conditional_bundle",
+    "license": "CC BY-NC 4.0 on the current official dataset card",
+    "access": "Public, ungated Hugging Face dataset",
+    "bundle_scope": "Noncommercial released dataset files and derivatives with attribution, license link, and change notice",
+    "handling": "Pin the source commit and audit date because the repository evolved during its release process.",
+    "sources": [
+      "https://huggingface.co/datasets/facebook/show3d-dataset",
+      "https://creativecommons.org/licenses/by-nc/4.0/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

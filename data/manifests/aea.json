@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "index": 19,
+  "slug": "aea",
+  "dataset": "AEA (Aria Everyday Activities)",
+  "representative_id": "loc5_script4_seq6_rec1 (downloader example)",
+  "summary": "官方真实活动/viewer/共享轨迹图；图片未声明属于该 downloader 样例 ID。",
+  "evidence": "viz",
+  "redistribution": "external-only",
+  "official_source": "https://facebookresearch.github.io/projectaria_tools/docs/open_datasets/aria_everyday_activities_dataset",
+  "media": [
+    {
+      "label": "活动实拍",
+      "kind": "image",
+      "local_path": null,
+      "official_url": "https://arxiv.org/html/2402.13349v1/figures/images/aria_teaser_updated.png",
+      "provenance": "official paper figure",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    },
+    {
+      "label": "共享轨迹",
+      "kind": "image",
+      "local_path": null,
+      "official_url": "https://facebookresearch.github.io/projectaria_tools/assets/images/aea_shared_3d_global_trajectories-b03ad9fb2da530ab71b888f61fa6689c.png",
+      "provenance": "official visualization",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "VRS / MPS / gaze / audio",
+      "status": "gated",
+      "format": "VRS / CSV / JSONL",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "按 Project Aria 下载流程获取。"
+    }
+  ],
+  "license_audit": {
+    "no": 19,
+    "name": "Aria Everyday Activities (AEA)",
+    "verdict": "external_only",
+    "license": "Project Aria AEA License; prohibits distributing the Dataset and derived works and prohibits public display or performance without prior written permission",
+    "access": "Official downloader and documentation",
+    "bundle_scope": "None",
+    "handling": "Do not commit frames, clips, GIFs, screenshots, or rendered trajectories. Link to the official viewer and downloader.",
+    "sources": [
+      "https://www.projectaria.com/datasets/aea/license/",
+      "https://facebookresearch.github.io/projectaria_tools/docs/open_datasets/aria_everyday_activities_dataset"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

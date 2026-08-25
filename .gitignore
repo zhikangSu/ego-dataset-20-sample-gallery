@@ -1,0 +1,9 @@
+# License-aware local cache: never commit dataset bytes downloaded by users.
+/assets/local/
+
+__pycache__/
+*.py[cod]
+*.partial
+*.partial.*
+.DS_Store
+Thumbs.db

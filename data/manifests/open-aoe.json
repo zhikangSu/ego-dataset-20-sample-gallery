@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "index": 17,
+  "slug": "open-aoe",
+  "dataset": "Open-AoE",
+  "representative_id": "aoe_20260214_233341_p000",
+  "summary": "固定 revision 下同一 sample 的 Raw、手网格预渲染与 action JSON；视图切换保持同一播放时刻。该 JSON 存在显著时段 QC 异常。",
+  "evidence": "raw",
+  "redistribution": "fetch",
+  "official_source": "https://huggingface.co/datasets/inclusionAI/OpenAoE-2000h/tree/c363c7866816505c697b9a7ab76341eb2773716b/aoe_20260214_233341_p000",
+  "media": [
+    {
+      "label": "Raw",
+      "kind": "video",
+      "local_path": "assets/local/open-aoe/raw.mp4",
+      "official_url": "https://huggingface.co/datasets/inclusionAI/OpenAoE-2000h/resolve/c363c7866816505c697b9a7ab76341eb2773716b/aoe_20260214_233341_p000/raw_video.mp4",
+      "provenance": "official raw sample at pinned revision",
+      "source_start_seconds": 3,
+      "fps": 30,
+      "synchronized_group": "open-aoe",
+      "overlay": null
+    },
+    {
+      "label": "Hands overlay",
+      "kind": "video",
+      "local_path": "assets/local/open-aoe/hands.mp4",
+      "official_url": "https://huggingface.co/datasets/inclusionAI/OpenAoE-2000h/resolve/c363c7866816505c697b9a7ab76341eb2773716b/aoe_20260214_233341_p000/ego_process/ego_hands_reconstruction/visualization/hands_combined.mp4",
+      "provenance": "official automatic hand-mesh visualization at pinned revision",
+      "source_start_seconds": 3,
+      "fps": 30,
+      "synchronized_group": "open-aoe",
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "ego_action_annotation.json",
+      "status": "fetch · QC warning",
+      "format": "JSON · 25 segments",
+      "local_path": "assets/local/open-aoe/annotations/ego_action_annotation.json",
+      "official_url": "https://huggingface.co/datasets/inclusionAI/OpenAoE-2000h/resolve/c363c7866816505c697b9a7ab76341eb2773716b/aoe_20260214_233341_p000/ego_annotation/ego_action_annotation.json",
+      "viewer": "open-aoe-timeline",
+      "note": "官方文件中前 24 段集中在 0–2.57 s，最后一段覆盖至 180.997 s；页面只如实展示并标为 QC anomaly，不将其当作干净 GT。"
+    }
+  ],
+  "license_audit": {
+    "no": 17,
+    "name": "Open-AoE",
+    "verdict": "external_only",
+    "license": "Apache-2.0 covers original source code; dataset is tagged 'other' and has no verifiable redistribution grant",
+    "access": "Public dataset repository",
+    "bundle_scope": "Code may be reused under Apache-2.0; dataset video, frames, and derived visualizations may not be bundled under this audit",
+    "handling": "Keep data as remote links or a downloader. Preserve Apache notices for reused code.",
+    "sources": [
+      "https://github.com/ant-research/Open-AoE",
+      "https://github.com/ant-research/Open-AoE/blob/main/LEGAL.md",
+      "https://huggingface.co/datasets/inclusionAI/OpenAoE-2000h"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

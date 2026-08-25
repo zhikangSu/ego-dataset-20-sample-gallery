@@ -1,0 +1,39 @@
+{
+  "schema_version": 2,
+  "index": 2,
+  "slug": "ha-ego-1k",
+  "dataset": "HA-Ego-1K",
+  "representative_id": "car_workshop/car_door_audio_system_installation_142 / clip03",
+  "summary": "六路同步视频与 IMU/标定均需先接受 Hugging Face 访问条件；仓库不会绕过 gate。",
+  "evidence": "locked",
+  "redistribution": "external-only",
+  "official_source": "https://huggingface.co/datasets/humanarchive/HA-Ego-1K",
+  "media": [],
+  "annotations": [
+    {
+      "label": "IMU + metadata + Kalibr",
+      "status": "gated",
+      "format": "CSV / JSON / YAML",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "接受官方条款后由用户自行下载。"
+    }
+  ],
+  "license_audit": {
+    "no": 2,
+    "name": "HA-Ego-1K",
+    "verdict": "external_only",
+    "license": "Dataset metadata reports CC BY-NC 4.0, but the gated click-through terms were not publicly retrievable",
+    "access": "Gated; unauthenticated access returns 401",
+    "bundle_scope": "None until the accepted gate terms are archived and confirmed not to restrict redistribution",
+    "handling": "Link to the access request; do not republish files obtained by an approved account.",
+    "sources": [
+      "https://huggingface.co/datasets/humanarchive/HA-Ego-1K"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

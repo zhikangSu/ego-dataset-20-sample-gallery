@@ -1,0 +1,74 @@
+{
+  "schema_version": 2,
+  "index": 9,
+  "slug": "comind",
+  "dataset": "CoMind",
+  "representative_id": "21c13149-ca54-45dc-94a1-bd74a1c8a27e",
+  "summary": "同一 UUID 的 leader/helper 两路 60 秒协作烹饪视频；仓库内置各 12 秒转码。",
+  "evidence": "raw",
+  "redistribution": "bundled",
+  "official_source": "https://comind.ethz.ch/",
+  "media": [
+    {
+      "label": "Leader",
+      "kind": "video",
+      "local_path": "assets/datasets/comind/leader.mp4",
+      "official_url": "https://comind.ethz.ch/files/example_videos/generic/21c13149-ca54-45dc-94a1-bd74a1c8a27e_leader.mp4",
+      "provenance": "official raw sample",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    },
+    {
+      "label": "Helper",
+      "kind": "video",
+      "local_path": "assets/datasets/comind/helper.mp4",
+      "official_url": "https://comind.ethz.ch/files/example_videos/generic/21c13149-ca54-45dc-94a1-bd74a1c8a27e_helper.mp4",
+      "provenance": "official synchronized raw sample",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    },
+    {
+      "label": "配对帧",
+      "kind": "image",
+      "local_path": "assets/datasets/comind/contact.webp",
+      "official_url": null,
+      "provenance": "frames from both official videos",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "gaze / hands / objects / scene",
+      "status": "source-only",
+      "format": "dataset fields",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "官网 example MP4 不附逐帧标注小文件。"
+    }
+  ],
+  "license_audit": {
+    "no": 9,
+    "name": "CoMind",
+    "verdict": "bundle",
+    "license": "CC BY 4.0",
+    "access": "Official download script and public samples",
+    "bundle_scope": "Dataset files and derivatives, including commercial use, with attribution, license link, and change notice",
+    "handling": "Prefer an actual dataset sample. Do not assume unrelated website decorations or third-party assets are covered.",
+    "sources": [
+      "https://comind.ethz.ch/",
+      "https://creativecommons.org/licenses/by/4.0/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

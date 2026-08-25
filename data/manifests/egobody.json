@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "index": 10,
+  "slug": "egobody",
+  "dataset": "EgoBody",
+  "representative_id": "official teaser / recording_name not disclosed",
+  "summary": "官方同步 teaser 展示 HoloLens ego、Kinect、gaze 与人体 mesh；原始记录需签协议。",
+  "evidence": "frames",
+  "redistribution": "external-only",
+  "official_source": "https://sanweiliti.github.io/egobody/egobody.html",
+  "media": [
+    {
+      "label": "同步 teaser",
+      "kind": "image",
+      "local_path": null,
+      "official_url": "https://sanweiliti.github.io/egobody/images/teaser_v2.jpg",
+      "provenance": "official visualization",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "SMPL-X / scene registration",
+      "status": "gated",
+      "format": "body + scene files",
+      "local_path": null,
+      "official_url": null,
+      "viewer": null,
+      "note": "不在 GitHub 重新分发。"
+    }
+  ],
+  "license_audit": {
+    "no": 10,
+    "name": "EgoBody",
+    "verdict": "external_only",
+    "license": "Signed research-use dataset license; no public blanket redistribution grant located",
+    "access": "Registration and signed license required",
+    "bundle_scope": "None",
+    "handling": "Keep the application link. Treat project-page teaser media as external-only unless separately licensed in writing.",
+    "sources": [
+      "https://sanweiliti.github.io/egobody/egobody.html",
+      "https://github.com/sanweiliti/EgoBody"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}

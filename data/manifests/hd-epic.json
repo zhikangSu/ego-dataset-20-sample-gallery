@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "index": 14,
+  "slug": "hd-epic",
+  "dataset": "HD-EPIC",
+  "representative_id": "P01-20240202-110250 / 134–153 s",
+  "summary": "真实 Nespresso 时间段：加奶泡并搅拌；脚本从公开长视频按时间窗转码。",
+  "evidence": "raw",
+  "redistribution": "noncommercial-download",
+  "official_source": "https://hd-epic.github.io/site/",
+  "media": [
+    {
+      "label": "19 秒窗口",
+      "kind": "video",
+      "local_path": "assets/local/hd-epic/p01_134_153.mp4",
+      "official_url": "https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-110250.mp4",
+      "provenance": "exact raw time window",
+      "source_start_seconds": null,
+      "fps": null,
+      "synchronized_group": null,
+      "overlay": null
+    }
+  ],
+  "annotations": [
+    {
+      "label": "action excerpt",
+      "status": "source-only",
+      "format": "JSON",
+      "local_path": null,
+      "official_url": "https://github.com/hd-epic/hd-epic-annotations",
+      "viewer": null,
+      "note": "官方 annotations 可核验该时间窗；当前脚本只裁视频，不伪称已自动提取 JSON。"
+    }
+  ],
+  "license_audit": {
+    "no": 14,
+    "name": "HD-EPIC",
+    "verdict": "conditional_bundle",
+    "license": "Conflicting official metadata: Bristol repository says CC BY 4.0; official Codabench challenge says CC BY-NC 4.0",
+    "access": "Public videos and annotations",
+    "bundle_scope": "Treat all media as CC BY-NC 4.0 until clarified; noncommercial use only, with attribution and change notice",
+    "handling": "Record both license sources in the attribution manifest. Obtain author confirmation before commercial use.",
+    "sources": [
+      "https://data.bris.ac.uk/data/dataset/3cqb5b81wk2dc2379fx1mrxh47",
+      "https://www.codabench.org/competitions/13645/"
+    ]
+  },
+  "generated_from": [
+    "data/catalog.js",
+    "data/license_audit.json"
+  ]
+}
