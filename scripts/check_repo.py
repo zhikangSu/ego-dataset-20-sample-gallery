@@ -71,7 +71,8 @@ def check_pages() -> None:
     gallery = [x for x in facts.iframes if x.get("class") == "sample-gallery-frame"]
     assert len(gallery) == 1, "report must contain exactly one gallery iframe"
     assert gallery[0].get("src") == "index.html?embed=1&viewer=annotation-sync-v1#gallery"
-    assert 'src="gallery.js"' in index, "gallery application script is missing"
+    assert 'src="gallery.js?v=annotation-sync-v1"' in index, "versioned gallery application script is missing"
+    assert 'src="data/catalog.js?v=annotation-sync-v1"' in index, "versioned catalog script is missing"
     gallery_js = (ROOT / "gallery.js").read_text(encoding="utf-8")
     assert "function mediaCandidates" in gallery_js, "official-media fallback is missing"
     assert "官方源直连" in gallery_js, "direct official-source state is missing"
