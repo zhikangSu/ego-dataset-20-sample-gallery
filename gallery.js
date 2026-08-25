@@ -61,7 +61,7 @@
   const clipTime = (video, media, kind) => Math.max(0, sourceTime(video, media, kind) - Number(media.sourceStart || 0));
 
   function candidates(input) {
-    return arr(input).flat().filter(Boolean);
+    return (Array.isArray(input) ? input : [input]).flat().filter(Boolean);
   }
 
   async function fetchJSON(input) {
