@@ -18,6 +18,14 @@ section{scroll-margin-top:72px;padding:42px 0 0}.section-head{display:flex;align
 .table-shell{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:auto}.matrix{border-collapse:separate;border-spacing:0;width:100%;min-width:1220px}.matrix th,.matrix td{padding:10px 11px;border-bottom:1px solid var(--line);vertical-align:middle;text-align:center}.matrix th{position:sticky;top:0;background:var(--panel);font-size:12px;color:var(--muted);z-index:2}.matrix th:first-child,.matrix td:first-child{text-align:left;position:sticky;left:0;background:var(--panel);z-index:1;min-width:210px}.matrix tr:last-child td{border-bottom:none}.dot{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:7px;font-weight:800;font-size:11px}.dot.s2{background:color-mix(in srgb,var(--good) 20%,transparent);color:var(--good)}.dot.s1{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}.dot.s0{background:var(--chip);color:var(--muted)}.score{font-weight:800;color:var(--accent)}
 .legend{display:flex;flex-wrap:wrap;gap:12px;margin:10px 0;color:var(--muted);font-size:12px}.legend span{display:inline-flex;align-items:center;gap:5px}
 .peer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.peer{padding:0;overflow:hidden}.peer-head{padding:18px 20px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}.peer-head h3{margin:0;font-size:17px}.badge{font-size:11px;border-radius:999px;padding:4px 8px;background:var(--chip);border:1px solid var(--line);white-space:nowrap}.badge.a{color:var(--good)}.badge.b{color:var(--warn)}.peer-body{padding:16px 20px}.kv{display:grid;grid-template-columns:115px 1fr;gap:6px 12px;margin:0}.kv dt{font-size:12px;color:var(--muted);font-weight:700}.kv dd{margin:0}.peer-note{margin-top:12px;padding:10px 12px;background:var(--chip);border-radius:10px;color:var(--muted);font-size:13px}.peer-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px}.rel{font-size:12px;color:var(--muted)}.rel b{color:var(--accent);font-size:16px}
+
+/* detailed peer comparison table */
+.peer-compare-guide{display:flex;align-items:center;flex-wrap:wrap;gap:9px 12px;margin:-2px 0 12px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-size:12px}.peer-compare-guide>span:first-child{margin-right:auto}.peer-compare-controls{display:grid;grid-template-columns:minmax(260px,1.8fr) minmax(130px,.7fr) minmax(145px,.75fr) minmax(170px,.9fr) auto auto;gap:9px;align-items:center;margin-bottom:12px}.peer-compare-controls input,.peer-compare-controls select,.peer-compare-controls button{width:100%;min-height:40px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:8px 11px;font:inherit;font-size:12px}.peer-compare-controls button{width:auto;cursor:pointer;font-weight:800;background:var(--chip)}.peer-compare-controls button:hover{border-color:var(--accent);color:var(--accent)}#peerCompareInfo{justify-self:end;color:var(--muted);font-size:12px;white-space:nowrap}
+.peer-compare-shell{max-height:min(78vh,980px);overscroll-behavior:contain}.peer-compare{--peer-group-h:34px;width:100%;min-width:2800px;border-collapse:separate;border-spacing:0;table-layout:fixed}.peer-compare th,.peer-compare td{padding:11px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:12px;line-height:1.48;word-break:break-word}.peer-compare tr>*:last-child{border-right:0}.peer-compare tbody tr:last-child td{border-bottom:0}.peer-compare thead th{position:sticky;background:var(--panel);z-index:4;color:var(--muted);font-weight:800}.peer-compare .peer-group-row th{top:0;height:var(--peer-group-h);padding-top:7px;padding-bottom:7px;text-align:center;background:color-mix(in srgb,var(--accent) 8%,var(--panel));color:var(--accent);font-size:11px;letter-spacing:.02em}.peer-compare .peer-field-row th{top:var(--peer-group-h);font-size:11px;padding-top:8px;padding-bottom:8px}.peer-compare thead th[rowspan]{top:0;vertical-align:middle;text-align:left;background:color-mix(in srgb,var(--accent) 8%,var(--panel));z-index:8}.peer-compare th:first-child,.peer-compare td:first-child{position:sticky;left:0;z-index:3;background:var(--panel);box-shadow:8px 0 14px -14px rgba(0,0,0,.7)}.peer-compare thead th:first-child{z-index:9}.peer-compare tbody tr:nth-child(even)>td{background:color-mix(in srgb,var(--accent2) 2.8%,var(--panel))}.peer-compare tbody tr:nth-child(even)>td:first-child{background:color-mix(in srgb,var(--accent2) 2.8%,var(--panel))}.peer-compare tbody tr:hover>td{background:color-mix(in srgb,var(--accent) 7%,var(--panel))}.peer-compare tbody tr:hover>td:first-child{background:color-mix(in srgb,var(--accent) 7%,var(--panel))}.peer-compare tbody tr.peer-hidden{display:none}
+.peer-compare .col-dataset{width:235px}.peer-compare .col-task{width:230px}.peer-compare .col-scale{width:190px}.peer-compare .col-views{width:225px}.peer-compare .col-sync{width:255px}.peer-compare .col-sensors{width:310px}.peer-compare .col-human{width:235px}.peer-compare .col-object{width:255px}.peer-compare .col-scene{width:255px}.peer-compare .col-access{width:245px}.peer-compare .col-note{width:350px}.peer-dataset-line{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.peer-dataset-name{font-size:14px;font-weight:850;line-height:1.3}.peer-score-pill{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;border-radius:999px;padding:3px 7px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);font-weight:900;font-size:11px}.peer-dataset-meta{margin-top:6px;color:var(--muted);font-size:10.5px}.peer-dataset-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.peer-dataset-badges .badge{font-size:9.5px;padding:3px 6px;white-space:normal}.peer-kind-badge{color:var(--accent2)}.peer-cell-label{display:block;margin:0 0 3px;color:var(--muted);font-size:9.5px;font-weight:850;letter-spacing:.04em;text-transform:uppercase}.peer-cell-block+.peer-cell-block{margin-top:9px;padding-top:8px;border-top:1px dashed var(--line)}.peer-note-cell{color:var(--text);font-weight:560}.peer-note-cell:before{content:"差异";display:inline-flex;margin:0 6px 4px 0;padding:2px 6px;border-radius:999px;background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent);font-size:9px;font-weight:900}.peer-compare-note{margin-top:8px}
+@media(max-width:1000px){.peer-compare-controls{grid-template-columns:1fr 1fr 1fr}.peer-compare-controls #peerQ{grid-column:1/-1}#peerCompareInfo{justify-self:start}.peer-compare-shell{max-height:none}}
+@media(max-width:650px){.peer-compare-guide{align-items:flex-start}.peer-compare-guide>span:first-child{width:100%}.peer-compare-controls{grid-template-columns:1fr 1fr}.peer-compare-controls #peerQ,.peer-compare-controls #peerCompareInfo{grid-column:1/-1}.peer-compare-controls button{width:100%}.peer-compare{min-width:2600px}}
+@media print{.peer-compare-controls{display:none}.peer-compare-shell{max-height:none;overflow:visible}.peer-compare{min-width:0;table-layout:auto;font-size:8px}.peer-compare th,.peer-compare td{font-size:8px;padding:5px}.peer-compare th:first-child,.peer-compare td:first-child{position:static}.peer-compare thead th{position:static}}
 .spec-grid{grid-template-columns:1.25fr .75fr}.spec h3{margin:0 0 10px}.spec ul,.spec ol{margin:8px 0;padding-left:20px}.track{display:grid;grid-template-columns:70px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}.track:last-child{border-bottom:0}.track-code{font-weight:900;color:var(--accent);font-size:18px}.metric{font-size:13px;color:var(--muted)}pre.tree{margin:0;background:#101820;color:#d8e5ea;border-radius:12px;padding:17px;overflow:auto;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace}
 .decision{border-left:4px solid var(--accent);padding-left:16px}.decision strong{font-size:17px}.risk{border-left:4px solid var(--warn);padding-left:16px}.risk h3{margin-top:0}
 .controls{display:grid;grid-template-columns:2fr repeat(4,1fr) auto;gap:10px;margin-bottom:12px}.controls input,.controls select,.controls button{width:100%;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:10px 12px;font:inherit}.controls button{cursor:pointer;font-weight:700;background:var(--accent);color:#fff;border-color:var(--accent)}.filter-info{color:var(--muted);font-size:13px;margin:8px 0}.catalog{width:100%;border-collapse:separate;border-spacing:0;min-width:1300px}.catalog th,.catalog td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.catalog th{position:sticky;top:0;background:var(--panel);z-index:2;font-size:12px;color:var(--muted);cursor:pointer}.catalog td:first-child{font-weight:750}.catalog tbody tr:hover{background:color-mix(in srgb,var(--accent) 4%,transparent)}.catalog .small{font-size:12px;color:var(--muted)}.evidence{font-weight:800}.evidence.A{color:var(--good)}.evidence.B{color:var(--warn)}.evidence.C{color:var(--muted)}details.rowdetail summary{cursor:pointer;color:var(--accent2);font-size:12px}details.rowdetail div{margin-top:8px;padding:9px;border-radius:8px;background:var(--chip);font-size:12px;color:var(--muted)}
@@ -80,7 +88,45 @@ section{scroll-margin-top:72px;padding:42px 0 0}.section-head{display:flex;align
 <div class="table-shell"><table class="matrix" id="matrixTable"><thead><tr><th>数据集</th><th>多目 ego</th><th>同步/标定</th><th>rig pose/SLAM</th><th>全身姿态</th><th>手部姿态</th><th>物体6DoF/状态</th><th>场景几何</th><th>接触/关系</th><th>语言/步骤</th><th>相关度</th><th>依据</th></tr></thead><tbody></tbody></table></div>
 </section>
 
-<section id="peers"><div class="section-head"><div><h2>重点数据集逐项核验</h2><p>下面仅展示 A/B 级重点记录。A：官方项目页/数据卡/文档已核验；B：主要依赖原论文或摘要；C：仅保留仓库目录信息。</p></div></div><div class="grid peer-grid" id="peerCards"></div></section>
+<section id="peers">
+<div class="section-head"><div><h2>重点数据集逐项核验：详细对比表</h2><p>将原来的逐项卡片改为按字段对齐的横向表格。每一行对应一个重点 peer，同一列直接比较规模、视角、同步标定、人体、物体、场景和开放条件。</p></div></div>
+<div class="peer-compare-guide">
+  <span><b>阅读方式：</b>固定左侧数据集列，横向滚动查看差异；点击数据集名称打开官方/主要来源。</span>
+  <span class="badge a">A级：官方项目页 / 数据卡 / 文档已核验</span>
+  <span class="badge b">B级：主要依赖原论文或摘要</span>
+</div>
+<div class="peer-compare-controls" role="group" aria-label="重点数据集筛选与排序">
+  <input id="peerQ" placeholder="搜索数据集、任务、传感器或标注……" aria-label="搜索重点数据集"/>
+  <select id="peerEvidenceFilter" aria-label="筛选依据等级"><option value="">全部依据</option><option value="A">仅 A 级</option><option value="B">仅 B 级</option></select>
+  <select id="peerRelFilter" aria-label="筛选相关度"><option value="0">全部相关度</option><option value="9">相关度 ≥ 9</option><option value="8">相关度 ≥ 8</option><option value="7">相关度 ≥ 7</option></select>
+  <select id="peerSort" aria-label="排序方式"><option value="relevance-desc">相关度：高 → 低</option><option value="year-desc">年份：新 → 旧</option><option value="name-asc">名称：A → Z</option></select>
+  <button id="peerReset" type="button">重置</button>
+  <span id="peerCompareInfo" aria-live="polite"></span>
+</div>
+<div class="table-shell peer-compare-shell">
+<table class="peer-compare" id="peerCompareTable">
+  <colgroup>
+    <col class="col-dataset"/><col class="col-task"/><col class="col-scale"/><col class="col-views"/><col class="col-sync"/>
+    <col class="col-sensors"/><col class="col-human"/><col class="col-object"/><col class="col-scene"/><col class="col-access"/><col class="col-note"/>
+  </colgroup>
+  <thead>
+    <tr class="peer-group-row">
+      <th rowspan="2">数据集 / 相关度 / 依据</th>
+      <th colspan="1">定位</th>
+      <th colspan="3">采集与相机系统</th>
+      <th colspan="4">可用监督与真值</th>
+      <th colspan="1">开放条件</th>
+      <th colspan="1">对六目 Benchmark 的核心差异</th>
+    </tr>
+    <tr class="peer-field-row">
+      <th>主要任务</th><th>规模</th><th>视角</th><th>同步 / 标定</th><th>传感器 / 标注</th><th>人体</th><th>物体 / 交互</th><th>场景 / 几何</th><th>访问 / 许可</th><th>差异定位与可借鉴点</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+</div>
+<p class="note peer-compare-note">表格保留原卡片中的全部字段，并额外补入“主要任务”。由于字段较多，桌面端建议横向滚动；左侧数据集列会保持固定。</p>
+</section>
 
 
 <section id="samples"><div class="section-head"><div><h2>20 个最相关 peer：本地样例与标注观察窗</h2><p>观察窗直接嵌入本报告，并与仓库首页共用同一份媒体、标注路径与许可配置；不会再由报告页单独加载远程大视频。</p></div></div>
@@ -782,7 +828,34 @@ const featureLabels=["多目 ego", "同步/标定", "rig pose/SLAM", "全身姿�
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 function dot(v){return v===2?'<i class="dot s2">强</i>':v===1?'<i class="dot s1">部</i>':'<i class="dot s0">—</i>'}
 function renderMatrix(){const tb=document.querySelector('#matrixTable tbody');tb.innerHTML=peers.map(p=>`<tr><td><a href="${esc(p.source)}" target="_blank" rel="noopener">${esc(p.name)}</a><div class="small">${esc(p.views)}</div></td>${p.feature_values.map(v=>`<td>${dot(v)}</td>`).join('')}<td class="score">${p.relevance}/10</td><td><span class="evidence ${p.evidence}">${p.evidence}</span></td></tr>`).join('')}
-function renderPeers(){document.getElementById('peerCards').innerHTML=peers.map(p=>`<article class="card peer"><div class="peer-head"><h3>${esc(p.name)}</h3><span class="badge ${p.evidence.toLowerCase()}">${p.evidence}级 · ${esc(p.kind)}</span></div><div class="peer-body"><dl class="kv"><dt>规模</dt><dd>${esc(p.scale)}</dd><dt>视角</dt><dd>${esc(p.views)}</dd><dt>同步/标定</dt><dd>${esc(p.sync)}；${esc(p.calib)}</dd><dt>传感器/标注</dt><dd>${esc(p.sensors)}</dd><dt>人体</dt><dd>${esc(p.human)}</dd><dt>物体/交互</dt><dd>${esc(p.objects)}</dd><dt>场景</dt><dd>${esc(p.scene)}</dd><dt>开放/许可</dt><dd>${esc(p.access)}；${esc(p.license)}</dd></dl><div class="peer-note">${esc(p.note)}</div><div class="peer-foot"><span class="rel">六目 benchmark 相关度 <b>${p.relevance}/10</b></span><a href="${esc(p.source)}" target="_blank" rel="noopener">官方/主要来源 ↗</a></div></div></article>`).join('')}
+function peerCell(label,text){return `<div class="peer-cell-block"><span class="peer-cell-label">${label}</span>${esc(text)}</div>`}
+function renderPeers(){
+  const q=(document.getElementById('peerQ')?.value||'').trim().toLowerCase();
+  const evidence=document.getElementById('peerEvidenceFilter')?.value||'';
+  const minRel=+(document.getElementById('peerRelFilter')?.value||0);
+  const sort=document.getElementById('peerSort')?.value||'relevance-desc';
+  let rows=peers.filter(p=>{
+    const hay=[p.name,p.task,p.scale,p.views,p.sync,p.calib,p.sensors,p.human,p.objects,p.scene,p.access,p.license,p.note,p.kind,p.category].join(' ').toLowerCase();
+    return (!q||hay.includes(q))&&(!evidence||p.evidence===evidence)&&p.relevance>=minRel;
+  });
+  rows.sort((a,b)=>sort==='year-desc'?(b.year-a.year||b.relevance-a.relevance||peers.indexOf(a)-peers.indexOf(b)):sort==='name-asc'?a.name.localeCompare(b.name):b.relevance-a.relevance||peers.indexOf(a)-peers.indexOf(b));
+  const tbody=document.querySelector('#peerCompareTable tbody');
+  if(!tbody)return;
+  tbody.innerHTML=rows.map(p=>`<tr>
+    <td><div class="peer-dataset-line"><a class="peer-dataset-name" href="${esc(p.source)}" target="_blank" rel="noopener">${esc(p.name)} ↗</a><span class="peer-score-pill">${p.relevance}/10</span></div><div class="peer-dataset-meta">${p.year} · ${esc(p.category)}</div><div class="peer-dataset-badges"><span class="badge ${p.evidence.toLowerCase()}">${p.evidence}级依据</span><span class="badge peer-kind-badge">${esc(p.kind)}</span></div></td>
+    <td>${esc(p.task)}</td>
+    <td>${esc(p.scale)}</td>
+    <td>${esc(p.views)}</td>
+    <td>${peerCell('同步',p.sync)}${peerCell('标定',p.calib)}</td>
+    <td>${esc(p.sensors)}</td>
+    <td>${esc(p.human)}</td>
+    <td>${esc(p.objects)}</td>
+    <td>${esc(p.scene)}</td>
+    <td>${peerCell('访问',p.access)}${peerCell('许可',p.license)}</td>
+    <td class="peer-note-cell">${esc(p.note)}</td>
+  </tr>`).join('');
+  const info=document.getElementById('peerCompareInfo');if(info)info.textContent=`显示 ${rows.length} / ${peers.length}`;
+}
 let filtered=[...entries],sortKey='relevance',sortAsc=false;
 function populateFilters(){const cats=[...new Set(entries.map(x=>x.category))];const kinds=[...new Set(entries.map(x=>x.kind))];document.getElementById('cat').innerHTML+=[...cats].sort().map(x=>`<option>${esc(x)}</option>`).join('');document.getElementById('kind').innerHTML+=[...kinds].sort().map(x=>`<option>${esc(x)}</option>`).join('')}
 function applyFilters(){const q=document.getElementById('q').value.trim().toLowerCase(),cat=document.getElementById('cat').value,kind=document.getElementById('kind').value,ev=document.getElementById('evidence').value,rel=+document.getElementById('rel').value;filtered=entries.filter(x=>{const hay=Object.values(x).join(' ').toLowerCase();return(!q||hay.includes(q))&&(!cat||x.category===cat)&&(!kind||x.kind===kind)&&(!ev||x.evidence===ev)&&x.relevance>=rel});filtered.sort((a,b)=>{let A=a[sortKey],B=b[sortKey];if(typeof A==='number')return sortAsc?A-B:B-A;A=String(A);B=String(B);return sortAsc?A.localeCompare(B,'zh'):B.localeCompare(A,'zh')});renderCatalog()}
@@ -792,6 +865,8 @@ function renderSupp(){document.getElementById('suppCards').innerHTML=supplementa
 function exportCSV(){const cols=['name','year','category','scale','task','kind','views','sync','calib','sensors','human','objects','scene','access','license','evidence','relevance','source','note'];const q=v=>'"'+String(v??'').replaceAll('"','""')+'"';const csv='\ufeff'+[cols.join(','),...filtered.map(r=>cols.map(c=>q(r[c])).join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='ego_dataset_filtered_catalog.csv';a.click();URL.revokeObjectURL(a.href)}
 function renderSources(){const unique=[...new Map([...entries,...supplementary].filter(x=>x.evidence!=='C').map(x=>[x.source,x])).values()];document.getElementById('sources').innerHTML='<h3 style="column-span:all;margin-top:26px">重点官方/主要来源（A/B级）</h3>'+unique.sort((a,b)=>a.name.localeCompare(b.name)).map(x=>`<div class="source"><b>${esc(x.name)}</b> · <a href="${esc(x.source)}" target="_blank" rel="noopener">打开来源 ↗</a></div>`).join('')}
 document.querySelectorAll('.controls input,.controls select').forEach(el=>el.addEventListener('input',applyFilters));document.querySelectorAll('#catalogTable th[data-sort]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.sort;if(sortKey===k)sortAsc=!sortAsc;else{sortKey=k;sortAsc=true}applyFilters()}));document.getElementById('exportBtn').addEventListener('click',exportCSV);
+['peerQ','peerEvidenceFilter','peerRelFilter','peerSort'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener(id==='peerQ'?'input':'change',renderPeers)});
+const peerReset=document.getElementById('peerReset');if(peerReset)peerReset.addEventListener('click',()=>{document.getElementById('peerQ').value='';document.getElementById('peerEvidenceFilter').value='';document.getElementById('peerRelFilter').value='0';document.getElementById('peerSort').value='relevance-desc';renderPeers()});
 populateFilters();renderMatrix();renderPeers();applyFilters();renderBars('catBars',catCounts);renderBars('kindBars',kindCounts);renderSupp();renderSources();
 </script>
 <script>
