@@ -47,11 +47,11 @@
     {
       "label": "5–17 s MPS + transcript",
       "status": "derived-excerpt",
-      "format": "JSON · 5 Hz pose/gaze/SLAM",
+      "format": "JSON",
       "local_path": "data/annotations/comind/21c13149_5_17.json",
       "official_url": null,
       "viewer": "record-timeline",
-      "note": "同 UUID、同 wearer 的官方 healthcheck 文件；按 MP4 description 设备时间精确对齐，逐词 transcript 保留原时间。"
+      "note": "同 UUID、同 wearer 的官方 healthcheck 文件；按 MP4 description 设备时间精确对齐。"
     },
     {
       "label": "objects / social / action benchmark",

@@ -259,6 +259,11 @@
         <div class="sync-warning">原始媒体或逐帧标注需要接受官方条款后下载；本页没有绕过 gate。</div>`;
       return () => {};
     }
+    if (binding === "exact-source-only") {
+      panel.innerHTML = `${syncHead("当前媒体的标注", "精确记录 · 仅官方源", "unmapped")}
+        <div class="sync-warning">视频 ID 和时间窗已精确确定，但官方 annotations 仓库没有独立 LICENSE；公开页面不复制或重打包其逐事件标注。下方列出可反查的 action、activity、sound、object movement 与 gaze priming 官方来源。</div>`;
+      return () => {};
+    }
     panel.innerHTML = `${syncHead("当前媒体的标注", "未公开逐帧文件", "unmapped")}
       <div class="sync-note">页面只显示能核验到当前样例的内容；数据集级 schema 请看下方“标注文件与 overlay”。</div>`;
     return () => {};
@@ -791,7 +796,6 @@
         case "comind": cleanup = await comindAnnotation(viewer, dataset, media, video, kind, mountId); break;
         case "show3d": cleanup = await show3dAnnotation(viewer, dataset, media, video, kind, mountId); break;
         case "segments": cleanup = await segmentAnnotation(viewer, dataset, media, video, kind, mountId); break;
-        case "hd-epic": cleanup = await hdEpicAnnotation(viewer, dataset, media, video, kind, mountId); break;
         case "open-aoe": cleanup = await openAoeAnnotation(viewer, dataset, media, video, kind, mountId); break;
         case "humanego": cleanup = await humanEgoAnnotation(viewer, dataset, media, video, kind, mountId); break;
         default: cleanup = genericAnnotation(viewer, dataset, media, video, kind);

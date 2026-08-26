@@ -47,11 +47,11 @@ python3 scripts/check_repo.py
 
 每个媒体窗下面都有“当前标注”面板。播放器移动时，能绑定到当前 record 和时间基准的字段会自动更新：
 
-- Ropedia：动作/子任务/物体、52 点身体、双手 21 点、接触、SLAM、IMU、深度和 3D 点投影。
+- Ropedia：视频与 1.93 GB HDF5 属同一记录，字段覆盖动作、52 点身体、双手 21 点、接触、SLAM、IMU、深度和 calibration；因 CC BY-NC 与公司分享场景，公开页只列官方源，不复制派生摘录。
 - CoMind：leader/helper 各自的 MPS 双手、gaze、SLAM 与逐词 transcript；该 test UUID 的 action/object/social benchmark GT 为 withheld，页面不会伪造。
 - SHOW3D：视频上的双手 2D overlay，以及下方同步的 hand confidence、3D wrist、object R/t 与 recording caption。
-- Assembly101：exact e1 的 fine action 区间；3D hands 在约 72 GB 的 pose release 中，未下载时明确注明。
-- HD-EPIC：action、verb/noun/hand、高层活动、声音、物体移动和 gaze priming 多轨时间轴。
+- Assembly101：exact e1 可在官方 validation.csv 反查 fine action；因 CC BY-NC，公开页只列官方源。3D hands 位于约 72 GB 的 pose release。
+- HD-EPIC：视频窗口可精确绑定到官方 action、activity、sound、object movement 和 gaze priming 源，但 annotations repo 没有独立 LICENSE；公开仓库只列官方源，不复制派生事件 JSON。
 - Open-AoE：MANO validity/wrist/45D pose、camera SE(3) 与 atomic action；官方 action JSON 的 QC 异常会醒目标红。
 - HumanEgo：同 recording 的 phase、双手 tracking，以及 Keypoints 视图里的 bread/plate 2D tracks；页面保留两支派生视频的 58 帧偏移和 MPS timestamp QC 说明。
 - ADT、EgoHTR、EgoBody、EgoPAT3D 等：官方 overlay 已烧录在图像或视频中，面板逐项解释画面内容。没有 record ID 的媒体只显示 schema/status，不把其他记录的标注强行贴上去。

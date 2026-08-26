@@ -70,18 +70,15 @@ def check_pages() -> None:
     facts.feed(report)
     gallery = [x for x in facts.iframes if x.get("class") == "sample-gallery-frame"]
     assert len(gallery) == 1, "report must contain exactly one gallery iframe"
-    assert gallery[0].get("src") == "index.html?embed=1&viewer=annotation-sync-v3#gallery"
-    assert 'src="gallery.js?v=annotation-sync-v3"' in index, "versioned gallery application script is missing"
-    assert 'src="data/catalog.js?v=annotation-sync-v3"' in index, "versioned catalog script is missing"
+    assert gallery[0].get("src") == "index.html?embed=1&viewer=annotation-sync-v4#gallery"
+    assert 'src="gallery.js?v=annotation-sync-v4"' in index, "versioned gallery application script is missing"
+    assert 'src="data/catalog.js?v=annotation-sync-v4"' in index, "versioned catalog script is missing"
     gallery_js = (ROOT / "gallery.js").read_text(encoding="utf-8")
     assert "function mediaCandidates" in gallery_js, "official-media fallback is missing"
     assert "官方源直连" in gallery_js, "direct official-source state is missing"
     assert "IntersectionObserver" in gallery_js, "remote media must remain lazy-loaded"
     for path in [
-        "data/annotations/ropedia/stereo_left_20_32.json",
         "data/annotations/comind/21c13149_5_17.json",
-        "data/annotations/assembly101/e1_175_185.json",
-        "data/annotations/hd-epic/P01_134_153.json",
     ]:
         assert (ROOT / path).exists(), f"missing synchronized annotation excerpt {path}"
     subprocess.run(["node", "--check", "data/catalog.js"], cwd=ROOT, check=True)

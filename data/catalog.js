@@ -4,15 +4,14 @@ window.EGO_GALLERY = [
     sampleId: "ropedia-ai/xperience-10m-sample / stereo_left.mp4",
     evidence: "raw", license: "CC BY-NC 4.0", redistribution: "noncommercial-download",
     source: "https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/tree/main",
-    summary: "291 秒六目公开 sample；页面固定查看 20–32 秒，并同步显示同一 HDF5 中的动作、身体/手部 3D、SLAM、IMU、深度与标定摘要。",
-    annotationBinding: "exact",
+    summary: "291 秒六目公开 sample；页面固定查看 20–32 秒。同一记录的 HDF5 含动作、身体/手部 3D、SLAM、IMU、深度与标定，但 CC BY-NC 数据不复制进公司分享用的 public repo。",
+    annotationBinding: "exact-source-only",
     media: [
-      {label:"20–32 秒", type:"video", local:"assets/local/ropedia/preview.mp4", remote:"https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/resolve/main/stereo_left.mp4", provenance:"exact raw time window", sourceStart:20, clipDuration:12, annotation:{kind:"ropedia",path:"data/annotations/ropedia/stereo_left_20_32.json"}},
+      {label:"20–32 秒", type:"video", local:"assets/local/ropedia/preview.mp4", remote:"https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/resolve/main/stereo_left.mp4", provenance:"exact raw time window", sourceStart:20, clipDuration:12},
       {label:"四帧速览", type:"image", local:"assets/local/ropedia/contact.webp", provenance:"raw frames"}
     ],
     annotations: [
-      {label:"20–32 s 同步摘要",status:"derived-excerpt",format:"JSON · 5 Hz",path:"data/annotations/ropedia/stereo_left_20_32.json",viewer:"record-timeline",note:"从同一官方 HDF5 按设备时间抽取；包含动作、52 点身体、双手各 21 点、SLAM、IMU、接触、深度统计与标定。"},
-      {label:"annotation.hdf5", status:"not-bundled", format:"HDF5 · 1.93 GB", note:"完整 dense depth 与原频率数据仍保留在官方文件；CC BY-NC 4.0。", source:"https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/blob/main/annotation.hdf5"}
+      {label:"annotation.hdf5", status:"source-only · CC BY-NC", format:"HDF5 · 1.93 GB", note:"同一视频记录；含动作、52 点身体、双手各 21 点、SLAM、IMU、接触、dense depth 与 calibration。为避免公司场景再分发，public repo 只保留官方源。", source:"https://huggingface.co/datasets/ropedia-ai/xperience-10m-sample/blob/main/annotation.hdf5"}
     ]
   },
   {
@@ -114,7 +113,7 @@ window.EGO_GALLERY = [
       {label:"配对帧",type:"image",local:"assets/datasets/comind/contact.webp",provenance:"frames from both official videos"}
     ],
     annotations: [
-      {label:"5–17 s MPS + transcript",status:"derived-excerpt",format:"JSON · 5 Hz pose/gaze/SLAM",path:"data/annotations/comind/21c13149_5_17.json",viewer:"record-timeline",note:"同 UUID、同 wearer 的官方 healthcheck 文件；按 MP4 description 设备时间精确对齐，逐词 transcript 保留原时间。"},
+      {label:"5–17 s MPS + transcript",status:"derived-excerpt",format:"JSON",path:"data/annotations/comind/21c13149_5_17.json",viewer:"record-timeline",note:"同 UUID、同 wearer 的官方 healthcheck 文件；按 MP4 description 设备时间精确对齐。"},
       {label:"objects / social / action benchmark",status:"not-available",format:"consolidated JSON",note:"该 UUID 属于 test split，官方 benchmark GT 为 null；不把其他帧或其他记录的标签贴到当前片段。"}
     ]
   },
@@ -162,14 +161,14 @@ window.EGO_GALLERY = [
     sampleId: "nusar-2021_action_both_9031-c04d_9031_user_id_2021-02-04_104130",
     evidence: "raw", license: "CC BY-NC 4.0", redistribution: "noncommercial-download",
     source: "https://assembly-101.github.io/",
-    summary: "官网 exact e1 序列的 175–185 秒；页面同步官方 fine action，12-view montage 仍明确标为非同一记录。",
-    annotationBinding: "partial",
+    summary: "官网 exact e1 序列的 175–185 秒；官方 validation.csv 可反查 fine action，但 CC BY-NC 标注不复制进公司分享用的 public repo。12-view montage 仍明确标为非同一记录。",
+    annotationBinding: "exact-source-only",
     media: [
-      {label:"Ego e1",type:"video",local:"assets/local/assembly101/e1.mp4",remote:"https://drive.usercontent.google.com/download?id=12gg-hMcLGnPXPVzkvhRyud1nqOzQ2_UG&export=download&confirm=t",provenance:"exact official sample window",sourceStart:175,clipDuration:10,crossOrigin:"anonymous",annotation:{kind:"segments",path:"data/annotations/assembly101/e1_175_185.json"}},
+      {label:"Ego e1",type:"video",local:"assets/local/assembly101/e1.mp4",remote:"https://drive.usercontent.google.com/download?id=12gg-hMcLGnPXPVzkvhRyud1nqOzQ2_UG&export=download&confirm=t",provenance:"exact official sample window",sourceStart:175,clipDuration:10},
       {label:"12-view",type:"video",local:"assets/local/assembly101/montage.mp4",remote:"https://assembly-101.github.io/assets/12_view_assembly.mp4",provenance:"official overview; not record-bound",sourceStart:5,clipDuration:10,annotationBinding:"unmapped"}
     ],
     annotations: [
-      {label:"e1 fine actions",status:"derived-excerpt",format:"JSON · 3 segments",path:"data/annotations/assembly101/e1_175_185.json",viewer:"record-timeline",note:"从官方 validation.csv 的 HMC_21176875(e1) 按 30 fps 裁到 175–185 秒。"},
+      {label:"e1 fine actions",status:"source-only · CC BY-NC",format:"validation.csv · 30 fps",source:"https://github.com/assembly-101/assembly101-annotations/tree/01651287eec9778bdf1de20e91e4b3162cccd770/fine-grained-annotations",note:"当前窗口可在官方 validation.csv 中按 HMC_21176875(e1) 反查；public repo 不复制其派生区间。"},
       {label:"errors / 3D hands",status:"not-bundled",format:"CSV / 72 GB pose archive",note:"3D hands 位于大型受控下载；当前片段未下载。12-view montage 也不是该序列。"}
     ]
   },
@@ -178,11 +177,11 @@ window.EGO_GALLERY = [
     sampleId: "P01-20240202-110250 / 134–153 s",
     evidence: "raw", license: "CC BY 4.0 (Bristol metadata; annotation repo has no standalone LICENSE)", redistribution: "fetch",
     source: "https://hd-epic.github.io/site/",
-    summary: "真实 Nespresso 时间段：页面同步 narration/action、verb/noun/hand、高层活动、声音、物体移动与 gaze priming。",
-    annotationBinding: "exact",
-    media: [{label:"134–153 秒",type:"video",local:"assets/local/hd-epic/p01_134_153.mp4",remote:"https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-110250.mp4",provenance:"exact raw time window",sourceStart:134,clipDuration:19,annotation:{kind:"hd-epic",path:"data/annotations/hd-epic/P01_134_153.json"}}],
+    summary: "真实 Nespresso 134–153 秒窗口；官方 annotations repo 含 action、activity、sound、object movement 与 gaze priming，但仓库无独立 LICENSE，因此本页不复制其派生标注字节。",
+    annotationBinding: "exact-source-only",
+    media: [{label:"134–153 秒",type:"video",local:"assets/local/hd-epic/p01_134_153.mp4",remote:"https://data.bris.ac.uk/datasets/3cqb5b81wk2dc2379fx1mrxh47/Videos/P01/P01-20240202-110250.mp4",provenance:"exact raw time window",sourceStart:134,clipDuration:19}],
     annotations: [
-      {label:"134–153 s 多轨标注",status:"derived-excerpt",format:"JSON",path:"data/annotations/hd-epic/P01_134_153.json",viewer:"record-timeline",source:"https://github.com/hd-epic/hd-epic-annotations",note:"官方记录级标注：12 个 narration/action、2 个 high-level activity、6 个 sound、4 个 object movement 与 8 个 gaze-priming 事件。"},
+      {label:"134–153 s 多轨标注",status:"source-only · license boundary",format:"PKL / CSV / JSON",source:"https://github.com/hd-epic/hd-epic-annotations",note:"该窗口可反查 12 个 narration/action、2 个 high-level activity、6 个 sound、4 个 object movement 与 8 个 gaze-priming 事件；annotations repo 无独立 LICENSE，public repo 不复制派生摘录。"},
       {label:"camera pose / dense gaze / masks",status:"source-only",format:"external intermediate data / PNG",source:"https://github.com/hd-epic/hd-epic-annotations",note:"官方另行下载；未把外部大文件复制到本仓库。"}
     ]
   },

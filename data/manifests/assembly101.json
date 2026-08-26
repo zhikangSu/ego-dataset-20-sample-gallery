@@ -4,7 +4,7 @@
   "slug": "assembly101",
   "dataset": "Assembly101",
   "representative_id": "nusar-2021_action_both_9031-c04d_9031_user_id_2021-02-04_104130",
-  "summary": "官网 exact e1 序列的 175–185 秒；页面同步官方 fine action，12-view montage 仍明确标为非同一记录。",
+  "summary": "官网 exact e1 序列的 175–185 秒；官方 validation.csv 可反查 fine action，但 CC BY-NC 标注不复制进公司分享用的 public repo。12-view montage 仍明确标为非同一记录。",
   "evidence": "raw",
   "redistribution": "noncommercial-download",
   "official_source": "https://assembly-101.github.io/",
@@ -35,12 +35,12 @@
   "annotations": [
     {
       "label": "e1 fine actions",
-      "status": "derived-excerpt",
-      "format": "JSON · 3 segments",
-      "local_path": "data/annotations/assembly101/e1_175_185.json",
-      "official_url": null,
-      "viewer": "record-timeline",
-      "note": "从官方 validation.csv 的 HMC_21176875(e1) 按 30 fps 裁到 175–185 秒。"
+      "status": "source-only · CC BY-NC",
+      "format": "validation.csv · 30 fps",
+      "local_path": null,
+      "official_url": "https://github.com/assembly-101/assembly101-annotations/tree/01651287eec9778bdf1de20e91e4b3162cccd770/fine-grained-annotations",
+      "viewer": null,
+      "note": "当前窗口可在官方 validation.csv 中按 HMC_21176875(e1) 反查；public repo 不复制其派生区间。"
     },
     {
       "label": "errors / 3D hands",

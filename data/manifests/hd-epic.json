@@ -4,7 +4,7 @@
   "slug": "hd-epic",
   "dataset": "HD-EPIC",
   "representative_id": "P01-20240202-110250 / 134–153 s",
-  "summary": "真实 Nespresso 时间段：页面同步 narration/action、verb/noun/hand、高层活动、声音、物体移动与 gaze priming。",
+  "summary": "真实 Nespresso 134–153 秒窗口；官方 annotations repo 含 action、activity、sound、object movement 与 gaze priming，但仓库无独立 LICENSE，因此本页不复制其派生标注字节。",
   "evidence": "raw",
   "redistribution": "fetch",
   "official_source": "https://hd-epic.github.io/site/",
@@ -24,12 +24,12 @@
   "annotations": [
     {
       "label": "134–153 s 多轨标注",
-      "status": "derived-excerpt",
-      "format": "JSON",
-      "local_path": "data/annotations/hd-epic/P01_134_153.json",
+      "status": "source-only · license boundary",
+      "format": "PKL / CSV / JSON",
+      "local_path": null,
       "official_url": "https://github.com/hd-epic/hd-epic-annotations",
-      "viewer": "record-timeline",
-      "note": "官方记录级标注：12 个 narration/action、2 个 high-level activity、6 个 sound、4 个 object movement 与 8 个 gaze-priming 事件。"
+      "viewer": null,
+      "note": "该窗口可反查 12 个 narration/action、2 个 high-level activity、6 个 sound、4 个 object movement 与 8 个 gaze-priming 事件；annotations repo 无独立 LICENSE，public repo 不复制派生摘录。"
     },
     {
       "label": "camera pose / dense gaze / masks",
