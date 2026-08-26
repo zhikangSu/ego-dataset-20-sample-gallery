@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>20 个 Ego 数据集 · 本地样例与标注观察窗</title>
 <script>
-if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('viewer-embed');
+const pageParams=new URLSearchParams(location.search);
+if(pageParams.get('embed')==='1')document.documentElement.classList.add('viewer-embed');
+if(pageParams.get('hideScenes')==='1')document.documentElement.classList.add('hide-scenes');
 </script>
 <style>
 :root{--bg:#f3f5f6;--panel:#fff;--text:#172126;--muted:#63727b;--line:#dce3e7;--accent:#087566;--blue:#245d91;--amber:#9b5d09;--red:#9f3939;--chip:#eef2f3;--shadow:0 12px 36px rgba(24,46,57,.08)}
@@ -27,6 +29,7 @@ header{background:radial-gradient(circle at 88% 0,rgba(8,117,102,.18),transparen
 .hidden{display:none}.footer{margin-top:30px;padding-top:17px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}
 @media(max-width:980px){.grid{grid-template-columns:1fr}.explain{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}}@media(max-width:650px){.wrap,.hero{padding-left:15px;padding-right:15px}.stats{grid-template-columns:1fr 1fr}.scene-method-head{align-items:flex-start;flex-direction:column}.scene-method-status{justify-content:flex-start}.toolbar{grid-template-columns:1fr 1fr}.toolbar input{grid-column:1/-1}.result{grid-column:auto;justify-self:end}.viewer{aspect-ratio:4/3}.card-head{align-items:flex-start}.badge{white-space:normal;text-align:center}.sync-grid{grid-template-columns:1fr}.sync-wide{grid-column:auto}.scene-row{grid-template-columns:minmax(82px,1fr) minmax(70px,1.2fr) auto}.scene-facts{grid-template-columns:1fr}.scene-scope,.scene-chart-head b,.scene-taxonomy span{font-size:10.5px}.scene-chart-head span,.scene-name,.scene-value,.scene-fact,.scene-note,.scene-sources a,.scene-empty{font-size:10px}}@media(max-width:420px){.scene-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name value" "track track"}.scene-name{grid-area:name}.scene-track{grid-area:track}.scene-value{grid-area:value;white-space:normal;max-width:150px}.scene-chart-head{align-items:flex-start;flex-direction:column;gap:2px}}
 html.viewer-embed header,html.viewer-embed main>.stats,html.viewer-embed main>.explain,html.viewer-embed main>.footer{display:none}html.viewer-embed .wrap{max-width:none;padding:0 10px 18px}html.viewer-embed .toolbar{padding-top:10px}
+html.hide-scenes .scene-method,html.hide-scenes #sceneStatus{display:none}html.hide-scenes .toolbar{grid-template-columns:2fr repeat(2,1fr) auto}@media(max-width:650px){html.hide-scenes .toolbar{grid-template-columns:1fr 1fr}html.hide-scenes .toolbar input{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -55,9 +58,9 @@ html.viewer-embed header,html.viewer-embed main>.stats,html.viewer-embed main>.e
   <section class="grid" id="cards"></section>
   <div class="footer">每项素材都保留 provenance、官方来源与许可状态。页面中的“标注”区分真实文件、官方 overlay、gated 数据和仅在论文中描述的 schema；“场景分布”同时标注统计层级、单位、覆盖范围和不可得原因。</div>
 </main>
-<script src="data/catalog.js?v=scene-dist-v2"></script>
-<script src="data/scenes.js?v=scene-dist-v2"></script>
-<script src="gallery.js?v=scene-dist-v2"></script>
+<script src="data/catalog.js?v=scene-split-v1"></script>
+<script src="data/scenes.js?v=scene-split-v1"></script>
+<script src="gallery.js?v=scene-split-v1"></script>
 <script type="text/plain" id="legacy-gallery-script">
 (function(){
 const D=window.EGO_GALLERY||[],cards=document.getElementById('cards'),IS_PAGES=/\.github\.io$/i.test(location.hostname),esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));

@@ -3,6 +3,7 @@
 
   const D = window.EGO_GALLERY || [];
   const SCENES = window.EGO_SCENES || {};
+  const HIDE_SCENES = new URLSearchParams(location.search).get("hideScenes") === "1";
   const cards = document.getElementById("cards");
   const IS_PAGES = /\.github\.io$/i.test(location.hostname);
   const JSON_CACHE = new Map();
@@ -1046,11 +1047,11 @@
   function card(dataset) {
     const media = dataset.media || [];
     const sceneStatus = SCENES[dataset.slug]?.status || "unavailable";
-    return `<article class="card" data-name="${esc(dataset.name.toLowerCase())}" data-evidence="${esc(dataset.evidence)}" data-availability="${esc(dataset.redistribution)}" data-scene-status="${esc(sceneStatus)}">
+    return `<article class="card" id="dataset-${esc(dataset.slug)}" data-name="${esc(dataset.name.toLowerCase())}" data-evidence="${esc(dataset.evidence)}" data-availability="${esc(dataset.redistribution)}" data-scene-status="${esc(sceneStatus)}">
       <div class="card-head"><div class="titleline"><span class="num">${String(dataset.no).padStart(2, "0")}</span><div><h2>${esc(dataset.name)}</h2><div class="sample-id">${esc(dataset.sampleId)}</div></div></div><span class="badge ${esc(dataset.evidence)}">${esc(labels[dataset.evidence])}</span></div>
       <div class="viewer" data-slug="${esc(dataset.slug)}"><div class="stage"></div><div class="tabs">${media.map((item, index) => `<button class="tab ${index === 0 ? "active" : ""}" data-i="${index}" data-label="${esc(item.label)}">${esc(item.label)}</button>`).join("")}</div><div class="caption">${media.length ? esc(media[0].provenance) : "没有公开可嵌媒体"}</div></div>
       <div class="sync-panel"><div class="sync-loading">进入可视区域后读取对应标注…</div></div>
-      <div class="body"><p class="summary">${esc(dataset.summary)}</p><div class="meta"><span class="chip">${esc(access[dataset.redistribution] || dataset.redistribution)}</span><span class="chip">${esc(dataset.license)}</span></div><div class="annotations"><h3>标注文件与 overlay</h3>${annotationMarkup(dataset)}</div>${sceneMarkup(dataset)}<div class="card-foot"><a href="data/manifests/${esc(dataset.slug)}.json" target="_blank">样例 manifest</a><a href="${esc(dataset.source)}" target="_blank" rel="noopener">官方来源 ↗</a></div></div>
+      <div class="body"><p class="summary">${esc(dataset.summary)}</p><div class="meta"><span class="chip">${esc(access[dataset.redistribution] || dataset.redistribution)}</span><span class="chip">${esc(dataset.license)}</span></div><div class="annotations"><h3>标注文件与 overlay</h3>${annotationMarkup(dataset)}</div>${HIDE_SCENES ? "" : sceneMarkup(dataset)}<div class="card-foot"><a href="data/manifests/${esc(dataset.slug)}.json" target="_blank">样例 manifest</a><a href="${esc(dataset.source)}" target="_blank" rel="noopener">官方来源 ↗</a></div></div>
     </article>`;
   }
 
@@ -1133,6 +1134,8 @@
       if (observer) observer.observe(viewer); else activate();
     });
     filter();
+    const target = location.hash.slice(1);
+    if (target.startsWith("dataset-")) requestAnimationFrame(() => document.getElementById(target)?.scrollIntoView({block: "start"}));
   }
 
   function openAoeTimeline(object) {
