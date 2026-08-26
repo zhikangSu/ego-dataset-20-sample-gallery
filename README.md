@@ -56,30 +56,35 @@ python3 scripts/check_repo.py
 - HumanEgo：同 recording 的 phase、双手 tracking，以及 Keypoints 视图里的 bread/plate 2D tracks；页面保留两支派生视频的 58 帧偏移和 MPS timestamp QC 说明。
 - ADT、EgoHTR、EgoBody、EgoPAT3D 等：官方 overlay 已烧录在图像或视频中，面板逐项解释画面内容。没有 record ID 的媒体只显示 schema/status，不把其他记录的标注强行贴上去。
 
-## 场景与任务分布怎么看
+## 具体场景分布怎么看
 
-`distribution.html` 是独立的 20 项横向对比页，并嵌入 `report.html` 的“场景与任务分布”section。它先用二维覆盖矩阵比较“物理场景分布 × 任务 / 活动 / 交互分布”的公开程度，再提供内部归一化的小图；媒体与逐帧标注仍放在 `index.html`，两类信息不再挤在同一张视频卡里。
+`distribution.html` 是独立的 20 项具体场景横向对比页，并嵌入 `report.html`。这一页只回答三个问题：每个数据集包含哪些真实采集场景、每种场景有多少数据 / 占比多少、哪些比例公开拿不到。任务、动作、物体和 interaction target 不再作为场景代理。
 
-页面优先统计物理 location；没有公开地点频次时，才降级为官方 activity、task、interaction target 或 scene-composition，并明确显示证据等级：
+页面先把官方原始标签映射到 15 个统一场景族，再提供两层视图：
 
-- `公开文件复算`：可以从当前公开 manifest、Parquet、JSON 或目录重新得到；
-- `官方汇总`：论文或数据卡给出精确表格，但 record-level 文件未公开或需 gate；
-- `仅类别/范围`：只发布 taxonomy 或场景组成，没有类别频数；
-- `暂不可量化`：连可信的类别汇总都没有，不从演示视频主观猜测。
+- 跨数据集热力图：所有数据集共享厨房、住宅、办公室、实验室、维修工坊、工业场地、运动空间、户外、桌面操作等固定轴；
+- 逐数据集卡片：显示 100% 场景构成条、完整原始场景清单、数量 / 比例、统计分母、映射说明、缺口和一手来源。
 
-不同数据集的单位可能是小时、recording、sequence、scene、task 或 annotation event；柱长只在单个数据集内部比较。全部 20 项的数字、缺口说明与一手来源集中在 `data/scenes.js`，二维矩阵的统一分档集中在 `data/scene-comparison.js`。
+数据可得性分成四档：
+
+- `比例可量化`：有场景级时长、recording、sequence、location 计数，或官方明确说明全部数据来自同一类场景；
+- `代理比例`：来自官方 audit，或由场景—任务混合标签映射；
+- `只有场景清单`：能确认场景范围，但没有逐类比例；
+- `不可得`：不从演示视频、任务名或常识主观推断。
+
+不同数据集的分母仍可能不同，但每个数字旁都会标明是小时、recording、sequence 还是 audit prevalence。全部 20 项的数字与一手来源集中在 `data/scenes.js`，15 类统一场景轴和可得性定义集中在 `data/scene-comparison.js`。
 
 ## 文件结构
 
 ```text
 index.html                  本地优先的 20 项观察窗
-distribution.html           20 项场景 × 任务横向对比页
+distribution.html           20 项具体场景分布横向对比页
 report.html                 完整调研报告（直接嵌入 local-first 观察窗）
 data/catalog.js             页面数据与媒体/标注路径
-data/scenes.js              20 项场景/任务分布、口径、缺口与一手来源
-data/scene-comparison.js    场景与任务公开程度的统一分档
+data/scenes.js              20 项原始/统一场景分布、口径、缺口与一手来源
+data/scene-comparison.js    15 类统一场景 taxonomy 与数据可得性定义
 gallery.js                  媒体加载、时间对齐、姿态/语义标注面板
-distribution.js             覆盖矩阵、筛选、排序与分布小图
+distribution.js             场景热力图、筛选、排序与逐数据集完整分布卡片
 data/annotations/           可核验到当前片段的轻量 record-level 摘要
 data/license_audit.json     20 项机器可读许可审计
 data/manifests/             从 catalog + license audit 生成的 20 份一致性 manifest

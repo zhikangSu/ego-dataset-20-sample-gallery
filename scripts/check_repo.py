@@ -53,11 +53,11 @@ def scenes() -> dict[str, dict]:
     return json.loads(result.stdout)
 
 
-def scene_comparison() -> dict[str, dict]:
+def scene_taxonomy() -> dict[str, object]:
     script = (
         "const fs=require('fs'),vm=require('vm'),c={window:{}};"
         "vm.runInNewContext(fs.readFileSync('data/scene-comparison.js','utf8'),c);"
-        "process.stdout.write(JSON.stringify(c.window.EGO_SCENE_COMPARISON));"
+        "process.stdout.write(JSON.stringify({taxonomy:c.window.EGO_SCENE_TAXONOMY,methods:c.window.EGO_SCENE_METHOD}));"
     )
     result = subprocess.run(
         ["node", "-e", script], cwd=ROOT, check=True, capture_output=True, text=True
@@ -90,8 +90,10 @@ def check_scene_distributions(records: list[dict], scene_records: dict[str, dict
     slugs = {record["slug"] for record in records}
     assert set(scene_records) == slugs, "scene distribution slugs must match all 20 datasets"
     allowed = {"computed", "reported", "taxonomy", "unavailable"}
+    availability = {"frequency", "proxy", "presence", "none"}
     for slug, scene in scene_records.items():
         assert scene.get("status") in allowed, f"invalid scene status for {slug}"
+        assert scene.get("availability") in availability, f"invalid scene availability for {slug}"
         assert scene.get("scope"), f"missing scene scope for {slug}"
         assert scene.get("sources"), f"missing primary scene source for {slug}"
         for source in scene["sources"]:
@@ -106,19 +108,26 @@ def check_scene_distributions(records: list[dict], scene_records: dict[str, dict
             if "total" in chart:
                 assert type(chart["total"]) in (int, float) and math.isfinite(chart["total"])
                 assert chart["total"] >= max(values), f"scene total smaller than a category for {slug}"
+        normalized = scene.get("normalized", [])
+        categories = [item.get("category") for item in normalized]
+        assert len(categories) == len(set(categories)), f"duplicate normalized scene category for {slug}"
+        if scene["availability"] in {"frequency", "proxy"}:
+            assert scene.get("denominator", {}).get("value", 0) > 0, f"missing scene denominator for {slug}"
+            assert normalized and all(type(item.get("value")) in (int, float) for item in normalized), f"missing normalized values for {slug}"
+        if scene["availability"] == "presence":
+            assert normalized and all(item.get("present") is True for item in normalized), f"invalid presence-only scenes for {slug}"
 
 
-def check_scene_comparison(records: list[dict], comparison: dict[str, dict]) -> None:
-    slugs = {record["slug"] for record in records}
-    assert set(comparison) == slugs, "scene comparison slugs must match all 20 datasets"
-    levels = {"physical", "semantic", "activity", "interaction", "composition", "unavailable"}
-    availability = {"frequency", "taxonomy", "scope", "none"}
-    for slug, record in comparison.items():
-        assert record.get("level") in levels, f"invalid comparison level for {slug}"
-        assert record.get("scene") in availability, f"invalid scene availability for {slug}"
-        assert record.get("task") in availability, f"invalid task availability for {slug}"
-        assert record.get("sceneNote"), f"missing scene comparison note for {slug}"
-        assert record.get("taskNote"), f"missing task comparison note for {slug}"
+def check_scene_taxonomy(scene_meta: dict[str, object], scene_records: dict[str, dict]) -> None:
+    taxonomy = scene_meta["taxonomy"]
+    methods = scene_meta["methods"]
+    assert len(taxonomy) == 15, f"expected 15 normalized scene categories, found {len(taxonomy)}"
+    category_ids = {item["id"] for item in taxonomy}
+    assert len(category_ids) == len(taxonomy), "normalized scene category ids must be unique"
+    assert set(methods) == {"frequency", "proxy", "presence", "none"}, "scene method legend is incomplete"
+    for slug, scene in scene_records.items():
+        for item in scene.get("normalized", []):
+            assert item["category"] in category_ids, f"unknown normalized category for {slug}: {item['category']}"
 
 
 def check_pages() -> None:
@@ -134,13 +143,13 @@ def check_pages() -> None:
     assert len(gallery) == 1, "report must contain exactly one gallery iframe"
     assert len(comparison) == 1, "report must contain exactly one scene comparison iframe"
     assert gallery[0].get("src") == "index.html?embed=1&viewer=scene-split-v1&hideScenes=1#gallery"
-    assert comparison[0].get("src") == "distribution.html?embed=1&viewer=scene-compare-v1"
-    assert 'src="gallery.js?v=scene-split-v1"' in index, "versioned gallery application script is missing"
-    assert 'src="data/catalog.js?v=scene-split-v1"' in index, "versioned catalog script is missing"
-    assert 'src="data/scenes.js?v=scene-split-v1"' in index, "scene distribution data script is missing"
-    assert 'src="data/scene-comparison.js?v=scene-compare-v1"' in distribution, "comparison metadata script is missing"
-    assert 'src="distribution.js?v=scene-compare-v1"' in distribution, "comparison application script is missing"
-    assert 'id="coverageGrid"' in distribution and 'id="smallGrid"' in distribution
+    assert comparison[0].get("src") == "distribution.html?embed=1&viewer=scene-distribution-v2"
+    assert 'src="gallery.js?v=scene-distribution-v2"' in index, "versioned gallery application script is missing"
+    assert 'src="data/catalog.js?v=scene-distribution-v2"' in index, "versioned catalog script is missing"
+    assert 'src="data/scenes.js?v=scene-distribution-v2"' in index, "scene distribution data script is missing"
+    assert 'src="data/scene-comparison.js?v=scene-distribution-v2"' in distribution, "scene taxonomy script is missing"
+    assert 'src="distribution.js?v=scene-distribution-v2"' in distribution, "scene distribution application script is missing"
+    assert 'id="heatmapGrid"' in distribution and 'id="cardsGrid"' in distribution
     gallery_js = (ROOT / "gallery.js").read_text(encoding="utf-8")
     assert "function mediaCandidates" in gallery_js, "official-media fallback is missing"
     assert "官方源直连" in gallery_js, "direct official-source state is missing"
@@ -182,13 +191,13 @@ def check_range_server() -> None:
 def main() -> None:
     records = catalog()
     scene_records = scenes()
-    comparison = scene_comparison()
+    scene_meta = scene_taxonomy()
     check_catalog_and_manifests(records)
     check_scene_distributions(records, scene_records)
-    check_scene_comparison(records, comparison)
+    check_scene_taxonomy(scene_meta, scene_records)
     check_pages()
     check_range_server()
-    print("OK: 20 catalog entries, scene/task comparison, lazy official-media fallback, and HTTP Range support")
+    print("OK: 20 catalog entries, concrete-scene distributions, lazy official-media fallback, and HTTP Range support")
 
 
 if __name__ == "__main__":

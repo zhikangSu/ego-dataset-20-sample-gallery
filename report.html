@@ -60,7 +60,7 @@ section{scroll-margin-top:72px;padding:42px 0 0}.section-head{display:flex;align
 <p class="lead">以 <b>awesome-ego-video-datasets</b> 当前仓库为全量索引，逐层区分原始真实采集、派生 QA/标注、合成/仿真、机器人视角和仅宣布项目；重点核验与贵司“六目同步 + 完整标定 + 人体姿态 + 环境恢复”最相关的数据集。</p>
 <div class="meta"><span>仓库主条目 180</span><span>7 个研究主题</span><span>重点独立核验 37</span><span>仓库外补充 6</span><span>20 个具体样例 · 本地优先播放</span><span>本地仓库 · 可搜索/筛选/导出 CSV</span></div>
 </div></header>
-<nav><div class="nav-inner"><a href="index.html"><b>本地样例观察窗 ↗</b></a><a href="#conclusion">结论</a><a href="#evolution">做到什么程度</a><a href="#matrix">重点矩阵</a><a href="#peers">重点数据集</a><a href="#scene-tasks">场景 / 任务分布</a><a href="#samples">20 个样例</a><a href="#benchmark">Benchmark 方案</a><a href="#catalog">180 条目录</a><a href="#gaps">缺口与风险</a><a href="#methods">口径与来源</a></div></nav>
+<nav><div class="nav-inner"><a href="index.html"><b>本地样例观察窗 ↗</b></a><a href="#conclusion">结论</a><a href="#evolution">做到什么程度</a><a href="#matrix">重点矩阵</a><a href="#peers">重点数据集</a><a href="#scene-tasks">具体场景分布</a><a href="#samples">20 个样例</a><a href="#benchmark">Benchmark 方案</a><a href="#catalog">180 条目录</a><a href="#gaps">缺口与风险</a><a href="#methods">口径与来源</a></div></nav>
 <main class="wrap">
 <section id="conclusion">
 <div class="section-head"><div><h2>先给结论</h2><p>不是照抄现有 benchmark，而是把现有数据已经覆盖的能力拆开后，组合成一个新的、可度量的六目真实环境基准。</p></div></div>
@@ -130,14 +130,14 @@ section{scroll-margin-top:72px;padding:42px 0 0}.section-head{display:flex;align
 
 
 <section id="scene-tasks">
-<div class="section-head"><div><h2>场景与任务分布：20 个数据集横向对比</h2><p>独立于视频样例，先比较各数据集“公开到了什么程度”，再按数据集内部归一化查看具体分布；避免把小时、序列、recording、场景和 annotation event 混成一个不可解释的总图。</p></div></div>
-<div class="callout"><h3>最快阅读方式：先看二维覆盖矩阵，再切换“分布小图”。</h3><p>二维矩阵的横轴是<b>物理场景分布</b>，纵轴是<b>任务 / 活动 / 交互分布</b>，每一维都分为“有频次、只有类别、只有范围 / 总量、不可得”。点任一数据集可跳到对应视频、姿态与动作语义标注卡片。</p></div>
-<div class="scene-compare-shell"><div class="scene-compare-bar"><span>支持搜索、按主分布 / 证据筛选、覆盖程度排序，并在总览矩阵与 20 张内部归一化小图之间切换。</span><a href="distribution.html" target="_blank" rel="noopener">独立打开场景 / 任务对比 ↗</a></div><iframe class="scene-compare-frame" src="distribution.html?embed=1&amp;viewer=scene-compare-v1" title="20 个 Ego 数据集场景与任务分布横向对比" loading="eager"><a href="distribution.html">打开场景与任务对比</a></iframe></div>
+<div class="section-head"><div><h2>具体场景分布：20 个数据集横向对比</h2><p>这里只研究真实采集环境：每个数据集包含哪些厨房、住宅、办公室、实验室、维修工坊、工业场地、运动空间、户外或桌面操作环境，以及各类占整个数据集的比例。</p></div></div>
+<div class="callout"><h3>任务、动作和物体类别已经从这一部分移除。</h3><p>页面保留每个数据集的<b>完整官方原始场景标签</b>，并映射到 15 个统一语义场景族。能量化时显示时长、recording、sequence 或 audit 占比；只能确认场景清单时显示“比例未公开”；完全拿不到时明确说明原因，不再用 cooking、ToyCar、reset-free 等任务或物体标签替代场景。</p></div>
+<div class="scene-compare-shell"><div class="scene-compare-bar"><span>先用统一场景轴热力图横向寻找覆盖与缺口，再查看每个数据集的 100% 构成条、完整原始场景清单、分母和一手来源。</span><a href="distribution.html" target="_blank" rel="noopener">独立打开具体场景分布 ↗</a></div><iframe class="scene-compare-frame" src="distribution.html?embed=1&amp;viewer=scene-distribution-v2" title="20 个 Ego 数据集具体场景分布横向对比" loading="eager"><a href="distribution.html">打开具体场景分布</a></iframe></div>
 </section>
 
 
 <section id="samples"><div class="section-head"><div><h2>20 个最相关 peer：本地样例与标注观察窗</h2><p>观察窗直接嵌入本报告，并与仓库首页共用同一份媒体、标注路径与许可配置；不会再由报告页单独加载远程大视频。</p></div></div>
-<div class="sample-gallery-shell"><div class="sample-gallery-bar"><span>此处专注媒体与 record-level 标注：精确绑定的姿态、动作、物体、视线等会随时间同步；场景 / 任务横向比较已移到上方独立 section。</span><a href="index.html" target="_blank" rel="noopener">独立打开观察窗 ↗</a></div><iframe class="sample-gallery-frame" src="index.html?embed=1&amp;viewer=scene-split-v1&amp;hideScenes=1#gallery" title="20 个 Ego 数据集样例与同步标注观察窗" loading="lazy"><a href="index.html">打开观察窗</a></iframe></div>
+<div class="sample-gallery-shell"><div class="sample-gallery-bar"><span>此处专注媒体与 record-level 标注：精确绑定的姿态、动作、物体、视线等会随时间同步；具体场景分布已移到上方独立 section。</span><a href="index.html" target="_blank" rel="noopener">独立打开观察窗 ↗</a></div><iframe class="sample-gallery-frame" src="index.html?embed=1&amp;viewer=scene-split-v1&amp;hideScenes=1#gallery" title="20 个 Ego 数据集样例与同步标注观察窗" loading="lazy"><a href="index.html">打开观察窗</a></iframe></div>
 <div class="callout sample-callout legacy-samples"><h3>阅读口径</h3><p>优先展示公开原始片段；原始数据受限、体积过大或尚未开放时，改用官方演示、官方标注可视化，或官方文档中可核对的具体 sequence/session ID 与文件结构。所有卡片都明确标注类别，<b>不会把论文效果图冒充原始数据</b>。</p></div>
 <div class="sample-summary legacy-samples">
   <div><b>20</b><span>代表样例，不减数量</span></div>

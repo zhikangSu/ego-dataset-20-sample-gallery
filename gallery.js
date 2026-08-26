@@ -30,9 +30,9 @@
   };
   const sceneStatusLabels = {
     computed: "公开文件复算",
-    reported: "官方汇总",
-    taxonomy: "仅类别 / 范围",
-    unavailable: "暂不可量化"
+    reported: "官方资料汇总",
+    taxonomy: "只有场景清单",
+    unavailable: "场景信息不可得"
   };
 
   const esc = value => String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -1036,12 +1036,12 @@
     };
     const charts = arr(scene.charts).map(sceneChartMarkup).join("");
     const taxonomy = arr(scene.taxonomy).map(item => typeof item === "string" ? item : item.label).filter(Boolean);
-    const taxonomyMarkup = taxonomy.length ? `<div class="scene-chart-head"><b>${esc(scene.taxonomyLabel || "官方场景 / 任务范围")}</b><span>无公开频数</span></div><div class="scene-taxonomy">${taxonomy.map(item => `<span>${esc(item)}</span>`).join("")}</div>` : "";
+    const taxonomyMarkup = taxonomy.length ? `<div class="scene-chart-head"><b>${esc(scene.taxonomyLabel || "完整已知场景清单")}</b><span>比例未公开</span></div><div class="scene-taxonomy">${taxonomy.map(item => `<span>${esc(item)}</span>`).join("")}</div>` : "";
     const facts = arr(scene.facts).filter(item => item?.label && item?.value !== undefined);
     const factMarkup = facts.length ? `<div class="scene-facts">${facts.map(item => `<div class="scene-fact"><b>${esc(item.value)}</b> · ${esc(item.label)}</div>`).join("")}</div>` : "";
     const sourceMarkup = arr(scene.sources).length ? `<div class="scene-sources">${scene.sources.map((source, index) => `<a href="${esc(safeHref(source.url))}" target="_blank" rel="noopener">${esc(source.label || `统计来源 ${index + 1}`)} ↗</a>`).join("")}</div>` : "";
-    const empty = !charts && !taxonomyMarkup ? `<div class="scene-empty">目前没有可量化的 record-level 场景频次；下方规模数字仅作背景，不代表分布。</div>` : "";
-    return `<section class="scene-panel"><div class="scene-head"><h3>场景 / 活动分布</h3><span class="scene-badge ${esc(scene.status)}">${esc(sceneStatusLabels[scene.status] || scene.status)}</span></div><div class="scene-content"><p class="scene-scope"><b>${esc(scene.basis || "统计层级")}</b> · ${esc(scene.scope || "—")}</p>${charts}${taxonomyMarkup}${factMarkup}${empty}${scene.note ? `<p class="scene-note">${esc(scene.note)}</p>` : ""}${sourceMarkup}</div></section>`;
+    const empty = !charts && !taxonomyMarkup ? `<div class="scene-empty">目前没有可量化的场景比例或完整场景清单；下方规模数字仅作背景，不代表分布。</div>` : "";
+    return `<section class="scene-panel"><div class="scene-head"><h3>具体场景分布</h3><span class="scene-badge ${esc(scene.status)}">${esc(sceneStatusLabels[scene.status] || scene.status)}</span></div><div class="scene-content"><p class="scene-scope"><b>${esc(scene.basis || "统计层级")}</b> · ${esc(scene.scope || "—")}</p>${charts}${taxonomyMarkup}${factMarkup}${empty}${scene.note ? `<p class="scene-note">${esc(scene.note)}</p>` : ""}${sourceMarkup}</div></section>`;
   }
 
   function card(dataset) {

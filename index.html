@@ -46,21 +46,21 @@ html.hide-scenes .scene-method,html.hide-scenes #sceneStatus{display:none}html.h
     <div class="panel"><h3>下载本地素材</h3><p>按数据集下载最安全；脚本会先显示许可说明，需要你显式接受来源条款。</p><div class="command"><code id="cmd">python3 scripts/bootstrap_assets.py --dataset show3d --accept-source-terms</code><button class="btn" id="copy">复制</button></div></div>
   </section>
   <section class="panel scene-method" aria-labelledby="scene-method-title">
-    <div class="scene-method-head"><div><h2 id="scene-method-title">场景分布口径</h2><p>优先统计物理地点；拿不到地点频次时，退到官方 activity / task / interaction-target 分布。不同数据集单位不同，只在单个数据集内部比较条长，不把“小时、序列、场景、任务”混成同一尺度。</p></div><div class="scene-method-status" id="sceneMethodStatus"></div></div>
+    <div class="scene-method-head"><div><h2 id="scene-method-title">具体场景分布口径</h2><p>只统计真实采集环境与官方 scene / location 标签；任务、动作、物体类别不再替代场景。不同数据集分母可能是小时、recording 或 sequence，页面会逐项标明。</p></div><div class="scene-method-status" id="sceneMethodStatus"></div></div>
   </section>
   <div class="toolbar" id="gallery">
     <input id="q" placeholder="搜索数据集、样例 ID、标注…">
     <select id="evidence"><option value="">全部证据类型</option><option value="raw">原始媒体/帧</option><option value="viz">数据可视化</option><option value="frames">官方实拍帧</option><option value="locked">访问受限</option></select>
     <select id="availability"><option value="">全部访问方式</option><option value="bundled">仓库内置</option><option value="fetch">可下载到本地</option><option value="noncommercial-download">非商业研究下载</option><option value="external-only">只能官方查看</option></select>
-    <select id="sceneStatus"><option value="">全部场景统计</option><option value="computed">公开文件复算</option><option value="reported">官方汇总</option><option value="taxonomy">仅类别/范围</option><option value="unavailable">暂不可量化</option></select>
+    <select id="sceneStatus"><option value="">全部场景统计</option><option value="computed">公开文件复算</option><option value="reported">官方资料汇总</option><option value="taxonomy">只有场景清单</option><option value="unavailable">场景信息不可得</option></select>
     <span class="result" id="result"></span>
   </div>
   <section class="grid" id="cards"></section>
   <div class="footer">每项素材都保留 provenance、官方来源与许可状态。页面中的“标注”区分真实文件、官方 overlay、gated 数据和仅在论文中描述的 schema；“场景分布”同时标注统计层级、单位、覆盖范围和不可得原因。</div>
 </main>
-<script src="data/catalog.js?v=scene-split-v1"></script>
-<script src="data/scenes.js?v=scene-split-v1"></script>
-<script src="gallery.js?v=scene-split-v1"></script>
+<script src="data/catalog.js?v=scene-distribution-v2"></script>
+<script src="data/scenes.js?v=scene-distribution-v2"></script>
+<script src="gallery.js?v=scene-distribution-v2"></script>
 <script type="text/plain" id="legacy-gallery-script">
 (function(){
 const D=window.EGO_GALLERY||[],cards=document.getElementById('cards'),IS_PAGES=/\.github\.io$/i.test(location.hostname),esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
