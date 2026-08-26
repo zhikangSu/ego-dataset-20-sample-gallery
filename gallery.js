@@ -2,6 +2,7 @@
   "use strict";
 
   const D = window.EGO_GALLERY || [];
+  const SCENES = window.EGO_SCENES || {};
   const cards = document.getElementById("cards");
   const IS_PAGES = /\.github\.io$/i.test(location.hostname);
   const JSON_CACHE = new Map();
@@ -26,6 +27,12 @@
     "external-only": "官方查看",
     "noncommercial-download": "官方直连 / 非商业下载"
   };
+  const sceneStatusLabels = {
+    computed: "公开文件复算",
+    reported: "官方汇总",
+    taxonomy: "仅类别 / 范围",
+    unavailable: "暂不可量化"
+  };
 
   const esc = value => String(value ?? "").replace(/[&<>"']/g, char => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"
@@ -37,6 +44,10 @@
     : "—";
   const arr = value => Array.isArray(value) ? value : [];
   const unique = value => [...new Set(arr(value).filter(Boolean))];
+  const safeHref = value => {
+    const href = String(value || "");
+    return /^(?:https?:\/\/|\.{0,2}\/|#)/i.test(href) ? href : "#";
+  };
   const nearest = (items, time, key = "time") => {
     if (!items?.length) return null;
     let best = items[0];
@@ -135,12 +146,23 @@
     const ready = D.filter(item => item.evidence !== "locked" && (item.media || []).some(media => (
       media.remote || String(media.local || "").startsWith("assets/datasets/")
     ))).length;
+    const sceneCounts = D.reduce((memo, item) => {
+      const status = SCENES[item.slug]?.status || "unavailable";
+      memo[status] = (memo[status] || 0) + 1;
+      return memo;
+    }, {});
+    const quantifiable = (sceneCounts.computed || 0) + (sceneCounts.reported || 0);
     document.getElementById("stats").innerHTML = `
       <div class="stat"><b>${D.length}</b><span>数据集观察窗</span></div>
       <div class="stat"><b>${ready}</b><span>配置了网页预览</span></div>
       <div class="stat"><b>${counts.raw || 0}</b><span>原始媒体 / 精确原始帧</span></div>
       <div class="stat"><b>${counts.viz || 0}</b><span>真实记录派生可视化</span></div>
+      <div class="stat"><b>${quantifiable}</b><span>可量化场景 / 任务分布</span></div>
       <div class="stat"><b>${counts.locked || 0}</b><span>访问受限</span></div>`;
+    const method = document.getElementById("sceneMethodStatus");
+    if (method) method.innerHTML = ["computed", "reported", "taxonomy", "unavailable"].map(status => (
+      `<span><b>${sceneCounts[status] || 0}</b>${esc(sceneStatusLabels[status])}</span>`
+    )).join("");
   }
 
   function syncHead(title, badge, badgeClass, current = "") {
@@ -981,26 +1003,91 @@
     }).join("");
   }
 
+  function sceneValue(value, unit) {
+    if (!finite(value)) return "—";
+    const number = Number(value);
+    const shown = Number.isInteger(number) ? String(number) : number.toFixed(number < 10 ? 2 : 1).replace(/\.0$/, "");
+    return `${shown}${unit ? ` ${unit}` : ""}`;
+  }
+
+  function sceneChartMarkup(chart) {
+    const items = arr(chart?.items).filter(item => finite(item.value));
+    if (!items.length) return "";
+    const maximum = Math.max(...items.map(item => Math.max(0, Number(item.value))), 0);
+    const declared = finite(chart.total) && Number(chart.total) > 0 ? Number(chart.total) : null;
+    const denominator = declared && declared >= maximum ? declared : (maximum || 1);
+    const rows = items.map(item => {
+      const value = Math.max(0, Number(item.value));
+      const width = value === 0 ? 0 : Math.max(1.5, Math.min(100, value / denominator * 100));
+      const display = item.display || sceneValue(item.value, chart.unit);
+      return `<div class="scene-row" title="${esc(item.note || `${item.label}: ${display}`)}"><span class="scene-name">${esc(item.label)}</span><span class="scene-track"><i style="width:${width.toFixed(2)}%"></i></span><span class="scene-value">${esc(display)}</span></div>`;
+    }).join("");
+    const scale = chart.scaleNote || (declared ? `条长按总量 ${sceneValue(declared, chart.unit)} 计算` : "条长按本图最大类别归一化");
+    return `<div class="scene-chart"><div class="scene-chart-head"><b>${esc(chart.dimension || "分布")}</b><span>${esc(scale)}</span></div><div class="scene-bars">${rows}</div></div>`;
+  }
+
+  function sceneMarkup(dataset) {
+    const scene = SCENES[dataset.slug] || {
+      status: "unavailable",
+      scope: "没有找到可核验的场景统计。",
+      note: "仅凭当前演示媒体不能推断完整数据集的场景分布。",
+      sources: []
+    };
+    const charts = arr(scene.charts).map(sceneChartMarkup).join("");
+    const taxonomy = arr(scene.taxonomy).map(item => typeof item === "string" ? item : item.label).filter(Boolean);
+    const taxonomyMarkup = taxonomy.length ? `<div class="scene-chart-head"><b>${esc(scene.taxonomyLabel || "官方场景 / 任务范围")}</b><span>无公开频数</span></div><div class="scene-taxonomy">${taxonomy.map(item => `<span>${esc(item)}</span>`).join("")}</div>` : "";
+    const facts = arr(scene.facts).filter(item => item?.label && item?.value !== undefined);
+    const factMarkup = facts.length ? `<div class="scene-facts">${facts.map(item => `<div class="scene-fact"><b>${esc(item.value)}</b> · ${esc(item.label)}</div>`).join("")}</div>` : "";
+    const sourceMarkup = arr(scene.sources).length ? `<div class="scene-sources">${scene.sources.map((source, index) => `<a href="${esc(safeHref(source.url))}" target="_blank" rel="noopener">${esc(source.label || `统计来源 ${index + 1}`)} ↗</a>`).join("")}</div>` : "";
+    const empty = !charts && !taxonomyMarkup ? `<div class="scene-empty">目前没有可量化的 record-level 场景频次；下方规模数字仅作背景，不代表分布。</div>` : "";
+    return `<section class="scene-panel"><div class="scene-head"><h3>场景 / 活动分布</h3><span class="scene-badge ${esc(scene.status)}">${esc(sceneStatusLabels[scene.status] || scene.status)}</span></div><div class="scene-content"><p class="scene-scope"><b>${esc(scene.basis || "统计层级")}</b> · ${esc(scene.scope || "—")}</p>${charts}${taxonomyMarkup}${factMarkup}${empty}${scene.note ? `<p class="scene-note">${esc(scene.note)}</p>` : ""}${sourceMarkup}</div></section>`;
+  }
+
   function card(dataset) {
     const media = dataset.media || [];
-    return `<article class="card" data-name="${esc(dataset.name.toLowerCase())}" data-evidence="${esc(dataset.evidence)}" data-availability="${esc(dataset.redistribution)}">
+    const sceneStatus = SCENES[dataset.slug]?.status || "unavailable";
+    return `<article class="card" data-name="${esc(dataset.name.toLowerCase())}" data-evidence="${esc(dataset.evidence)}" data-availability="${esc(dataset.redistribution)}" data-scene-status="${esc(sceneStatus)}">
       <div class="card-head"><div class="titleline"><span class="num">${String(dataset.no).padStart(2, "0")}</span><div><h2>${esc(dataset.name)}</h2><div class="sample-id">${esc(dataset.sampleId)}</div></div></div><span class="badge ${esc(dataset.evidence)}">${esc(labels[dataset.evidence])}</span></div>
       <div class="viewer" data-slug="${esc(dataset.slug)}"><div class="stage"></div><div class="tabs">${media.map((item, index) => `<button class="tab ${index === 0 ? "active" : ""}" data-i="${index}" data-label="${esc(item.label)}">${esc(item.label)}</button>`).join("")}</div><div class="caption">${media.length ? esc(media[0].provenance) : "没有公开可嵌媒体"}</div></div>
       <div class="sync-panel"><div class="sync-loading">进入可视区域后读取对应标注…</div></div>
-      <div class="body"><p class="summary">${esc(dataset.summary)}</p><div class="meta"><span class="chip">${esc(access[dataset.redistribution] || dataset.redistribution)}</span><span class="chip">${esc(dataset.license)}</span></div><div class="annotations"><h3>标注文件与 overlay</h3>${annotationMarkup(dataset)}</div><div class="card-foot"><a href="data/manifests/${esc(dataset.slug)}.json" target="_blank">样例 manifest</a><a href="${esc(dataset.source)}" target="_blank" rel="noopener">官方来源 ↗</a></div></div>
+      <div class="body"><p class="summary">${esc(dataset.summary)}</p><div class="meta"><span class="chip">${esc(access[dataset.redistribution] || dataset.redistribution)}</span><span class="chip">${esc(dataset.license)}</span></div><div class="annotations"><h3>标注文件与 overlay</h3>${annotationMarkup(dataset)}</div>${sceneMarkup(dataset)}<div class="card-foot"><a href="data/manifests/${esc(dataset.slug)}.json" target="_blank">样例 manifest</a><a href="${esc(dataset.source)}" target="_blank" rel="noopener">官方来源 ↗</a></div></div>
     </article>`;
+  }
+
+  function searchText(dataset, scene) {
+    const datasetTerms = [
+      dataset.name, dataset.sampleId, dataset.summary, dataset.evidence,
+      dataset.redistribution, dataset.license,
+      ...arr(dataset.media).flatMap(item => [item.label, item.provenance]),
+      ...arr(dataset.annotations).flatMap(item => [item.label, item.status, item.format, item.note])
+    ];
+    const sceneTerms = [
+      scene.basis, scene.scope, scene.note, scene.taxonomyLabel,
+      ...arr(scene.taxonomy).map(item => typeof item === "string" ? item : item.label),
+      ...arr(scene.charts).flatMap(chart => [
+        chart.dimension, chart.unit, chart.scaleNote,
+        ...arr(chart.items).flatMap(item => [item.label, item.display, item.note])
+      ]),
+      ...arr(scene.facts).flatMap(item => [item.label, item.value]),
+      ...arr(scene.sources).map(source => source.label)
+    ];
+    return [...datasetTerms, ...sceneTerms].filter(Boolean).join(" ").toLowerCase();
   }
 
   function filter() {
     const query = document.getElementById("q").value.trim().toLowerCase();
     const evidence = document.getElementById("evidence").value;
     const availability = document.getElementById("availability").value;
+    const selectedSceneStatus = document.getElementById("sceneStatus").value;
     let count = 0;
     [...cards.children].forEach((element, index) => {
       const dataset = D[index];
-      const haystack = JSON.stringify(dataset).toLowerCase();
-      const visible = (!query || haystack.includes(query)) && (!evidence || dataset.evidence === evidence) && (!availability || dataset.redistribution === availability);
+      const scene = SCENES[dataset.slug] || {};
+      const status = scene.status || "unavailable";
+      const haystack = searchText(dataset, scene);
+      const visible = (!query || haystack.includes(query)) && (!evidence || dataset.evidence === evidence) && (!availability || dataset.redistribution === availability) && (!selectedSceneStatus || status === selectedSceneStatus);
       element.classList.toggle("hidden", !visible);
+      if (!visible) element.querySelectorAll("video").forEach(video => video.pause());
       if (visible) count += 1;
     });
     document.getElementById("result").textContent = `显示 ${count} / ${D.length}`;
@@ -1086,7 +1173,7 @@
     }
   });
 
-  ["q", "evidence", "availability"].forEach(id => document.getElementById(id).addEventListener("input", filter));
+  ["q", "evidence", "availability", "sceneStatus"].forEach(id => document.getElementById(id).addEventListener("input", filter));
   document.getElementById("copy").onclick = async () => {
     const text = document.getElementById("cmd").textContent;
     try {
