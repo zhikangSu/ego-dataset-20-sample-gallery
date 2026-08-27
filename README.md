@@ -74,6 +74,12 @@ python3 scripts/check_repo.py
 
 不同数据集的分母仍可能不同，但每个数字旁都会标明是小时、recording、sequence 还是 audit prevalence。全部 39 项的数字与一手来源集中在 `data/scenes.js`；场景页自己的 39 项目录、开放状态与查漏边界集中在 `data/scene-catalog.js`；15 类统一场景轴和可得性定义集中在 `data/scene-comparison.js`。
 
+## 39 项综合比较与 20 个媒体样例的边界
+
+`report.html` 的能力矩阵和详细字段表同样覆盖全部 39 项，不再只比较原来的 20 个媒体 peer。新增 19 项与原 20 项共用规模、视角、同步 / 标定、传感器、人体、物体、场景、许可和九项能力强弱字段，并可按调研批次、开放状态、依据等级和相关度筛选。新增记录集中在 `data/comparison-additions.js`。
+
+媒体观察窗仍保持 20 项：它只回答“是否有可合法展示、可绑定到具体 record 的媒体 / 标注样例”，不代表综合调研只有 20 项。报告现在明确区分三层：180 条仓库目录、39 项核心横向比较、20 个媒体样例。
+
 ## 文件结构
 
 ```text
@@ -84,6 +90,7 @@ data/catalog.js             页面数据与媒体/标注路径
 data/scene-catalog.js       39 项场景调研目录、开放状态与不重复计数边界
 data/scenes.js              39 项原始/统一场景分布、口径、缺口与一手来源
 data/scene-comparison.js    15 类统一场景 taxonomy 与数据可得性定义
+data/comparison-additions.js 新增 19 项的规模、模态、真值、许可和能力矩阵字段
 gallery.js                  媒体加载、时间对齐、姿态/语义标注面板
 distribution.js             场景热力图、筛选、排序与逐数据集完整分布卡片
 data/annotations/           可核验到当前片段的轻量 record-level 摘要

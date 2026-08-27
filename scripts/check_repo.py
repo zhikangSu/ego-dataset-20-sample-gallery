@@ -78,6 +78,18 @@ def scene_taxonomy() -> dict[str, object]:
     return json.loads(result.stdout)
 
 
+def comparison_additions() -> dict[str, object]:
+    script = (
+        "const fs=require('fs'),vm=require('vm'),c={window:{}};"
+        "vm.runInNewContext(fs.readFileSync('data/comparison-additions.js','utf8'),c);"
+        "process.stdout.write(JSON.stringify(c.window.EGO_COMPARISON_META));"
+    )
+    result = subprocess.run(
+        ["node", "-e", script], cwd=ROOT, check=True, capture_output=True, text=True
+    )
+    return json.loads(result.stdout)
+
+
 def check_catalog_and_manifests(records: list[dict]) -> None:
     assert len(records) == 20, f"expected 20 catalog records, found {len(records)}"
     assert [r["no"] for r in records] == list(range(1, 21)), "catalog indices are not 1..20"
@@ -151,6 +163,28 @@ def check_scene_taxonomy(scene_meta: dict[str, object], scene_records: dict[str,
             assert item["category"] in category_ids, f"unknown normalized category for {slug}: {item['category']}"
 
 
+def check_comparison_additions(comparison: dict[str, object], scene_records: list[dict]) -> None:
+    additions = comparison["additions"]
+    assert len(additions) == 19, f"expected 19 comparison additions, found {len(additions)}"
+    addition_slugs = {item["slug"] for item in additions}
+    scene_addition_slugs = {item["slug"] for item in scene_records if not item.get("hasSample")}
+    assert addition_slugs == scene_addition_slugs, "comparison additions must match the 19 expanded scene datasets"
+    assert len(comparison["originalReleaseByName"]) == 20, "all original media peers need release status"
+    assert set(comparison["releaseLabels"]) == {"open", "gated", "phased", "pending"}
+    required = {
+        "name", "year", "category", "scale", "task", "kind", "views", "sync", "calib",
+        "sensors", "human", "objects", "scene", "access", "license", "evidence", "relevance",
+        "releaseStatus", "source", "note", "feature_values"
+    }
+    for item in additions:
+        assert required <= set(item), f"incomplete comparison row for {item.get('slug')}"
+        assert item["evidence"] in {"A", "B"}, f"invalid evidence for {item['slug']}"
+        assert item["releaseStatus"] in comparison["releaseLabels"], f"invalid release status for {item['slug']}"
+        assert item["source"].startswith("https://"), f"unsafe comparison source for {item['slug']}"
+        assert len(item["feature_values"]) == 9, f"comparison feature vector must have 9 fields for {item['slug']}"
+        assert set(item["feature_values"]) <= {0, 1, 2}, f"invalid feature value for {item['slug']}"
+
+
 def check_pages() -> None:
     report = (ROOT / "report.html").read_text(encoding="utf-8")
     index = (ROOT / "index.html").read_text(encoding="utf-8")
@@ -171,6 +205,10 @@ def check_pages() -> None:
     assert 'src="data/scene-catalog.js?v=scene-distribution-v3"' in distribution, "expanded scene catalog is missing"
     assert 'src="data/scene-comparison.js?v=scene-distribution-v3"' in distribution, "scene taxonomy script is missing"
     assert 'src="distribution.js?v=scene-distribution-v3"' in distribution, "scene distribution application script is missing"
+    assert 'src="data/comparison-additions.js?v=comparison-v1"' in report, "39-item comparison data is missing"
+    assert "39 个开放 / 重要 Ego 数据集：统一能力矩阵" in report, "expanded comparison matrix heading is missing"
+    assert 'id="peerCohortFilter"' in report and 'id="peerReleaseFilter"' in report, "comparison filters are incomplete"
+    assert "comparisonPeers.map" in report, "ability matrix must render all 39 comparison datasets"
     assert 'id="heatmapGrid"' in distribution and 'id="cardsGrid"' in distribution and 'id="boundaryList"' in distribution
     gallery_js = (ROOT / "gallery.js").read_text(encoding="utf-8")
     assert "function mediaCandidates" in gallery_js, "official-media fallback is missing"
@@ -185,6 +223,7 @@ def check_pages() -> None:
     subprocess.run(["node", "--check", "data/scene-catalog.js"], cwd=ROOT, check=True)
     subprocess.run(["node", "--check", "data/scenes.js"], cwd=ROOT, check=True)
     subprocess.run(["node", "--check", "data/scene-comparison.js"], cwd=ROOT, check=True)
+    subprocess.run(["node", "--check", "data/comparison-additions.js"], cwd=ROOT, check=True)
     subprocess.run(["node", "--check", "gallery.js"], cwd=ROOT, check=True)
     subprocess.run(["node", "--check", "distribution.js"], cwd=ROOT, check=True)
 
@@ -216,12 +255,14 @@ def main() -> None:
     scene_records_catalog = scene_catalog()
     scene_records = scenes()
     scene_meta = scene_taxonomy()
+    comparison = comparison_additions()
     check_catalog_and_manifests(records)
     check_scene_distributions(scene_records_catalog, scene_records)
     check_scene_taxonomy(scene_meta, scene_records)
+    check_comparison_additions(comparison, scene_records_catalog)
     check_pages()
     check_range_server()
-    print("OK: 20 media entries, 39 concrete-scene records, release-state boundaries, lazy official-media fallback, and HTTP Range support")
+    print("OK: 20 media entries, 39-item capability comparison, 39 concrete-scene records, release-state boundaries, lazy official-media fallback, and HTTP Range support")
 
 
 if __name__ == "__main__":
