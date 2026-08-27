@@ -566,5 +566,395 @@ window.EGO_SCENES = {
       {label: "官方仓库与 scene index", url: "https://github.com/ai4ce/EgoPAT3D"},
       {label: "官方项目页", url: "https://ai4ce.github.io/EgoPAT3D/"}
     ]
+  },
+
+  "egolive": {
+    status: "taxonomy",
+    availability: "presence",
+    basis: "论文明确列出的真实业务环境",
+    scope: "论文版为 1,680 h、65,866 episodes、346 项任务；明确覆盖 home service、retail、pharmacy 等真实业务场景，但没有逐场景小时或 episode 数。",
+    normalized: [
+      {category: "home", present: true, label: "Home service"},
+      {category: "service", present: true, label: "Retail / pharmacy"}
+    ],
+    taxonomyLabel: "官方明确出现的场景范围",
+    taxonomy: ["Home service", "Retail", "Pharmacy", "Other practical work scenarios · 未展开"],
+    facts: [
+      {label: "论文版时长", value: "1,680 h"},
+      {label: "episodes", value: "65,866"},
+      {label: "真实任务", value: "346"},
+      {label: "视频", value: "stereo · 4K · 60 fps"}
+    ],
+    note: "京东后续传播口径出现 2,000 h，但正式论文为 1,680 h；在拿到平台 manifest 前不合并两个版本，也不根据任务名推算场景占比。",
+    sources: [
+      {label: "正式论文", url: "https://arxiv.org/abs/2604.23570"},
+      {label: "京东 JoyEgoCam / 数据入口", url: "https://robotdata.jdcloud.com/data-collection"}
+    ]
+  },
+
+  "egoverse": {
+    status: "unavailable",
+    availability: "none",
+    basis: "当前 release 的 240 scenes 元数据",
+    scope: "官方 living dataset 当前写明 4,003 h、约 80K episodes、1,965 tasks、240 scenes，但公开首页没有给出 240 个场景的命名清单或逐场景规模。",
+    facts: [
+      {label: "当前 release", value: "4,003 h"},
+      {label: "episodes", value: "≈80K"},
+      {label: "tasks", value: "1,965"},
+      {label: "scenes", value: "240"}
+    ],
+    note: "240 scenes 是规模字段，不等于可比较的语义场景分布。待官方 browser / manifest 暴露 scene 名与 episode 映射后再复算。",
+    sources: [{label: "官方项目页", url: "https://egoverse.ai/"}]
+  },
+
+  "ego4d": {
+    status: "taxonomy",
+    availability: "presence",
+    basis: "官方概览的 broad scenario families",
+    scope: "3,670 h、923 位参与者、74 locations、9 countries；官方概览确认 household、outdoor、workplace、leisure 等大类，但没有互斥物理场景的完整时长表。",
+    normalized: [
+      {category: "home", present: true, label: "Household"},
+      {category: "outdoor", present: true, label: "Outdoor"},
+      {category: "office", present: true, label: "Workplace"},
+      {category: "sports", present: true, label: "Leisure"}
+    ],
+    taxonomyLabel: "官方 broad scenarios（不是比例）",
+    taxonomy: ["Household", "Outdoor", "Workplace", "Leisure", "Hundreds of additional scenarios · 未完整列出"],
+    facts: [
+      {label: "视频时长", value: "3,670 h"},
+      {label: "参与者", value: "923"},
+      {label: "locations", value: "74"},
+      {label: "countries", value: "9"}
+    ],
+    note: "官方 scenario/domain 标签不等于房间类别；本页只做存在性映射，不把 narrations 或 activity labels 变成场景占比。",
+    sources: [
+      {label: "官方项目页", url: "https://ego4d-data.org/"},
+      {label: "官方文档", url: "https://ego4d-data.org/docs/"}
+    ]
+  },
+
+  "egocentric-10k": {
+    status: "reported",
+    availability: "frequency",
+    basis: "官方数据卡：exclusively in real factories",
+    scope: "完整 10,000 h 数据全部来自真实工厂；可确定工业场景占 100%，但工厂内部产线、工位或地点比例没有公开。",
+    denominator: {value: 10000, unit: "h", label: "官方总视频时长"},
+    normalized: [{category: "industrial", value: 10000, label: "Real factories"}],
+    charts: [{dimension: "语义场景构成", unit: "h", total: 10000, items: [{label: "Real factories", value: 10000, display: "10,000 h · 100%", mapping: "industrial"}]}],
+    facts: [
+      {label: "视频时长", value: "10,000 h"},
+      {label: "clips", value: "192,900"},
+      {label: "frames", value: "1.08B"},
+      {label: "公开体量", value: "≈18 TB"}
+    ],
+    note: "100% 只表示统一语义场景为工厂，不代表每个工厂、车间或工位均衡。",
+    sources: [{label: "官方 ModelScope 数据卡", url: "https://www.modelscope.cn/datasets/builddotai/Egocentric-10K/summary"}]
+  },
+
+  "egosuite-open100k": {
+    status: "taxonomy",
+    availability: "presence",
+    basis: "完整集合公布的 7 类环境与 128 scene types",
+    scope: "完整集合规划 100,000 h、128 类场景、15,000+ 场景/任务；当前可直接枚举的 EgoDemo 为 50 h，EgoStandard / EgoPro 通过 gated mutable buckets 分发。",
+    normalized: [
+      {category: "home", present: true, label: "Home"},
+      {category: "office", present: true, label: "Office"},
+      {category: "industrial", present: true, label: "Industrial / logistics"},
+      {category: "service", present: true, label: "Hotel / retail"},
+      {category: "sports", present: true, label: "Sports"}
+    ],
+    taxonomyLabel: "公布的环境大类（无逐类比例）",
+    taxonomy: ["Home", "Hotel", "Retail", "Sports", "Logistics", "Office", "Industrial"],
+    facts: [
+      {label: "完整集合规划", value: "100,000 h"},
+      {label: "scene types", value: "128"},
+      {label: "tasks / scenes", value: "15,000+"},
+      {label: "可直接检查 sample", value: "EgoDemo · 50 h"}
+    ],
+    note: "10 万小时是完整集合口径；50 h EgoDemo、90K h EgoStandard 与 10K h EgoPro 是同一集合的不同 SKU，LeRobot/MCAP 只是同一 episode 的不同格式，不能重复计时。场景比例需以 bucket manifest 为准。",
+    sources: [
+      {label: "官方 HF collection", url: "https://huggingface.co/collections/LightwheelAI/egosuite-open100k"},
+      {label: "官方 EgoDemo 数据卡", url: "https://huggingface.co/datasets/LightwheelAI/EgoDemo"}
+    ]
+  },
+
+  "nymeria": {
+    status: "taxonomy",
+    availability: "presence",
+    basis: "论文给出的 50 个物理 locations",
+    scope: "300+ h、1,200 recordings、20 unscripted scenarios；物理地点为 47 houses、1 cafeteria/patio、1 office building、1 campus/outdoor 区域，但官方未给各 location 的录制时长占比。",
+    normalized: [
+      {category: "home", present: true, label: "47 houses"},
+      {category: "service", present: true, label: "Cafeteria / patio"},
+      {category: "office", present: true, label: "Office building"},
+      {category: "outdoor", present: true, label: "Campus / trails"}
+    ],
+    taxonomyLabel: "完整 location 类型范围",
+    taxonomy: ["47 houses", "1 cafeteria with outdoor patio", "1 multistory office building", "1 campus ground with parking / hiking / biking trails"],
+    facts: [
+      {label: "clean data", value: "300+ h"},
+      {label: "recordings", value: "1,200"},
+      {label: "scenarios", value: "20"},
+      {label: "locations", value: "50"}
+    ],
+    note: "47/50 houses 是地点数量占比，不是视频数据占比；因此热力图只标记存在，不画成 94% 住宅。NymeriaPlus 是同一采集集的增强标注版本，不重复计为新数据集。",
+    sources: [
+      {label: "官方数据卡", url: "https://huggingface.co/datasets/projectaria/Nymeria"},
+      {label: "官方仓库 / NymeriaPlus", url: "https://github.com/facebookresearch/nymeria_dataset"}
+    ]
+  },
+
+  "epic-kitchens-100": {
+    status: "reported",
+    availability: "frequency",
+    basis: "官方采集范围：45 个参与者家庭厨房",
+    scope: "100 h、700 videos 全部记录参与者在其家庭厨房中的日常活动；统一场景可确定厨房占 100%，逐厨房时长需从元数据另算。",
+    denominator: {value: 100, unit: "h", label: "官方总视频时长"},
+    normalized: [{category: "kitchen", value: 100, label: "45 home kitchens"}],
+    charts: [{dimension: "语义场景构成", unit: "h", total: 100, items: [{label: "45 home kitchens", value: 100, display: "100 h · 100%", mapping: "kitchen"}]}],
+    facts: [
+      {label: "视频时长", value: "100 h"},
+      {label: "videos", value: "700"},
+      {label: "kitchens", value: "45"},
+      {label: "action segments", value: "≈90K"}
+    ],
+    note: "这里的 100% 是语义场景层级；45 个具体厨房之间的比例并非 1/45，需根据 700 段视频元数据复算。VISOR、EPIC-Fields、EPIC-Sounds 是同一视频的派生标注，不重复计算。",
+    sources: [{label: "官方数据集页", url: "https://epic-kitchens.github.io/"}]
+  },
+
+  "holoassist": {
+    status: "taxonomy",
+    availability: "presence",
+    basis: "官方论文描述的对象与采集环境范围",
+    scope: "166–169 h、350 instructor–performer pairs、20 个 object-centric tasks；官方明确提到 specialized labs 与 factories，但没有逐物理场景时长。",
+    normalized: [
+      {category: "lab", present: true, label: "Specialized labs"},
+      {category: "industrial", present: true, label: "Factories"},
+      {category: "tabletop", present: true, label: "Object-centric work areas"}
+    ],
+    taxonomyLabel: "官方可确认的环境范围",
+    taxonomy: ["Specialized laboratories", "Factories", "Object-centric work areas · exact rooms not enumerated"],
+    facts: [
+      {label: "官方网页当前口径", value: "169 h"},
+      {label: "论文口径", value: "166 h"},
+      {label: "pairs", value: "350"},
+      {label: "tasks", value: "20"}
+    ],
+    note: "GoPro、espresso、IKEA、NavVis 等是对象/任务名称，不是场景类别；本页不按对象分布替代房间分布。",
+    sources: [
+      {label: "官方项目与下载", url: "https://holoassist.github.io/"},
+      {label: "ICCV 论文", url: "https://openaccess.thecvf.com/content/ICCV2023/html/Wang_HoloAssist_an_Egocentric_Human_Interaction_Dataset_for_Interactive_AI_Assistants_ICCV_2023_paper.html"}
+    ]
+  },
+
+  "egolife": {
+    status: "reported",
+    availability: "frequency",
+    basis: "一周共同居住的单一 shared house",
+    scope: "6 位志愿者在同一共享住宅生活 7 天，每人约 50 h；总计约 300 participant-hours，15 路固定 GoPro 与房屋 3D scan 覆盖同一住宅环境。",
+    denominator: {value: 300, unit: "participant-h", label: "6 人累计佩戴时长"},
+    normalized: [{category: "home", value: 300, label: "Shared living house"}],
+    charts: [{dimension: "语义场景构成", unit: "participant-h", total: 300, items: [{label: "Shared living house", value: 300, display: "≈300 participant-h · 100%", mapping: "home"}]}],
+    facts: [
+      {label: "参与者", value: "6"},
+      {label: "每人时长", value: "≈50 h"},
+      {label: "累计 wearer 时长", value: "≈300 participant-h"},
+      {label: "固定相机", value: "15 GoPros"}
+    ],
+    note: "300 participant-hours 不是 300 小时独立 wall-clock；6 路同步 wearer 视角会重复覆盖同一时段。住宅内部厨房、客厅、卧室等子房间占比尚未公开。",
+    sources: [{label: "官方项目页", url: "https://egolife-ai.github.io/"}]
+  },
+
+  "hot3d": {
+    status: "unavailable",
+    availability: "none",
+    basis: "物理采集场景 / room taxonomy",
+    scope: "833 min、1.5M multi-view frames、33 个手持物体；公开数据卡详细描述手和物体 GT，但未给互斥的物理房间/地点清单。",
+    facts: [
+      {label: "视频时长", value: "833 min"},
+      {label: "multi-view frames", value: "1.5M"},
+      {label: "objects", value: "33"},
+      {label: "devices", value: "Aria + Quest 3"}
+    ],
+    note: "“hand-held objects”与 33 个对象不是场景。没有官方 room taxonomy 前，不把官方预览画面主观归类为实验室或桌面。",
+    sources: [
+      {label: "Project Aria 官方文档", url: "https://facebookresearch.github.io/projectaria_tools/docs/open_datasets/hot3d"},
+      {label: "官方数据卡", url: "https://huggingface.co/datasets/projectaria/hot3d"}
+    ]
+  },
+
+  "saber": {
+    status: "reported",
+    availability: "frequency",
+    basis: "官方说明：multiple real grocery stores",
+    scope: "100+ h 自然店内活动全部采自营业中的真实 grocery stores；完整语义场景为零售，具体门店、货架区与后场比例未公开。",
+    denominator: {value: 100, unit: "h+", label: "论文约数下限"},
+    normalized: [{category: "service", value: 100, label: "Operational grocery stores"}],
+    charts: [{dimension: "语义场景构成", unit: "h+", total: 100, items: [{label: "Operational grocery stores", value: 100, display: "100+ h · 100% retail", mapping: "service"}]}],
+    facts: [
+      {label: "完整采集", value: "100+ h"},
+      {label: "training samples", value: "≈44.8K"},
+      {label: "公开子集", value: "SABER-10K"},
+      {label: "views", value: "ego + 360° exo"}
+    ],
+    note: "完整 100+ h 与公开 SABER-10K 子集不是同一开放粒度；页面将开放状态标为“分批/子集”，不把 44.8K 派生训练样本当成新增视频。",
+    sources: [
+      {label: "官方论文", url: "https://arxiv.org/html/2605.09613"},
+      {label: "公开 SABER-10K", url: "https://huggingface.co/datasets/DreamVu/SABER-10K"}
+    ]
+  },
+
+  "egoexolearn": {
+    status: "taxonomy",
+    availability: "presence",
+    basis: "官方概览的 daily-life 与 specialized-lab 环境",
+    scope: "120 h 异步 ego/exo 程序活动，官方明确覆盖 daily life scenarios 与 specialized laboratories，但没有逐物理场景比例。",
+    normalized: [
+      {category: "home", present: true, label: "Daily-life environments"},
+      {category: "lab", present: true, label: "Specialized laboratories"}
+    ],
+    taxonomyLabel: "官方 broad environments",
+    taxonomy: ["Daily-life scenarios", "Specialized laboratories"],
+    facts: [
+      {label: "总视频", value: "120 h"},
+      {label: "视角", value: "ego + demonstration exo"},
+      {label: "附加信号", value: "gaze"}
+    ],
+    note: "任务类别与 demo 来源不能替代 physical scene taxonomy；比例保持不可量化。",
+    sources: [
+      {label: "官方项目页", url: "https://egoexolearn.github.io/"},
+      {label: "官方仓库", url: "https://github.com/OpenGVLab/EgoExoLearn"}
+    ]
+  },
+
+  "egobrain": {
+    status: "unavailable",
+    availability: "none",
+    basis: "跨环境 physical-scene metadata",
+    scope: "61 h 同步 32-channel EEG 与第一视角视频，40 位参与者执行 29 类日常活动；公开概览没有给互斥的物理环境清单或逐环境时长。",
+    facts: [
+      {label: "同步时长", value: "61 h"},
+      {label: "参与者", value: "40"},
+      {label: "活动类别", value: "29"},
+      {label: "EEG", value: "32 channels"}
+    ],
+    note: "work / play / learn / consume 及 29 个 activity 是行为类别，不是场景；因此不画场景比例。",
+    sources: [
+      {label: "Microsoft Research", url: "https://www.microsoft.com/en-us/research/publication/egobrain-synergizing-minds-and-eyes-for-human-action-understanding/"},
+      {label: "ICLR 论文", url: "https://openreview.net/forum?id=DGcoJINQ7P"}
+    ]
+  },
+
+  "egomagic": {
+    status: "unavailable",
+    availability: "none",
+    basis: "医学视频的 physical capture sites",
+    scope: "3,355 videos、50 个 field-medicine tasks；论文与 Zenodo 提供任务/对象标注，但没有按医院、训练室、户外救治点等物理场景拆分。",
+    facts: [
+      {label: "videos", value: "3,355"},
+      {label: "medical tasks", value: "50"},
+      {label: "object labels", value: "1.95M"},
+      {label: "medical objects", value: "124"}
+    ],
+    note: "Field medicine 是任务领域，不足以判定每段视频的物理环境；保留为不可得，避免把医疗任务当场景。",
+    sources: [
+      {label: "官方 Zenodo release", url: "https://zenodo.org/records/19239155"},
+      {label: "论文", url: "https://arxiv.org/abs/2604.22036"}
+    ]
+  },
+
+  "meccano": {
+    status: "reported",
+    availability: "frequency",
+    basis: "官方定义：industrial-like assembly setting",
+    scope: "20 位参与者均在工业式装配环境中组装同一类摩托车模型；统一语义场景记为维修/工坊 100%，但具体工位布局比例未公开。",
+    denominator: {value: 1, unit: "corpus", label: "完整 MECCANO corpus"},
+    normalized: [{category: "workshop", value: 1, label: "Industrial-like assembly setting"}],
+    charts: [{dimension: "语义场景构成", unit: "corpus", total: 1, items: [{label: "Industrial-like assembly setting", value: 1, display: "完整数据集 · 100%", mapping: "workshop"}]}],
+    facts: [
+      {label: "参与者", value: "20"},
+      {label: "活动", value: "motorbike model assembly"},
+      {label: "模态", value: "RGB + depth + gaze"}
+    ],
+    note: "这是数据集级单一语义环境，不表示真实工厂生产数据；官方用词是 industrial-like。",
+    sources: [
+      {label: "官方项目页", url: "https://iplab.dmi.unict.it/legacy/MECCANO/"},
+      {label: "官方仓库", url: "https://github.com/fpv-iplab/MECCANO"}
+    ]
+  },
+
+  "ego-extra": {
+    status: "taxonomy",
+    availability: "presence",
+    basis: "四个官方 scenario domains",
+    scope: "50 h expert–trainee 程序辅助视频覆盖 bike workshop、kitchen、bakery、assembly 等场景域；没有公开逐域小时或视频数。",
+    normalized: [
+      {category: "workshop", present: true, label: "Bike workshop"},
+      {category: "kitchen", present: true, label: "Kitchen / bakery"},
+      {category: "tabletop", present: true, label: "Assembly"}
+    ],
+    taxonomyLabel: "官方 scenario domains（无比例）",
+    taxonomy: ["Bike workshop", "Kitchen", "Bakery", "Assembly"],
+    facts: [
+      {label: "总视频", value: "50 h"},
+      {label: "采集方式", value: "Wizard of Oz"},
+      {label: "核心标注", value: "expert–trainee dialogue"}
+    ],
+    note: "场景域仍混有任务语义，因此只做存在性映射，不计算物理房间比例。",
+    sources: [{label: "WACV 2026 论文", url: "https://openaccess.thecvf.com/content/WACV2026/html/Ragusa_Ego-EXTRA_video-language_Egocentric_Dataset_for_EXpert-TRAinee_assistance_WACV_2026_paper.html"}]
+  },
+
+  "charades-ego": {
+    status: "taxonomy",
+    availability: "presence",
+    basis: "官方采集范围：daily indoor activities",
+    scope: "7,860 paired first/third-person videos、68.8 h；官方确认均为日常室内活动，但未提供可互斥的厨房、卧室、客厅等逐房间比例。",
+    normalized: [{category: "home", present: true, label: "Daily indoor environments"}],
+    taxonomyLabel: "官方场景范围",
+    taxonomy: ["Daily indoor environments · room taxonomy not released"],
+    facts: [
+      {label: "paired videos", value: "7,860"},
+      {label: "总时长", value: "68.8 h"},
+      {label: "activity instances", value: "68,536"},
+      {label: "actions", value: "157 classes"}
+    ],
+    note: "157 action classes 不能替代室内房间分布；热力图只标记住宅/室内存在。",
+    sources: [
+      {label: "AllenAI 官方项目", url: "https://prior.allenai.org/projects/charades-ego"},
+      {label: "论文", url: "https://arxiv.org/abs/1804.09626"}
+    ]
+  },
+
+  "egocom": {
+    status: "unavailable",
+    availability: "none",
+    basis: "39 个 conversation 的 physical rooms",
+    scope: "38.5 h、39 个自然对话、34 位说话者；公开 metadata 记录 conversation 与 speaker，但没有 room/location 字段。",
+    facts: [
+      {label: "总时长", value: "38.5 h"},
+      {label: "conversations", value: "39"},
+      {label: "speakers", value: "34"},
+      {label: "transcribed words", value: "240K"}
+    ],
+    note: "card games、镜子、objects in the room 等是话题/互动内容，不能据此推断录制场景。官方仓库已归档，但 release assets 仍可下载。",
+    sources: [{label: "官方归档仓库与 release", url: "https://github.com/facebookresearch/EgoCom-Dataset"}]
+  },
+
+  "mobileego-anywhere": {
+    status: "reported",
+    availability: "frequency",
+    basis: "论文 release：household activity",
+    scope: "论文报告 354 sessions、200 h 长时 household activity，由 16 位贡献者使用头戴手机采集；统一语义场景可记住宅 100%，但完整下载入口仍需核验。",
+    denominator: {value: 200, unit: "h", label: "论文报告的 released dataset"},
+    normalized: [{category: "home", value: 200, label: "Household environments"}],
+    charts: [{dimension: "语义场景构成", unit: "h", total: 200, items: [{label: "Household environments", value: 200, display: "200 h · 100%", mapping: "home"}]}],
+    facts: [
+      {label: "论文报告", value: "200 h"},
+      {label: "sessions", value: "354"},
+      {label: "contributors", value: "16"},
+      {label: "附加信息", value: "6DoF + depth + hands"}
+    ],
+    note: "比例来自论文对 released dataset 的整体描述；在独立文件清单可访问前，开放状态仍标记为“入口待核验”。",
+    sources: [{label: "论文", url: "https://arxiv.org/abs/2605.05945"}]
   }
 };

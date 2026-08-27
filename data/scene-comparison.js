@@ -20,7 +20,7 @@ window.EGO_SCENE_METHOD = {
   frequency: {
     label: "场景比例可量化",
     short: "比例可量化",
-    description: "官方或公开文件提供场景级时长、recording、sequence、location 数，或明确说明数据全部来自同一语义场景。"
+    description: "官方或公开文件提供场景级时长、recording、sequence、各 location 的录制计数，或明确说明数据全部来自同一语义场景。"
   },
   proxy: {
     label: "代理比例",

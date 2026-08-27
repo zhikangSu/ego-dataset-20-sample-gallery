@@ -58,7 +58,7 @@ python3 scripts/check_repo.py
 
 ## 具体场景分布怎么看
 
-`distribution.html` 是独立的 20 项具体场景横向对比页，并嵌入 `report.html`。这一页只回答三个问题：每个数据集包含哪些真实采集场景、每种场景有多少数据 / 占比多少、哪些比例公开拿不到。任务、动作、物体和 interaction target 不再作为场景代理。
+`distribution.html` 是独立的 39 项具体场景横向对比页，并嵌入 `report.html`。其中前 20 项与媒体观察窗对应，另补入 19 个大型或重要专项数据集，包括 EgoLive、EgoVerse、Ego4D、Egocentric-10K、EgoSuite-Open100K、Nymeria、EPIC-KITCHENS-100、HoloAssist、EgoLife 和 HOT3D。场景页只回答三个问题：每个数据集包含哪些真实采集场景、每种场景有多少数据 / 占比多少、哪些比例公开拿不到。任务、动作、物体和 interaction target 不再作为场景代理。
 
 页面先把官方原始标签映射到 15 个统一场景族，再提供两层视图：
 
@@ -72,16 +72,17 @@ python3 scripts/check_repo.py
 - `只有场景清单`：能确认场景范围，但没有逐类比例；
 - `不可得`：不从演示视频、任务名或常识主观推断。
 
-不同数据集的分母仍可能不同，但每个数字旁都会标明是小时、recording、sequence 还是 audit prevalence。全部 20 项的数字与一手来源集中在 `data/scenes.js`，15 类统一场景轴和可得性定义集中在 `data/scene-comparison.js`。
+不同数据集的分母仍可能不同，但每个数字旁都会标明是小时、recording、sequence 还是 audit prevalence。全部 39 项的数字与一手来源集中在 `data/scenes.js`；场景页自己的 39 项目录、开放状态与查漏边界集中在 `data/scene-catalog.js`；15 类统一场景轴和可得性定义集中在 `data/scene-comparison.js`。
 
 ## 文件结构
 
 ```text
 index.html                  本地优先的 20 项观察窗
-distribution.html           20 项具体场景分布横向对比页
+distribution.html           39 项具体场景分布横向对比页
 report.html                 完整调研报告（直接嵌入 local-first 观察窗）
 data/catalog.js             页面数据与媒体/标注路径
-data/scenes.js              20 项原始/统一场景分布、口径、缺口与一手来源
+data/scene-catalog.js       39 项场景调研目录、开放状态与不重复计数边界
+data/scenes.js              39 项原始/统一场景分布、口径、缺口与一手来源
 data/scene-comparison.js    15 类统一场景 taxonomy 与数据可得性定义
 gallery.js                  媒体加载、时间对齐、姿态/语义标注面板
 distribution.js             场景热力图、筛选、排序与逐数据集完整分布卡片

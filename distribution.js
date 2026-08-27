@@ -1,12 +1,15 @@
 (() => {
   "use strict";
 
-  const CATALOG = window.EGO_GALLERY || [];
+  const CATALOG = window.EGO_SCENE_DATASETS || window.EGO_GALLERY || [];
   const SCENES = window.EGO_SCENES || {};
   const TAXONOMY = window.EGO_SCENE_TAXONOMY || [];
   const METHODS = window.EGO_SCENE_METHOD || {};
+  const RELEASE = window.EGO_RELEASE_STATUS || {};
+  const BOUNDARIES = window.EGO_SCENE_BOUNDARIES || [];
   const TAXONOMY_BY_ID = Object.fromEntries(TAXONOMY.map(item => [item.id, item]));
   const METHOD_ORDER = {frequency: 0, proxy: 1, presence: 2, none: 3};
+  const RELEASE_ORDER = {open: 0, gated: 1, phased: 2, pending: 3};
   const STATUS_LABELS = {
     computed: "公开文件复算",
     reported: "官方资料汇总",
@@ -48,7 +51,7 @@
       topShare: numeric.length ? Math.max(...numeric.map(item => item.share)) : null,
       diversity: normalized.length,
       search: [
-        dataset.name, dataset.slug, scene.basis, scene.scope, scene.note,
+        dataset.name, dataset.slug, dataset.year, dataset.tier, RELEASE[dataset.releaseStatus]?.label, scene.basis, scene.scope, scene.note,
         ...normalized.flatMap(item => [item.label, item.taxonomy.label]),
         ...arr(scene.taxonomy),
         ...arr(scene.charts).flatMap(chart => [chart.dimension, ...arr(chart.items).map(item => item.label)]),
@@ -61,13 +64,15 @@
     q: document.getElementById("q"),
     category: document.getElementById("category"),
     availability: document.getElementById("availability"),
+    release: document.getElementById("release"),
     sort: document.getElementById("sort"),
     quantified: document.getElementById("quantified"),
     result: document.getElementById("result"),
     stats: document.getElementById("stats"),
     heatmap: document.getElementById("heatmapGrid"),
     cards: document.getElementById("cardsGrid"),
-    legend: document.getElementById("sceneLegend")
+    legend: document.getElementById("sceneLegend"),
+    boundaries: document.getElementById("boundaryList")
   };
 
   function methodBadge(scene) {
@@ -75,15 +80,22 @@
     return `<span class="method-badge ${esc(key)}">${esc(METHODS[key]?.short || key)}</span>`;
   }
 
+  function releaseBadge(record) {
+    const key = record.releaseStatus || "pending";
+    return `<span class="release-badge ${esc(key)}" title="${esc(RELEASE[key]?.label || key)}">${esc(RELEASE[key]?.short || key)}</span>`;
+  }
+
   function filteredRecords() {
     const query = elements.q.value.trim().toLowerCase();
     const category = elements.category.value;
     const availability = elements.availability.value;
+    const release = elements.release.value;
     const quantified = elements.quantified.checked;
     const records = RECORDS.filter(record => (
       (!query || record.search.includes(query)) &&
       (!category || record.normalized.some(item => item.category === category)) &&
       (!availability || record.scene.availability === availability) &&
+      (!release || record.releaseStatus === release) &&
       (!quantified || ["frequency", "proxy"].includes(record.scene.availability))
     ));
     const sort = elements.sort.value;
@@ -91,6 +103,7 @@
       if (sort === "availability") {
         return (METHOD_ORDER[a.scene.availability] ?? 9) - (METHOD_ORDER[b.scene.availability] ?? 9) || a.no - b.no;
       }
+      if (sort === "release") return (RELEASE_ORDER[a.releaseStatus] ?? 9) - (RELEASE_ORDER[b.releaseStatus] ?? 9) || a.no - b.no;
       if (sort === "diversity") return b.diversity - a.diversity || a.no - b.no;
       if (sort === "balanced") return (a.topShare ?? 101) - (b.topShare ?? 101) || a.no - b.no;
       return a.no - b.no;
@@ -110,14 +123,14 @@
       memo[key] = (memo[key] || 0) + 1;
       return memo;
     }, {});
-    const rawLabels = RECORDS.reduce((sum, record) => sum + arr(record.scene.charts?.[0]?.items).length + arr(record.scene.taxonomy).length, 0);
+    const additions = RECORDS.filter(record => record.tier !== "sample-peer").length;
     elements.stats.innerHTML = `
-      <div class="stat"><b>${RECORDS.length}</b><span>重点原始 Ego 数据集</span></div>
+      <div class="stat"><b>${RECORDS.length}</b><span>独立采集 / 重要 Ego 数据集</span></div>
       <div class="stat"><b>${counts.frequency || 0}</b><span>场景比例可直接量化</span></div>
       <div class="stat"><b>${counts.proxy || 0}</b><span>官方 audit / 映射代理比例</span></div>
       <div class="stat"><b>${counts.presence || 0}</b><span>只有场景清单</span></div>
       <div class="stat"><b>${counts.none || 0}</b><span>公开场景信息不足</span></div>
-      <div class="stat"><b>${rawLabels}</b><span>页面列出的原始场景标签</span></div>`;
+      <div class="stat"><b>+${additions}</b><span>本轮补充的大型 / 专项数据集</span></div>`;
   }
 
   function heatmapCell(record, category) {
@@ -218,7 +231,7 @@
     elements.cards.innerHTML = records.map(record => {
       const scene = record.scene;
       return `<article class="scene-card" id="scene-${esc(record.slug)}">
-        <div class="card-head"><div><span class="card-index">${String(record.no).padStart(2, "0")}</span><h3>${esc(record.name)}</h3><small>${esc(STATUS_LABELS[scene.status] || scene.status || "—")}</small></div>${methodBadge(scene)}</div>
+        <div class="card-head"><div><span class="card-index">${String(record.no).padStart(2, "0")}</span><h3>${esc(record.name)}</h3><small>${record.year ? `${esc(record.year)} · ` : ""}${esc(STATUS_LABELS[scene.status] || scene.status || "—")}${record.tier === "core-addition" ? " · 必补大型集" : record.tier === "specialized" ? " · 重要专项集" : " · 20 项样例 peer"}</small></div><div class="card-badges">${releaseBadge(record)}${methodBadge(scene)}</div></div>
         <div class="card-body">
           <p class="scope"><b>${esc(scene.basis || "统计口径")}</b>${esc(scene.scope || "—")}</p>
           ${distributionMarkup(record)}
@@ -226,10 +239,17 @@
           ${taxonomyMarkup(scene)}
           ${factsMarkup(scene)}
           ${scene.note ? `<p class="caveat">${esc(scene.note)}</p>` : ""}
-          <div class="card-foot">${sourcesMarkup(scene)}<a class="sample-link" href="index.html#dataset-${esc(record.slug)}" target="_blank" rel="noopener">查看样例与标注 ↗</a></div>
+          <div class="card-foot">${sourcesMarkup(scene)}${record.hasSample ? `<a class="sample-link" href="index.html#dataset-${esc(record.slug)}" target="_blank" rel="noopener">查看样例与标注 ↗</a>` : `<span class="no-sample">本轮仅补场景调研，尚未加入媒体样例</span>`}</div>
         </div>
       </article>`;
     }).join("") || `<div class="empty-state">当前筛选没有匹配项。</div>`;
+  }
+
+  function renderBoundaries() {
+    if (!elements.boundaries) return;
+    elements.boundaries.innerHTML = BOUNDARIES.map(group => (
+      `<div class="boundary-card"><b>${esc(group.label)}</b><ul>${arr(group.items).map(item => `<li>${esc(item)}</li>`).join("")}</ul></div>`
+    )).join("");
   }
 
   function render() {
@@ -245,8 +265,9 @@
     option.textContent = item.label;
     elements.category.appendChild(option);
   });
-  [elements.q, elements.category, elements.availability, elements.sort, elements.quantified].forEach(control => control.addEventListener("input", render));
+  [elements.q, elements.category, elements.availability, elements.release, elements.sort, elements.quantified].forEach(control => control.addEventListener("input", render));
   renderLegend();
   renderStats();
+  renderBoundaries();
   render();
 })();

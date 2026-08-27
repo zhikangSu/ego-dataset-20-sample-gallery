@@ -53,6 +53,19 @@ def scenes() -> dict[str, dict]:
     return json.loads(result.stdout)
 
 
+def scene_catalog() -> list[dict]:
+    script = (
+        "const fs=require('fs'),vm=require('vm'),c={window:{}};"
+        "vm.runInNewContext(fs.readFileSync('data/catalog.js','utf8'),c);"
+        "vm.runInNewContext(fs.readFileSync('data/scene-catalog.js','utf8'),c);"
+        "process.stdout.write(JSON.stringify(c.window.EGO_SCENE_DATASETS));"
+    )
+    result = subprocess.run(
+        ["node", "-e", script], cwd=ROOT, check=True, capture_output=True, text=True
+    )
+    return json.loads(result.stdout)
+
+
 def scene_taxonomy() -> dict[str, object]:
     script = (
         "const fs=require('fs'),vm=require('vm'),c={window:{}};"
@@ -87,8 +100,13 @@ def check_catalog_and_manifests(records: list[dict]) -> None:
 
 
 def check_scene_distributions(records: list[dict], scene_records: dict[str, dict]) -> None:
+    assert len(records) == 39, f"expected 39 scene records, found {len(records)}"
+    assert [r["no"] for r in records] == list(range(1, 40)), "scene indices are not 1..39"
     slugs = {record["slug"] for record in records}
-    assert set(scene_records) == slugs, "scene distribution slugs must match all 20 datasets"
+    assert len(slugs) == 39, "scene catalog slugs must be unique"
+    assert set(scene_records) == slugs, "scene distribution slugs must match all 39 datasets"
+    assert sum(bool(record.get("hasSample")) for record in records) == 20, "scene catalog must preserve exactly 20 media peers"
+    assert {record.get("releaseStatus") for record in records} <= {"open", "gated", "phased", "pending"}, "invalid release status"
     allowed = {"computed", "reported", "taxonomy", "unavailable"}
     availability = {"frequency", "proxy", "presence", "none"}
     for slug, scene in scene_records.items():
@@ -114,6 +132,9 @@ def check_scene_distributions(records: list[dict], scene_records: dict[str, dict
         if scene["availability"] in {"frequency", "proxy"}:
             assert scene.get("denominator", {}).get("value", 0) > 0, f"missing scene denominator for {slug}"
             assert normalized and all(type(item.get("value")) in (int, float) for item in normalized), f"missing normalized values for {slug}"
+            denominator = scene["denominator"]["value"]
+            total = sum(item["value"] for item in normalized)
+            assert math.isclose(total, denominator, rel_tol=1e-6, abs_tol=1e-6), f"normalized scene values do not sum to denominator for {slug}: {total} != {denominator}"
         if scene["availability"] == "presence":
             assert normalized and all(item.get("present") is True for item in normalized), f"invalid presence-only scenes for {slug}"
 
@@ -143,13 +164,14 @@ def check_pages() -> None:
     assert len(gallery) == 1, "report must contain exactly one gallery iframe"
     assert len(comparison) == 1, "report must contain exactly one scene comparison iframe"
     assert gallery[0].get("src") == "index.html?embed=1&viewer=scene-split-v1&hideScenes=1#gallery"
-    assert comparison[0].get("src") == "distribution.html?embed=1&viewer=scene-distribution-v2"
+    assert comparison[0].get("src") == "distribution.html?embed=1&viewer=scene-distribution-v3"
     assert 'src="gallery.js?v=scene-distribution-v2"' in index, "versioned gallery application script is missing"
     assert 'src="data/catalog.js?v=scene-distribution-v2"' in index, "versioned catalog script is missing"
     assert 'src="data/scenes.js?v=scene-distribution-v2"' in index, "scene distribution data script is missing"
-    assert 'src="data/scene-comparison.js?v=scene-distribution-v2"' in distribution, "scene taxonomy script is missing"
-    assert 'src="distribution.js?v=scene-distribution-v2"' in distribution, "scene distribution application script is missing"
-    assert 'id="heatmapGrid"' in distribution and 'id="cardsGrid"' in distribution
+    assert 'src="data/scene-catalog.js?v=scene-distribution-v3"' in distribution, "expanded scene catalog is missing"
+    assert 'src="data/scene-comparison.js?v=scene-distribution-v3"' in distribution, "scene taxonomy script is missing"
+    assert 'src="distribution.js?v=scene-distribution-v3"' in distribution, "scene distribution application script is missing"
+    assert 'id="heatmapGrid"' in distribution and 'id="cardsGrid"' in distribution and 'id="boundaryList"' in distribution
     gallery_js = (ROOT / "gallery.js").read_text(encoding="utf-8")
     assert "function mediaCandidates" in gallery_js, "official-media fallback is missing"
     assert "官方源直连" in gallery_js, "direct official-source state is missing"
@@ -160,6 +182,7 @@ def check_pages() -> None:
     ]:
         assert (ROOT / path).exists(), f"missing synchronized annotation excerpt {path}"
     subprocess.run(["node", "--check", "data/catalog.js"], cwd=ROOT, check=True)
+    subprocess.run(["node", "--check", "data/scene-catalog.js"], cwd=ROOT, check=True)
     subprocess.run(["node", "--check", "data/scenes.js"], cwd=ROOT, check=True)
     subprocess.run(["node", "--check", "data/scene-comparison.js"], cwd=ROOT, check=True)
     subprocess.run(["node", "--check", "gallery.js"], cwd=ROOT, check=True)
@@ -190,14 +213,15 @@ def check_range_server() -> None:
 
 def main() -> None:
     records = catalog()
+    scene_records_catalog = scene_catalog()
     scene_records = scenes()
     scene_meta = scene_taxonomy()
     check_catalog_and_manifests(records)
-    check_scene_distributions(records, scene_records)
+    check_scene_distributions(scene_records_catalog, scene_records)
     check_scene_taxonomy(scene_meta, scene_records)
     check_pages()
     check_range_server()
-    print("OK: 20 catalog entries, concrete-scene distributions, lazy official-media fallback, and HTTP Range support")
+    print("OK: 20 media entries, 39 concrete-scene records, release-state boundaries, lazy official-media fallback, and HTTP Range support")
 
 
 if __name__ == "__main__":
