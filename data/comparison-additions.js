@@ -493,6 +493,10 @@
   window.EGO_COMPARISON_META = {
     releaseLabels,
     originalReleaseByName,
+    catalogAliases: {
+      "EgoLive (JD.com)": "EgoLive",
+      "Nymeria / NymeriaPlus": "Nymeria"
+    },
     additions
   };
 })();

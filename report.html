@@ -58,15 +58,15 @@ section{scroll-margin-top:72px;padding:42px 0 0}.section-head{display:flex;align
 <div class="kicker">Research landscape · benchmark design · verified 2026-08-25</div>
 <h1>Ego 视频数据集全景调研<br/>与六目抽象环境 Benchmark 设计</h1>
 <p class="lead">以 <b>awesome-ego-video-datasets</b> 当前仓库为全量索引，逐层区分原始真实采集、派生 QA/标注、合成/仿真、机器人视角和仅宣布项目；重点核验与贵司“六目同步 + 完整标定 + 人体姿态 + 环境恢复”最相关的数据集。</p>
-<div class="meta"><span>仓库主条目 180</span><span>7 个研究主题</span><span>核心横向比较 39</span><span>新增大型 / 专项集 19</span><span>20 个具体样例 · 本地优先播放</span><span>本地仓库 · 可搜索/筛选/导出 CSV</span></div>
+<div class="meta"><span>综合目录 185（仓库 180 + 外部 5）</span><span>7 个研究主题</span><span>核心横向比较 39</span><span>新增调研 19（其中 14 已在原目录）</span><span>20 个具体样例 · 本地优先播放</span><span>可搜索 / 筛选 / 导出 CSV</span></div>
 </div></header>
-<nav><div class="nav-inner"><a href="index.html"><b>本地样例观察窗 ↗</b></a><a href="#conclusion">结论</a><a href="#evolution">做到什么程度</a><a href="#matrix">39 项能力矩阵</a><a href="#peers">39 项详细对比</a><a href="#scene-tasks">具体场景分布</a><a href="#samples">20 个样例</a><a href="#benchmark">Benchmark 方案</a><a href="#catalog">180 条目录</a><a href="#gaps">缺口与风险</a><a href="#methods">口径与来源</a></div></nav>
+<nav><div class="nav-inner"><a href="index.html"><b>本地样例观察窗 ↗</b></a><a href="#conclusion">结论</a><a href="#evolution">做到什么程度</a><a href="#matrix">39 项能力矩阵</a><a href="#peers">39 项详细对比</a><a href="#scene-tasks">具体场景分布</a><a href="#samples">20 个样例</a><a href="#benchmark">Benchmark 方案</a><a href="#catalog">185 条综合目录</a><a href="#gaps">缺口与风险</a><a href="#methods">口径与来源</a></div></nav>
 <main class="wrap">
 <section id="conclusion">
 <div class="section-head"><div><h2>先给结论</h2><p>不是照抄现有 benchmark，而是把现有数据已经覆盖的能力拆开后，组合成一个新的、可度量的六目真实环境基准。</p></div></div>
-<div class="callout"><h3>推荐唯一主线：发布 <em>EgoScene-6V</em>，评测“六目视频 → 统一世界坐标中的人体 + 抽象环境 + 动态交互状态”。</h3><p>现有数据集已经分别做到：<b>同一头戴 rig 的六目同步与标定</b>（HA-Ego-1K、Ropedia）、<b>全身/手/物体/触觉的联合状态</b>（ACE-Data-0）、<b>高精度扫描或数字孪生场景</b>（ADT、EgoHTR、AIST-Living）、<b>长程序和跨视角活动</b>（Ego-Exo4D、Assembly101）。但在本轮核验范围内，尚未发现一个成熟开放 benchmark 同时提供：<b>真实六目头戴视频 + 完整人体世界姿态 + 结构化静态场景 + 动态物体 6DoF/状态 + 人体-场景/物体接触 + 摄像头缺失鲁棒性</b>。</p><p class="note">上句是基于已核验数据字段作出的综合判断，不是对所有未公开商业数据的绝对断言。</p></div>
+<div class="callout"><h3>推荐唯一主线：发布 <em>EgoScene-6V</em>，评测“六目视频 → 统一世界坐标中的人体 + 抽象环境 + 动态交互状态”。</h3><p>扩展到 39 项后，现有数据已经分别做到：<b>千至万小时级真实任务视频</b>（EgoLive、EgoVerse、Ego4D、Egocentric-10K，EgoSuite 为分批发布口径）、<b>同一头戴 rig 的六目同步与标定</b>（HA-Ego-1K、Ropedia）、<b>全身运动与统一世界定位</b>（Nymeria、EgoHTR）、<b>全身/手/物体/触觉的联合状态</b>（ACE-Data-0）、<b>高精度手—物 3D 真值</b>（HOT3D）以及<b>长程序和跨视角活动</b>（Ego-Exo4D、Assembly101、HoloAssist）。但在本轮 39 项核验范围内，仍未发现一个成熟开放 benchmark 同时提供：<b>真实六目头戴视频 + 完整人体世界姿态 + 结构化静态场景 + 动态物体 6DoF/状态 + 人体-场景/物体接触 + 摄像头缺失鲁棒性</b>。</p><p class="note">结论按当前可核验 release 得出；EgoSuite 等 living / staged dataset 的宣传规模、实际可下载规模和字段覆盖率必须分版本记录。</p></div>
 <div class="grid stats">
-<div class="stat"><b>180</b><span>仓库主条目</span></div><div class="stat"><b>7</b><span>任务主题</span></div><div class="stat"><b>39</b><span>核心横向比较</span></div><div class="stat"><b>20</b><span>带媒体样例子集</span></div><div class="stat"><b>600</b><span>建议首版序列数</span></div><div class="stat"><b>10–15 h</b><span>建议 wall-clock 视频时长</span></div>
+<div class="stat"><b>185</b><span>去重综合目录</span></div><div class="stat"><b>7</b><span>任务主题</span></div><div class="stat"><b>39</b><span>核心横向比较</span></div><div class="stat"><b>20</b><span>带媒体样例子集</span></div><div class="stat"><b>600</b><span>建议首版序列数</span></div><div class="stat"><b>10–15 h</b><span>建议 wall-clock 视频时长</span></div>
 </div>
 <div class="grid three" style="margin-top:16px">
 <div class="card"><span class="num">1</span><h3>不要把“相机小时”当独立时长</h3><p>六路相机记录 10 h 是 60 camera-hours，但时间多样性仍只有 10 h。报告规模时必须同时写 wall-clock hours、camera-hours、episodes、subjects 和 environments。</p></div>
@@ -80,7 +80,7 @@ section{scroll-margin-top:72px;padding:42px 0 0}.section-head{display:flex;align
 <div class="card era"><div class="years">2009–2017</div><h3>二维识别阶段</h3><ul><li>单 RGB/RGB-D、短序列</li><li>手框/手分割、动作类别、ADL</li><li>代表：Handled Objects、EgoHands、ADL、EgoGesture</li></ul></div>
 <div class="card era"><div class="years">2018–2022</div><h3>大规模动作与 3D HOI</h3><ul><li>100 h–3,000 h 级视频</li><li>gaze、RGB-D、3D hand/object pose</li><li>代表：EPIC-KITCHENS、Ego4D、HOI4D、H2O</li></ul></div>
 <div class="card era"><div class="years">2023–2024</div><h3>跨视角与数字孪生</h3><ul><li>同步 ego-exo、多相机标定</li><li>SLAM、点云、全局 3D body/hand</li><li>代表：ADT、Ego-Exo4D、AssemblyHands、HoloAssist</li></ul></div>
-<div class="card era"><div class="years">2025–2026</div><h3>物理多模态与机器人迁移</h3><ul><li>六目/十二目、触觉/力/EMG</li><li>人体—物体—场景联合状态</li><li>VLA、world model、长时记忆与主动辅助</li></ul></div>
+<div class="card era"><div class="years">2025–2026</div><h3>规模化人类示范与物理多模态</h3><ul><li>1,000–10,000 h 级真实任务采集与 100K h 分批发布计划</li><li>双目/六目/十二目、EEG、触觉、全身与手—物 3D</li><li>代表：EgoLive、EgoVerse、Egocentric-10K、EgoSuite、EgoBrain、HOT3D</li></ul></div>
 </div></section>
 
 <section id="matrix"><div class="section-head"><div><h2>39 个开放 / 重要 Ego 数据集：统一能力矩阵</h2><p>原 20 个媒体 peer 与新增 19 个大型 / 专项数据集使用同一套能力字段。“强”表示数据原生/系统性提供；“部分”表示仅子集、派生估计、随 release 变化或不是主要 benchmark GT；“非核心”不代表完全没有该信息。</p></div></div>
@@ -801,12 +801,12 @@ Annotations/
 </div>
 </section>
 
-<section id="catalog"><div class="section-head"><div><h2>仓库全部 180 个主条目</h2><p>A/B 级字段已独立核验；C 级是为了完整性保留的仓库索引，不能把“未列出”理解为“数据一定没有”。点击表头排序，点击“详情”展开字段。</p></div></div>
+<section id="catalog"><div class="section-head"><div><h2>去重后的 185 项综合目录</h2><p>由仓库快照的 180 个唯一主条目，加上原目录确实缺少的 Egocentric-10K、EgoSuite-Open100K、Nymeria、HOT3D、EgoBrain 共 5 项组成。新增调研的另外 14 项已在原 180 条中，本页用最新核验字段覆盖旧的目录级记录，不重复计数。</p></div></div>
 <div class="controls"><input id="q" placeholder="搜索名称、任务、规模、字段……"/><select id="cat"><option value="">全部主题</option></select><select id="kind"><option value="">全部数据类型</option></select><select id="evidence"><option value="">全部依据等级</option><option>A</option><option>B</option><option>C</option></select><select id="rel"><option value="0">全部相关度</option><option value="8">≥8</option><option value="6">≥6</option><option value="4">≥4</option></select><button id="exportBtn">导出当前 CSV</button></div>
 <div class="filter-info" id="filterInfo"></div><div class="table-shell"><table class="catalog" id="catalogTable"><thead><tr><th data-sort="name">名称</th><th data-sort="year">年份</th><th data-sort="category">主题</th><th data-sort="scale">规模</th><th data-sort="task">主要任务</th><th data-sort="kind">类型</th><th data-sort="evidence">依据</th><th data-sort="relevance">相关度</th><th>来源/详情</th></tr></thead><tbody></tbody></table></div>
 </section>
 
-<section id="gaps"><div class="section-head"><div><h2>覆盖统计、缺口与发布风险</h2><p>这些统计描述“仓库如何组织条目”，不是对所有数据真实模态的精确频数统计；只有 A/B 级可用于严谨模态比较。</p></div></div>
+<section id="gaps"><div class="section-head"><div><h2>覆盖统计、缺口与发布风险</h2><p>主题和类型数量已按 185 项去重综合目录重新计算；它们描述条目组织方式，不是对视频小时或真实模态覆盖率的加权统计。严谨模态比较仍以 39 项 A/B 级核验表为准。</p></div></div>
 <div class="grid bars"><div class="card"><h3>按主题分布</h3><div id="catBars"></div></div><div class="card"><h3>按条目类型分布</h3><div id="kindBars"></div></div></div>
 <div class="grid three" style="margin-top:16px">
 <div class="card risk"><h3>风险 1：伪标签闭环</h3><p>用同一算法生成环境/人体 GT 再评测同类算法，会把模型偏差固化为“真值”。必须保存独立传感器或人工校验来源。</p></div>
@@ -821,7 +821,7 @@ Annotations/
 <section id="methods"><div class="section-head"><div><h2>调研口径与来源</h2><p>精确区分“论文宣称”“当前项目页”“实际可下载 release”和“本报告推断”。</p></div></div>
 <div class="grid three">
 <div class="card"><h3>依据等级</h3><p><b style="color:var(--good)">A</b>：官方项目页、官方文档、官方数据卡或代码仓已核验。<br/><b style="color:var(--warn)">B</b>：主要依赖原论文/摘要，开放包细节可能尚未稳定。<br/><b>C</b>：仓库目录级信息；保留完整性，但下载前必须复核。</p></div>
-<div class="card"><h3>版本口径</h3><p>调研日期：2026-08-25。仓库 README blob：<code>25898fc…f55</code>。本页按七个主表实际解析得到 180 个唯一主条目；仓库页眉的 “Papers 178” 徽章不是本页的数据集计数，且可能存在更新滞后。对于 living dataset，页面优先记录当前官方 release，并在备注中保留仓库/论文快照差异。</p></div>
+<div class="card"><h3>版本口径</h3><p>综合更新日期：2026-08-27。仓库 README blob：<code>25898fc…f55</code>。七个主表解析得到 180 个唯一主条目；与 19 项新增调研去重后，14 项已存在、5 项为仓库外净新增，因此综合目录为 185，而不是 199。对于 living dataset，页面优先记录当前官方 release，并保留论文快照、宣传规模与实际下载版本的差异。</p></div>
 <div class="card"><h3>未知字段</h3><p>“未统一核验”不等于“没有”。特别是 camera calibration、原始传感器频率、商业使用权和 test labels，必须在真正下载或签约前逐项检查。</p></div>
 </div>
 <div class="sources" id="sources"></div>
@@ -842,6 +842,17 @@ const comparisonPeers=[
   ...comparisonMeta.additions.map(p=>({...p,cohort:"added"}))
 ];
 const comparisonPeerNames=new Set(comparisonPeers.map(p=>p.name.replace(" / NymeriaPlus","")));
+const catalogNameFor=p=>comparisonMeta.catalogAliases?.[p.name]||p.name;
+const catalogAdditionByName=new Map(comparisonMeta.additions.map(p=>[catalogNameFor(p),p]));
+const originalCatalogNames=new Set(entries.map(x=>x.name));
+const expandedEntries=[
+  ...entries.map(x=>{
+    const update=catalogAdditionByName.get(x.name);
+    return update?{...x,...update,name:x.name,catalogOrigin:"repository-updated"}:{...x,catalogOrigin:"repository"};
+  }),
+  ...comparisonMeta.additions.filter(p=>!originalCatalogNames.has(catalogNameFor(p))).map(p=>({...p,catalogOrigin:"external-addition"}))
+];
+const countBy=(rows,key)=>rows.reduce((acc,row)=>(acc[row[key]||"未分类"]=(acc[row[key]||"未分类"]||0)+1,acc),{});
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 function dot(v){return v===2?'<i class="dot s2">强</i>':v===1?'<i class="dot s1">部</i>':'<i class="dot s0">—</i>'}
 function renderMatrix(){const tb=document.querySelector('#matrixTable tbody');tb.innerHTML=comparisonPeers.map(p=>`<tr><td><a href="${esc(p.source)}" target="_blank" rel="noopener">${esc(p.name)}</a><div class="small">${esc(p.views)}</div><div class="peer-dataset-badges"><span class="badge peer-cohort-badge">${p.cohort==='added'?'新增调研':'媒体 peer'}</span><span class="badge peer-release-${esc(p.releaseStatus)}">${esc(comparisonMeta.releaseLabels[p.releaseStatus]||p.releaseStatus)}</span></div></td>${p.feature_values.map(v=>`<td>${dot(v)}</td>`).join('')}<td class="score">${p.relevance}/10</td><td><span class="evidence ${p.evidence}">${p.evidence}</span></td></tr>`).join('')}
@@ -875,18 +886,18 @@ function renderPeers(){
   </tr>`).join('');
   const info=document.getElementById('peerCompareInfo');if(info)info.textContent=`显示 ${rows.length} / ${comparisonPeers.length}`;
 }
-let filtered=[...entries],sortKey='relevance',sortAsc=false;
-function populateFilters(){const cats=[...new Set(entries.map(x=>x.category))];const kinds=[...new Set(entries.map(x=>x.kind))];document.getElementById('cat').innerHTML+=[...cats].sort().map(x=>`<option>${esc(x)}</option>`).join('');document.getElementById('kind').innerHTML+=[...kinds].sort().map(x=>`<option>${esc(x)}</option>`).join('')}
-function applyFilters(){const q=document.getElementById('q').value.trim().toLowerCase(),cat=document.getElementById('cat').value,kind=document.getElementById('kind').value,ev=document.getElementById('evidence').value,rel=+document.getElementById('rel').value;filtered=entries.filter(x=>{const hay=Object.values(x).join(' ').toLowerCase();return(!q||hay.includes(q))&&(!cat||x.category===cat)&&(!kind||x.kind===kind)&&(!ev||x.evidence===ev)&&x.relevance>=rel});filtered.sort((a,b)=>{let A=a[sortKey],B=b[sortKey];if(typeof A==='number')return sortAsc?A-B:B-A;A=String(A);B=String(B);return sortAsc?A.localeCompare(B,'zh'):B.localeCompare(A,'zh')});renderCatalog()}
-function renderCatalog(){const tb=document.querySelector('#catalogTable tbody');tb.innerHTML=filtered.map(x=>`<tr><td><a href="${esc(x.source)}" target="_blank" rel="noopener">${esc(x.name)}</a></td><td>${x.year}</td><td>${esc(x.category)}</td><td>${esc(x.scale)}</td><td>${esc(x.task)}</td><td>${esc(x.kind)}</td><td><span class="evidence ${x.evidence}">${x.evidence}</span></td><td class="score">${x.relevance}</td><td><details class="rowdetail"><summary>详情</summary><div><b>视角：</b>${esc(x.views)}<br/><b>同步：</b>${esc(x.sync)}<br/><b>标定：</b>${esc(x.calib)}<br/><b>传感器/标注：</b>${esc(x.sensors)}<br/><b>人体：</b>${esc(x.human)}<br/><b>物体：</b>${esc(x.objects)}<br/><b>场景：</b>${esc(x.scene)}<br/><b>开放：</b>${esc(x.access)}<br/><b>许可：</b>${esc(x.license)}<br/><b>判断：</b>${esc(x.note)}</div></details></td></tr>`).join('');document.getElementById('filterInfo').textContent=`显示 ${filtered.length} / ${entries.length} 条；当前排序：${sortKey} ${sortAsc?'升序':'降序'}`}
+let filtered=[...expandedEntries],sortKey='relevance',sortAsc=false;
+function populateFilters(){const cats=[...new Set(expandedEntries.map(x=>x.category))];const kinds=[...new Set(expandedEntries.map(x=>x.kind))];document.getElementById('cat').innerHTML+=[...cats].sort().map(x=>`<option>${esc(x)}</option>`).join('');document.getElementById('kind').innerHTML+=[...kinds].sort().map(x=>`<option>${esc(x)}</option>`).join('')}
+function applyFilters(){const q=document.getElementById('q').value.trim().toLowerCase(),cat=document.getElementById('cat').value,kind=document.getElementById('kind').value,ev=document.getElementById('evidence').value,rel=+document.getElementById('rel').value;filtered=expandedEntries.filter(x=>{const hay=Object.values(x).join(' ').toLowerCase();return(!q||hay.includes(q))&&(!cat||x.category===cat)&&(!kind||x.kind===kind)&&(!ev||x.evidence===ev)&&x.relevance>=rel});filtered.sort((a,b)=>{let A=a[sortKey],B=b[sortKey];if(typeof A==='number')return sortAsc?A-B:B-A;A=String(A);B=String(B);return sortAsc?A.localeCompare(B,'zh'):B.localeCompare(A,'zh')});renderCatalog()}
+function renderCatalog(){const tb=document.querySelector('#catalogTable tbody');tb.innerHTML=filtered.map(x=>`<tr><td><a href="${esc(x.source)}" target="_blank" rel="noopener">${esc(x.name)}</a><div class="small">${x.catalogOrigin==='external-addition'?'仓库外净新增':x.catalogOrigin==='repository-updated'?'原仓库条目 · 字段已更新':'仓库快照条目'}</div></td><td>${x.year}</td><td>${esc(x.category)}</td><td>${esc(x.scale)}</td><td>${esc(x.task)}</td><td>${esc(x.kind)}</td><td><span class="evidence ${x.evidence}">${x.evidence}</span></td><td class="score">${x.relevance}</td><td><details class="rowdetail"><summary>详情</summary><div><b>视角：</b>${esc(x.views)}<br/><b>同步：</b>${esc(x.sync)}<br/><b>标定：</b>${esc(x.calib)}<br/><b>传感器/标注：</b>${esc(x.sensors)}<br/><b>人体：</b>${esc(x.human)}<br/><b>物体：</b>${esc(x.objects)}<br/><b>场景：</b>${esc(x.scene)}<br/><b>开放：</b>${esc(x.access)}<br/><b>许可：</b>${esc(x.license)}<br/><b>判断：</b>${esc(x.note)}</div></details></td></tr>`).join('');document.getElementById('filterInfo').textContent=`显示 ${filtered.length} / ${expandedEntries.length} 条（仓库 180 + 外部净新增 5）；当前排序：${sortKey} ${sortAsc?'升序':'降序'}`}
 function renderBars(id,obj){const max=Math.max(...Object.values(obj));document.getElementById(id).innerHTML=Object.entries(obj).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="barrow"><span>${esc(k)}</span><div class="bar"><i style="width:${v/max*100}%"></i></div><b>${v}</b></div>`).join('')}
 function renderSupp(){const remaining=supplementary.filter(x=>!comparisonPeerNames.has(x.name));document.getElementById('suppCards').innerHTML=remaining.map(x=>`<div class="card"><h3>${esc(x.name)} <span class="badge ${x.evidence.toLowerCase()}">${x.evidence}级</span></h3><p><b>${esc(x.scale)}</b><br/>${esc(x.task)}</p><div class="peer-note">${esc(x.note)}</div><p style="margin-top:10px"><a href="${esc(x.source)}" target="_blank" rel="noopener">来源 ↗</a></p></div>`).join('')}
-function exportCSV(){const cols=['name','year','category','scale','task','kind','views','sync','calib','sensors','human','objects','scene','access','license','evidence','relevance','source','note'];const q=v=>'"'+String(v??'').replaceAll('"','""')+'"';const csv='\ufeff'+[cols.join(','),...filtered.map(r=>cols.map(c=>q(r[c])).join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='ego_dataset_filtered_catalog.csv';a.click();URL.revokeObjectURL(a.href)}
-function renderSources(){const unique=[...new Map([...entries,...comparisonPeers,...supplementary].filter(x=>x.evidence!=='C').map(x=>[x.source,x])).values()];document.getElementById('sources').innerHTML='<h3 style="column-span:all;margin-top:26px">重点官方/主要来源（A/B级）</h3>'+unique.sort((a,b)=>a.name.localeCompare(b.name)).map(x=>`<div class="source"><b>${esc(x.name)}</b> · <a href="${esc(x.source)}" target="_blank" rel="noopener">打开来源 ↗</a></div>`).join('')}
+function exportCSV(){const cols=['name','year','category','scale','task','kind','views','sync','calib','sensors','human','objects','scene','access','license','evidence','relevance','catalogOrigin','source','note'];const q=v=>'"'+String(v??'').replaceAll('"','""')+'"';const csv='\ufeff'+[cols.join(','),...filtered.map(r=>cols.map(c=>q(r[c])).join(','))].join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='ego_dataset_filtered_185_catalog.csv';a.click();URL.revokeObjectURL(a.href)}
+function renderSources(){const unique=[...new Map([...expandedEntries,...comparisonPeers,...supplementary].filter(x=>x.evidence!=='C').map(x=>[x.source,x])).values()];document.getElementById('sources').innerHTML='<h3 style="column-span:all;margin-top:26px">重点官方/主要来源（A/B级）</h3>'+unique.sort((a,b)=>a.name.localeCompare(b.name)).map(x=>`<div class="source"><b>${esc(x.name)}</b> · <a href="${esc(x.source)}" target="_blank" rel="noopener">打开来源 ↗</a></div>`).join('')}
 document.querySelectorAll('.controls input,.controls select').forEach(el=>el.addEventListener('input',applyFilters));document.querySelectorAll('#catalogTable th[data-sort]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.sort;if(sortKey===k)sortAsc=!sortAsc;else{sortKey=k;sortAsc=true}applyFilters()}));document.getElementById('exportBtn').addEventListener('click',exportCSV);
 ['peerQ','peerEvidenceFilter','peerRelFilter','peerCohortFilter','peerReleaseFilter','peerSort'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener(id==='peerQ'?'input':'change',renderPeers)});
 const peerReset=document.getElementById('peerReset');if(peerReset)peerReset.addEventListener('click',()=>{document.getElementById('peerQ').value='';document.getElementById('peerEvidenceFilter').value='';document.getElementById('peerRelFilter').value='0';document.getElementById('peerCohortFilter').value='';document.getElementById('peerReleaseFilter').value='';document.getElementById('peerSort').value='relevance-desc';renderPeers()});
-populateFilters();renderMatrix();renderPeers();applyFilters();renderBars('catBars',catCounts);renderBars('kindBars',kindCounts);renderSupp();renderSources();
+populateFilters();renderMatrix();renderPeers();applyFilters();renderBars('catBars',countBy(expandedEntries,'category'));renderBars('kindBars',countBy(expandedEntries,'kind'));renderSupp();renderSources();
 </script>
 <script>
 (function(){

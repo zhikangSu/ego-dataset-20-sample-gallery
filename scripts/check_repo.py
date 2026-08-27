@@ -90,6 +90,20 @@ def comparison_additions() -> dict[str, object]:
     return json.loads(result.stdout)
 
 
+def report_entries() -> list[dict]:
+    script = (
+        "const fs=require('fs');"
+        "const s=fs.readFileSync('report.html','utf8');"
+        "const m=s.match(/const entries=(\\[[\\s\\S]*?\\]);\\nconst supplementary=/);"
+        "if(!m)throw new Error('report entries not found');"
+        "process.stdout.write(m[1]);"
+    )
+    result = subprocess.run(
+        ["node", "-e", script], cwd=ROOT, check=True, capture_output=True, text=True
+    )
+    return json.loads(result.stdout)
+
+
 def check_catalog_and_manifests(records: list[dict]) -> None:
     assert len(records) == 20, f"expected 20 catalog records, found {len(records)}"
     assert [r["no"] for r in records] == list(range(1, 21)), "catalog indices are not 1..20"
@@ -170,6 +184,10 @@ def check_comparison_additions(comparison: dict[str, object], scene_records: lis
     scene_addition_slugs = {item["slug"] for item in scene_records if not item.get("hasSample")}
     assert addition_slugs == scene_addition_slugs, "comparison additions must match the 19 expanded scene datasets"
     assert len(comparison["originalReleaseByName"]) == 20, "all original media peers need release status"
+    assert comparison["catalogAliases"] == {
+        "EgoLive (JD.com)": "EgoLive",
+        "Nymeria / NymeriaPlus": "Nymeria",
+    }, "catalog alias map changed unexpectedly"
     assert set(comparison["releaseLabels"]) == {"open", "gated", "phased", "pending"}
     required = {
         "name", "year", "category", "scale", "task", "kind", "views", "sync", "calib",
@@ -183,6 +201,22 @@ def check_comparison_additions(comparison: dict[str, object], scene_records: lis
         assert item["source"].startswith("https://"), f"unsafe comparison source for {item['slug']}"
         assert len(item["feature_values"]) == 9, f"comparison feature vector must have 9 fields for {item['slug']}"
         assert set(item["feature_values"]) <= {0, 1, 2}, f"invalid feature value for {item['slug']}"
+
+
+def check_expanded_catalog(entries: list[dict], comparison: dict[str, object]) -> None:
+    assert len(entries) == 180, f"upstream snapshot must remain 180 unique rows, found {len(entries)}"
+    names = {item["name"] for item in entries}
+    assert len(names) == 180, "upstream report entries must be unique"
+    aliases = comparison["catalogAliases"]
+    additions = comparison["additions"]
+    matched = [item for item in additions if aliases.get(item["name"], item["name"]) in names]
+    external = [item for item in additions if aliases.get(item["name"], item["name"]) not in names]
+    assert len(matched) == 14, f"expected 14 field updates to existing catalog rows, found {len(matched)}"
+    assert len(external) == 5, f"expected 5 net-new catalog rows, found {len(external)}"
+    assert {item["name"] for item in external} == {
+        "Egocentric-10K", "EgoSuite-Open100K", "Nymeria / NymeriaPlus", "HOT3D", "EgoBrain"
+    }, "unexpected net-new catalog set"
+    assert len(entries) + len(external) == 185, "expanded catalog total must be 185"
 
 
 def check_pages() -> None:
@@ -207,6 +241,8 @@ def check_pages() -> None:
     assert 'src="distribution.js?v=scene-distribution-v3"' in distribution, "scene distribution application script is missing"
     assert 'src="data/comparison-additions.js?v=comparison-v1"' in report, "39-item comparison data is missing"
     assert "39 个开放 / 重要 Ego 数据集：统一能力矩阵" in report, "expanded comparison matrix heading is missing"
+    assert "去重后的 185 项综合目录" in report, "expanded 185-item catalog heading is missing"
+    assert "countBy(expandedEntries,'category')" in report and "countBy(expandedEntries,'kind')" in report, "coverage bars must use the 185-item catalog"
     assert 'id="peerCohortFilter"' in report and 'id="peerReleaseFilter"' in report, "comparison filters are incomplete"
     assert "comparisonPeers.map" in report, "ability matrix must render all 39 comparison datasets"
     assert 'id="heatmapGrid"' in distribution and 'id="cardsGrid"' in distribution and 'id="boundaryList"' in distribution
@@ -256,13 +292,15 @@ def main() -> None:
     scene_records = scenes()
     scene_meta = scene_taxonomy()
     comparison = comparison_additions()
+    report_catalog = report_entries()
     check_catalog_and_manifests(records)
     check_scene_distributions(scene_records_catalog, scene_records)
     check_scene_taxonomy(scene_meta, scene_records)
     check_comparison_additions(comparison, scene_records_catalog)
+    check_expanded_catalog(report_catalog, comparison)
     check_pages()
     check_range_server()
-    print("OK: 20 media entries, 39-item capability comparison, 39 concrete-scene records, release-state boundaries, lazy official-media fallback, and HTTP Range support")
+    print("OK: 185-item deduplicated catalog, 39-item capability comparison, 39 concrete-scene records, 20 media entries, release-state boundaries, lazy official-media fallback, and HTTP Range support")
 
 
 if __name__ == "__main__":

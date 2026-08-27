@@ -78,7 +78,9 @@ python3 scripts/check_repo.py
 
 `report.html` 的能力矩阵和详细字段表同样覆盖全部 39 项，不再只比较原来的 20 个媒体 peer。新增 19 项与原 20 项共用规模、视角、同步 / 标定、传感器、人体、物体、场景、许可和九项能力强弱字段，并可按调研批次、开放状态、依据等级和相关度筛选。新增记录集中在 `data/comparison-additions.js`。
 
-媒体观察窗仍保持 20 项：它只回答“是否有可合法展示、可绑定到具体 record 的媒体 / 标注样例”，不代表综合调研只有 20 项。报告现在明确区分三层：180 条仓库目录、39 项核心横向比较、20 个媒体样例。
+媒体观察窗仍保持 20 项：它只回答“是否有可合法展示、可绑定到具体 record 的媒体 / 标注样例”，不代表综合调研只有 20 项。报告现在明确区分三层：185 项去重综合目录、39 项核心横向比较、20 个媒体样例。
+
+185 项综合目录的计算不是 `180 + 19 = 199`：新增调研的 19 项中，EgoLive、EgoVerse、Ego4D、EPIC-KITCHENS-100、HoloAssist、EgoLife、SABER、EgoExoLearn、EgoMAGIC、MECCANO、Ego-EXTRA、Charades-Ego、EgoCom 和 MobileEgo Anywhere 共 14 项已经存在于原仓库目录，只更新字段；Egocentric-10K、EgoSuite-Open100K、Nymeria、HOT3D、EgoBrain 共 5 项是净新增。主题和类型统计由这 185 项动态重算。
 
 ## 文件结构
 
